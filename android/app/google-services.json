@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "835003660829",
+    "firebase_url": "https://msb-mobile-banking.firebaseio.com",
+    "project_id": "msb-mobile-banking",
+    "storage_bucket": "msb-mobile-banking.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:835003660829:android:5456d7441c98ab4c",
+        "android_client_info": {
+          "package_name": "vn.com.msb.smartBanking"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "835003660829-9jeg1idnck9drgrg3069gufq61drv49a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBurUysRq6TgM3PEZ9VMdXlRdL62OTA0dY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "835003660829-9jeg1idnck9drgrg3069gufq61drv49a.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "835003660829-gce035uq910rv2op2dcmv7d6dier0845.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.msb.mobileBanking",
+                "app_store_id": "436134873"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

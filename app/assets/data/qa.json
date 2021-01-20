@@ -1,0 +1,69 @@
+[
+{   "stt":"1",
+    "question":"Tôi có thể dùng user và mật khẩu truy cập Internet Banking (đăng nhập trên trang Website của MSB) để đăng nhập vào ứng dụng Mobilie Banking được không?",
+    "answer":"Khách hàng sử đụng dịch vụ ngân hàng điện tử của MSB chỉ cần dùng 1 user và mật khẩu để đăng nhập cả Internet Banking và Mobilie Banking."
+},{"stt":"2",
+    "question":"Tôi quên User đăng nhập thì phải làm thế nào?",
+    "answer":"User đăng nhập thường là địa chỉ email hoặc số điện thoại bạn đã đăng ký. Nếu bạn không thể nhớ bạn có thể gọi điện lên hotline tổng đài hỗ trợ (1800599999) để được hỗ trợ gợi  nhớ hoặc ra quầy giao dịch để được hỗ trợ cấp lại user đăng nhập."
+},{"stt":"3",
+    "question":"Tôi quên mật khẩu đăng nhập thì phải làm thế nào?",
+    "answer":"Bạn có thể sử dụng tính năng \"Quên mật khẩu\" tại màn hình đăng nhập của Internet Banking trên Website: http://msb.com.vn hoặc trên màn hình đăng nhập của Mobilie Banking. Lưu ý các thông tin khi khai báo để lấy lại mật khẩu cần khớp với thông tin đã đăng ký với MSB."
+},{"stt":"4",
+    "question":"Mật khẩu truy cập Internet Banking/Mobilie Banking của MSB cần cấu thành bởi yếu tố nào? Và có tối thiểu bao nhiêu ký tự?",
+    "answer":"Bao gồm chữ viết hoa, chữ thường và số hoặc bao gồm chữ thường, số, và ký tự đặc biệt. Lưu ý: ko bao gồm các ký tự đặc biệt \"\"<,>:;'Mật khẩu có tối thiểu 06 ký tự"
+},{"stt":"5",
+    "question":"Mật khẩu do hệ thống MSB gửi tới điện thoại của KH khi đăng nhập lần đầu hoặc khi khách hàng lấy lại mật khẩu thành công có thời hạn sử dụng bao nhiêu lâu?",
+    "answer":"Mật khẩu do hệ thống gửi tới có thời hạn 07 ngày"
+},{"stt":"6",
+    "question":"Khách hàng bị khóa dịch vụ khi nhập sai mật khẩu bao nhiêu lần?",
+    "answer":"Dịch vụ sẽ bị khóa khi nhập sai mật khẩu 05 lần."
+},{"stt":"7",
+    "question":"Mã Pin đăng nhập là gì?",
+    "answer":"Là mật mã gồm 4 chữ số giúp bạn truy cập nhanh vào MSB Mobilie Banking mà không cần phải nhập user và mật khẩu truy cập Internet Banking như thông thường."
+},{"stt":"8",
+    "question":"Tôi quên mã Pin đăng nhập vào Mobile Banking, tôi muốn tạo lại mã Pin, tôi phải làm gì?",
+    "answer":"Bạn đăng nhập vào Mobile Banking bằng mật khẩu trước, sau đó vào Cài đặt/Kích hoạt lại dứng dụng và tạo lại mã Pin theo ý mình."
+},{"stt":"9",
+    "question":"Sau khi thay đổi mật khẩu truy cập, tôi không đăng nhập được bằng mã Pin 4 số nữa, tôi phải làm thế nào?",
+    "answer":"Tại màn hình yêu cầu Nhập mã Pin, bạn hãy nhấn dòng \"Đăng nhập bằng mật khẩu\" ở phía cuối màn hình, sau đó đăng nhập lại bằng user và mật khẩu bạn vừa đổi. Các lần đăng nhập tiếp theo bạn lại sử dụng được mã đăng nhập nhanh bằng 4 số như bình thường."
+},{"stt":"10",
+    "question":"Tôi đang sử dụng phương thức đăng nhập là đăng nhập bằng mật khẩu và muốn đổi phương thức đăng nhập bằng mật khẩu nhanh 4 số (mã PIN) thì tôi phải thao tác thế nào?",
+    "answer":"Bạn vào \"Cài đặt\" nhấn \"Đăng nhập bằng PIN\", xác nhận và tính năng đăng nhập bằng Pin được thiết lập (hiển thị bằng nút chấm tròn đỏ)"
+},{"stt":"11",
+    "question":"Soft token là gì",
+    "answer":"Soft Token là cách nhận mật khẩu xác thực giao dịch 1 lần (OTP) được tích hợp trong ứng dụng Mobile Banking của MSB trên thiết bị di động thông minh (thay vì nhận OTP qua  phương thức SMS truyền thống). Các khách hàng khi thực hiện giao dịch trực tuyến từ 100 triệu/ngày trở lên đều phải sử dụng phương thức xác thực Soft Token."
+},{"stt":"12",
+    "question":"Tôi phải làm gì để sử dụng được Softoken",
+    "answer":"Để sử dụng Soft token, Quý khách cần đăng ký  Soft Token  trên Internet Banking của MSB và kích hoạt tính năng Soft Token trên ứng dụng MobileBanking của MSB. Hướng dẫn đăng ký và sử dụng Softoken: https://www.msb.com.vn:8080/razuna/assets/1/EDE03158E5DE4BF0BE91EA176DAD7DDA/doc/302F2C285176434A81857A2866220252/hdsd_soft_token.pdf"
+},{"stt":"13",
+    "question":"Tôi đang dùng phương thức đăng nhập bằng Sinh trắc học (nhận diện khuôn mặt/ vân tay), tôi muốn cài đặt cả phương thức xác thực giao dịch bằng Sinh trắc học thì tôi phải làm như thế nào?",
+    "answer":"Theo quy định của Ngân hàng nhà nước, bạn không thể cùng lúc dùng cả phương thức đăng nhập và phương thức xác thực giao dịch bằng Sinh trắc học. Vì vậy bạn sẽ không cài đặt được phương thức xác thực giao dịch bằng Sinh trắc học khi bạn đang cài đặt phương thức đăng nhập bằng Sinh trắc học. "
+},{"stt":"14",
+    "question":"Tôi cần phải làm gì để đủ điều kiện đăng ký online việc sử dụng Internetbanking/Mobile banking",
+    "answer":"Bạn cần phải có tài khoản thanh toán đã mở tại MSB và số điện thoại chính chủ đã đăng ký với MSB."
+},{"stt":"15",
+    "question":"Tôi có đổi được hạn mức giao dịch của tôi không? Và làm như thế nào?",
+    "answer":"Bạn chỉ có thể thao tác đổi hạn mức giao dịch trên Internetbanking hoặc Mobile banking trong giới hạn hạn mức giao dịch của gói Tài khoản bạn đang sử dụng, không điều chỉnh vượt quá được. Thao tác: Cài đặt/ Đổi hạn mức giao dịch"
+},{"stt":"16",
+    "question":"Tôi muốn khóa thẻ, tôi phải thao tác ở đâu?",
+    "answer":"Bạn nhấn \"Dịch vụ thẻ\" ở trang chủ, nhấn vào Thẻ cần khóa, nhấn \"Khóa thẻ\". Xác nhận \"Đồng ý\" nếu bạn muốn khóa thẻ."
+},{"stt":"17",
+    "question":"Để cài đặt và sử dụng MSB Mobile Banking thì yêu cầu đối với thiết bị di động là gì",
+    "answer":"- Đối với Hệ điều hành iOS: yêu cầu Version 10.0 trở lên\n- Đối với Hệ điều hành Android: Version 4.1 trở lên"
+},{"stt":"18",
+    "question":"Tôi muốn xem bản hướng dẫn chi tiết cách cài đặt, kích hoạt và sử dụng app thì xem tài liệu ở đâu?",
+    "answer":"Bạn vào đường link dưới đây để xem hướng dẫn chi tiết:Hướng dẫn kích hoạt bằng Clip: Hướng dẫn sử dụng Mobile Banking: https://www.msb.com.vn:8080/razuna/assets/1/2D47A82788724AF480F391FD07FBD6FA/doc/DF36DA2E2C274D349DEB7A9EBAF2409B/HDSD_Mobile_App.pdf"
+},{"stt":"19",
+    "question":"Tôi có thể đăng nhập tài khoản của tôi và sử dụng đồng thời ứng dụng Mobile Banking trên hai thiết bị di động khác nhau trong cùng một thời điểm không? ",
+    "answer":"Không, trong cùng một thời điểm, bạn chỉ có thể sử dụng ứng dụng Mobile banking trên một thiết bị duy nhất, tức nếu bạn đăng nhập trên thiết bị này thì phải đăng xuất ở thiết bị kia."
+},{"stt":"20",
+    "question":"Có thể sử dụng 02 tài khoản truy cập khác nhau trên 02 thiết bị di động khác nhau (dùng hệ điều hành IOS) nhưng có chung user Icloud không?",
+    "answer":"Không, nếu cả hai thiết bị dùng chung user icloud thì khi đăng nhập sử dụng ứng dụng Mobile banking ở thiết bị này sẽ làm ứng dụng ở thiết bị kia bị thoát ra ngoài không sử dụng được"
+},{"stt":"21",
+    "question":"Khách hàng sẽ nhận được SMS biến động số dư với những loại giao dịch nào?",
+    "answer":"Giao dịch làm thay đôỉ số dư trên Tài khoản thanh toán, có giá trị giao dịch từ 30.000 VND trở lên"
+},{"stt":"22",
+    "question":"Tôi có hai tài khoản thanh toán, tôi muốn đặt mặc định 1 tài khoản khi giao dịch, tôi phải làm thế nào?",
+    "answer":"Bạn nhấn \"Cài đặt\", tìm \"Đổi tài khoản mặc định\" và thay đổi theo ý bạn."
+}
+]

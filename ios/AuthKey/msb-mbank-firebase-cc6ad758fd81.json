@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "msb-mbank-firebase",
+  "private_key_id": "cc6ad758fd811ff03109660d028b07fdcd53952b",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCsNxGJf/cgEX4a\n4lxEV+nRVohS4KcJy+lnNkFdEV0NjyeA9aJsMcAEQ3wITQ9bduSu7z6P7jUXUx5U\ndQZa/JXgutNZjhF6o6tGdGrqf52Qr4K6KZVc0ifBlWj4/4qSre05GHqOV1zxhuPB\nkWrlL4iS5cGUqfneU3TnZFyXeVOVsyTZud+UJpozPtEqDd8mgT/Pl6CjMfKHqbGE\nvDs3Leh3diPpQr+GOJkucybrnw+ym4TjpR7pkw4GhFESIdGTNhfI07xk5qjRvFbz\nrMPgrEc0vwkuF7ijcbXdXs9OfhmJJASTBVa8hZZVs/cSantPO1NquU9sVMZoxjDV\ndy4p/pj3AgMBAAECggEAB1KPTojM/P8UnP4Gk4PAoso9ut00g265LbTmRWSWNhv7\njDjL8pldVpESaaPx+DiijQTWyykcw5e6kJ320QP80Q5m+CxzQwMWJqvCjaMzE7jZ\nI4mrGsREAa/IEKmE8d57v+0lIOV6dtNk3pEmIDj+/KGdgCQhRlPHT70G6gxNnCE5\nxLoKcAJYPR0GjT26yxHh4YKp4JYXRqntfTqhfTno4vYhpOzrRTvKCcZ5/gVMih5c\n7RsUsN8IKkPq5SpklDgLDZl/AJMYl32DXAOb1fUKrnERiUbjd8pqfHwHoi63pHnM\ncjF6IllzS/Yfk67nVSplB/ZadSmLQliAxTnksJ8FkQKBgQDjO3JVn/wQuT52bVLx\nEx9sZSoQRAs7Ido7VvPkff4dON2zC2UhmlxX+6sXpmPSdJbfJaS0Mo2RXvdqKFle\n67AnNGZqBeFoxvmdk2TTirJ6Cd15EuIUpTNupWKFQ8yx4bXTqcSu1fc3UuXvMI+B\nx+rdQdgPgVf4E7CS/mclDbzAuQKBgQDCBIcm13yNdVQdKTgWjYqjYz+9wABrhMm7\nvtTb1dAcq4NGH9SYhhoFMXwbIYEw/ESQsrOBTPBotcz+L1schIT1l4S6yDgObzfV\nSteGNnnq1VHT8mGKUWBV+1w1CiC/NH/fqeOQMjhg1DBj/R1NV8BpmJfTplfrPoZr\niiBXOX9vLwKBgQCog7uE2IJ8fIRgGy85bS8Ome+Z5HxXvAE1pIR23SEI1tVDJJ45\nT1pQPWlivpikyKXiku4UXLE0L7NYXNf6VttqF6gj1HyX0YfoXhiV8PPvIUXHtkNH\ngEQmOCxaHC+/c13+vJYJ+s+9jZLL0b17R6FbuKrcxNVSOnfmaxhfGFL0sQKBgQCg\nX1XICX7u/vjUUeoG2mCqxbM+iaLPPSfzhL42KPqpeCw+nrkAinifqlPHqV48u4mB\ngfVW/94I753Ozh4l6HRu/Ru9uRp88/nW2NJmIkmMj1/gLg3qY3GaIPgK76A57I92\ntdtgqeJoR3zoaaT69XoazwNQ88LgtQIvijFJaEGqCQKBgDagildO7ZVA7ymheaH1\nxu9hxTFzvNuZGuz2WTu2lcIyE6lYprW8Bu1IghUIm6hLOn8BPXVCl9kMYEvAB8ME\nXhH03DzMyLZj+mTKuqU17XctIb0ZS6o2j3nmlgYXSjKHRtFhNB9SPT5qAPqa7swm\n/kLndhFKybwNPNaqi4L2N2I7\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-account-service@msb-mbank-firebase.iam.gserviceaccount.com",
+  "client_id": "107016493738762526749",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-account-service%40msb-mbank-firebase.iam.gserviceaccount.com"
+}

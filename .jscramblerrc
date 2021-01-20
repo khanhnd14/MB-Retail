@@ -1,0 +1,57 @@
+
+  {
+  "keys": {
+    "accessKey": "C116017967E4870D982DD13F965EAEC0950A38BC",
+    "secretKey": "E7E9776FF8AA6A1D99F0FDC2D1431A5777CECAD2"
+  },
+    "applicationId": "5f60432beef84c0016960648",
+  "params": [
+   {
+     "name": "whitespaceRemoval"
+   },
+   {
+     "name": "identifiersRenaming",
+     "options": {
+       "mode": "SAFEST"
+     }
+   },
+   {
+     "name": "dotToBracketNotation"
+   },
+   {
+     "name": "deadCodeInjection"
+   },
+   {
+     "name": "stringConcealing"
+   },
+   {
+     "name": "functionReordering"
+   },
+   {
+     "options": {
+       "freq": 1,
+       "features": [
+         "opaqueFunctions"
+       ]
+     },
+     "name": "functionOutlining"
+   },
+   {
+     "name": "propertyKeysObfuscation"
+   },
+   {
+     "name": "regexObfuscation"
+   },
+   {
+     "name": "booleanToAnything"
+   }
+ ],
+ "sourceMaps":false,
+ "areSubscribersOrdered": false,
+  "useRecommendedOrder": true,
+  "jscramblerVersion": "7.0",
+  "tolerateMinification": false,
+  "profilingDataMode": "off",
+  "useAppClassification": true,
+  "browsers": {}
+}

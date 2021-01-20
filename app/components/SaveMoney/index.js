@@ -1,0 +1,5 @@
+export { default as AmountPayment } from './AmountPayment'
+export { default as DueDate } from './DueDate'
+export { default as InterestRate } from './InterestRate'
+export { default as TypeSave } from './TypeSave'
+export { default as PaymentMethod } from './PaymentMethod'

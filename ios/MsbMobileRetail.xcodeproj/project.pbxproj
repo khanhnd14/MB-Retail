@@ -1,0 +1,926 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0F1DB4B75BCD4330B7738910 /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FECC08325C947FBA91D377E /* MaterialIcons.ttf */; };
+		11B22B602A6B4E12875D3A12 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B2381CD9520A499CB1D58317 /* SimpleLineIcons.ttf */; };
+		1229ABF5C1164FA79AFC9475 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 64B4806586D744A0B6AC48C0 /* Foundation.ttf */; };
+		13A1C6B91EC54B0C8279DDAE /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 86990A65259A463E91CAAC6B /* Zocial.ttf */; };
+		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
+		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
+		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		25D1BBE1768A4582AC37C4D6 /* iconupdate2.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 243675F99F0E4D5FA1CD9B76 /* iconupdate2.ttf */; };
+		2D77244F56204981824CF48D /* icomoonkyc.svg in Resources */ = {isa = PBXBuildFile; fileRef = E7C43BB8540A429F9AAB0606 /* icomoonkyc.svg */; };
+		2DF66C57780B470782C24238 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6F54860463CF47FA898701B3 /* EvilIcons.ttf */; };
+		37B28FC9403C4F0D9DB4D0E5 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 56CD469691CD4C649DBB23A5 /* Ionicons.ttf */; };
+		408DDED067824FE69A624E01 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7BDAC4930BAA4C2995774583 /* MaterialCommunityIcons.ttf */; };
+		4137297FF64D405EBA4EF65C /* helveticaneuemedium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 773DB09AF918416B88467CA0 /* helveticaneuemedium.ttf */; };
+		444C3321BF0D458B82EB4575 /* icomoonupdate.woff in Resources */ = {isa = PBXBuildFile; fileRef = 0B3F471FEE63416F987CEDB6 /* icomoonupdate.woff */; };
+		4FB50F8CBA0641FEA8543F80 /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5FAE7C0E77C9436996C7FDFB /* Fontisto.ttf */; };
+		522F07D3DF610724CB377652 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E7FF725F1998E3E59D7CB82A /* libPods-OneSignalNotificationServiceExtension.a */; };
+		53B3C69C48F941DA92390F81 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C95C0F6293304197BF78D4E1 /* FontAwesome5_Regular.ttf */; };
+		53C7A83711B842228F90595E /* icomoonsetting.svg in Resources */ = {isa = PBXBuildFile; fileRef = F2AAF955F3C84CDB95EE34C5 /* icomoonsetting.svg */; };
+		56A46BB424C81F2C002751E2 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56A46BB324C81F2C002751E2 /* NotificationService.swift */; };
+		56A46BB824C81F2C002751E2 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 56A46BB124C81F2C002751E2 /* OneSignalNotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		56C1E152258383B8001B43E6 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 56C1E151258383AE001B43E6 /* GoogleService-Info.plist */; };
+		5A54DF307AE64A6FA96F3E46 /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 915A77DCE5154104B0A0A722 /* AntDesign.ttf */; };
+		5F9B8CF3242DEA5300A301A4 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F9B8CF2242DEA5300A301A4 /* File.swift */; };
+		608E34494CC449DD873F0A0D /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B0E5B1BD14CF439F80C2F769 /* FontAwesome5_Brands.ttf */; };
+		63A12001A1DA4A4DA60C2848 /* icomoonsetting.woff in Resources */ = {isa = PBXBuildFile; fileRef = 8881BEBE08544CD7A19E729B /* icomoonsetting.woff */; };
+		64B279C9EF9E422EBDDE32B2 /* icomoon.woff in Resources */ = {isa = PBXBuildFile; fileRef = 951B16B698BB43928A992879 /* icomoon.woff */; };
+		66B25FDCD09C478ABD7E138A /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 008BBF9FC35140A992FBB4BA /* FontAwesome.ttf */; };
+		66FE9B4005E44E66A67823D0 /* icomoon.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CA274F3B241344DA848FB373 /* icomoon.ttf */; };
+		6828B42DE3564EB2A41D0ADA /* iconupdate2.svg in Resources */ = {isa = PBXBuildFile; fileRef = 979DC0DEA3774065B2CA19A7 /* iconupdate2.svg */; };
+		689B6A3B81754E1997266321 /* icomoon.svg in Resources */ = {isa = PBXBuildFile; fileRef = 2C553BEE838F4137897EC1AE /* icomoon.svg */; };
+		6FFDE6EEE4804B1DA9ABF712 /* icomoonaccount.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7480A89E1E4422496F27864 /* icomoonaccount.ttf */; };
+		716C1A47FAA44BBC93F15314 /* icomoonhome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 28DFF94EEBF0412A81F9AB9C /* icomoonhome.ttf */; };
+		7364055CB4594984A38C0D94 /* icomoonaccount.woff in Resources */ = {isa = PBXBuildFile; fileRef = 1B07B6BBF7E14504980AD5BA /* icomoonaccount.woff */; };
+		7E88C827D4364CA2801B296A /* icomoonkyc.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D5B178FD69CC4EDF8B96C2A2 /* icomoonkyc.ttf */; };
+		7F747233BB824A7E9B03C87B /* icomoonhome.woff in Resources */ = {isa = PBXBuildFile; fileRef = B81BED99138448D686519827 /* icomoonhome.woff */; };
+		80E6F8F48E4E92D3149B17E6 /* libPods-MsbMobileRetail.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 970844B0A913A9F6D389EFE6 /* libPods-MsbMobileRetail.a */; };
+		82E1E9253FCE4B93A7FED000 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CF55B08CB88242B482D6E276 /* FontAwesome5_Solid.ttf */; };
+		84677601F21B463CBB570071 /* helveticaneuelight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3FF45D02AD444B48B27BA943 /* helveticaneuelight.ttf */; };
+		9DD94F2BE60647EAA4E4265C /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 385CA95861344D4AB4BC5DC7 /* Entypo.ttf */; };
+		A8024533E7DF4DF8940C0D0D /* icomoonhome.svg in Resources */ = {isa = PBXBuildFile; fileRef = BEF640BF785C40338A23CF8F /* icomoonhome.svg */; };
+		AD82E19D4A224356B3E67EC3 /* icomoonupdate.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9A69957EA7CF4B50AC924F36 /* icomoonupdate.ttf */; };
+		B49275BE23AD46AFB70F3B63 /* helveticaneuelightitalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CE9FB21AD63D43A5AE3FC15F /* helveticaneuelightitalic.ttf */; };
+		B4C0EC666C1F495D92694789 /* icomoonupdate.svg in Resources */ = {isa = PBXBuildFile; fileRef = 7463035BD462416895DF89DC /* icomoonupdate.svg */; };
+		BBF338825F5F4F99947EC873 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 82C1B2FEA59C43C08CC9A2E0 /* Octicons.ttf */; };
+		BEC43A41250627F60057638C /* mycert.cer in Resources */ = {isa = PBXBuildFile; fileRef = BEC43A40250627F60057638C /* mycert.cer */; };
+		BEC43A42250627F60057638C /* mycert.cer in Resources */ = {isa = PBXBuildFile; fileRef = BEC43A40250627F60057638C /* mycert.cer */; };
+		D89FC83D583242FF863F4FFC /* icomoonkyc.woff in Resources */ = {isa = PBXBuildFile; fileRef = B189F30028E940038D4E459A /* icomoonkyc.woff */; };
+		DD736F3ABD6547DA9E3862F9 /* icomoonaccount.svg in Resources */ = {isa = PBXBuildFile; fileRef = DED23E3ECDED465C8DD56042 /* icomoonaccount.svg */; };
+		E2B3A7EC817E4A4992CA7799 /* icomoonsetting.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4E22012248914094A786E853 /* icomoonsetting.ttf */; };
+		F78E65722BC34F59909A4E5C /* iconupdate2.woff in Resources */ = {isa = PBXBuildFile; fileRef = FF78D6542D014054B4BF2E90 /* iconupdate2.woff */; };
+		FB71D141DB944D119B9C34B8 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1C25C3C86A89455AAE5B76D0 /* Feather.ttf */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		56A46BB624C81F2C002751E2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 83CBB9F71A601CBA00E9B192 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 56A46BB024C81F2C002751E2;
+			remoteInfo = OneSignalNotificationServiceExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		56A46BBC24C81F2C002751E2 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				56A46BB824C81F2C002751E2 /* OneSignalNotificationServiceExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		008BBF9FC35140A992FBB4BA /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		00E356F21AD99517003FC87E /* MsbMobileRetailTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MsbMobileRetailTests.m; sourceTree = "<group>"; };
+		093371D5642A4215A225CAEF /* Baloo-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Baloo-Regular.ttf"; path = "../app/assets/fonts/Baloo-Regular.ttf"; sourceTree = "<group>"; };
+		0B3F471FEE63416F987CEDB6 /* icomoonupdate.woff */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonupdate.woff; path = ../app/assets/fonts/icomoonupdate.woff; sourceTree = "<group>"; };
+		13B07F961A680F5B00A75B9A /* MSB mBank.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MSB mBank.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = MsbMobileRetail/AppDelegate.h; sourceTree = "<group>"; };
+		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = MsbMobileRetail/AppDelegate.m; sourceTree = "<group>"; };
+		13B07FB21A68108700A75B9A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = MsbMobileRetail/Images.xcassets; sourceTree = "<group>"; };
+		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = MsbMobileRetail/Info.plist; sourceTree = "<group>"; };
+		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = MsbMobileRetail/main.m; sourceTree = "<group>"; };
+		14CCC2D73E279EFC8E65323B /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		1B07B6BBF7E14504980AD5BA /* icomoonaccount.woff */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonaccount.woff; path = ../app/assets/fonts/icomoonaccount.woff; sourceTree = "<group>"; };
+		1C25C3C86A89455AAE5B76D0 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		243675F99F0E4D5FA1CD9B76 /* iconupdate2.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = iconupdate2.ttf; path = ../app/assets/fonts/iconupdate2.ttf; sourceTree = "<group>"; };
+		28DFF94EEBF0412A81F9AB9C /* icomoonhome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonhome.ttf; path = ../app/assets/fonts/icomoonhome.ttf; sourceTree = "<group>"; };
+		2C553BEE838F4137897EC1AE /* icomoon.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoon.svg; path = ../app/assets/fonts/icomoon.svg; sourceTree = "<group>"; };
+		385CA95861344D4AB4BC5DC7 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
+		3FECC08325C947FBA91D377E /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
+		3FF45D02AD444B48B27BA943 /* helveticaneuelight.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = helveticaneuelight.ttf; path = ../app/assets/fonts/helveticaneuelight.ttf; sourceTree = "<group>"; };
+		44919D6F44A53CAE85446112 /* Pods-MsbMobileRetail.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MsbMobileRetail.debug.xcconfig"; path = "Target Support Files/Pods-MsbMobileRetail/Pods-MsbMobileRetail.debug.xcconfig"; sourceTree = "<group>"; };
+		4E22012248914094A786E853 /* icomoonsetting.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonsetting.ttf; path = ../app/assets/fonts/icomoonsetting.ttf; sourceTree = "<group>"; };
+		53546AE15C79241F7400C921 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OneSignalNotificationServiceExtension.release.xcconfig"; path = "Target Support Files/Pods-OneSignalNotificationServiceExtension/Pods-OneSignalNotificationServiceExtension.release.xcconfig"; sourceTree = "<group>"; };
+		56A46BB124C81F2C002751E2 /* OneSignalNotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = OneSignalNotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		56A46BB324C81F2C002751E2 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		56A46BB524C81F2C002751E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		56C1E151258383AE001B43E6 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		56CD469691CD4C649DBB23A5 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
+		56E0FB30248555B800AC2139 /* MSB mBank.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = "MSB mBank.entitlements"; path = "MsbMobileRetail/MSB mBank.entitlements"; sourceTree = "<group>"; };
+		5B29889588F8FBE15C9E54EE /* Pods-MsbMobileRetail.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MsbMobileRetail.release.xcconfig"; path = "Target Support Files/Pods-MsbMobileRetail/Pods-MsbMobileRetail.release.xcconfig"; sourceTree = "<group>"; };
+		5F5E865124CF456C00DC5DCB /* libRNTrustVisionRnsdkFramework.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNTrustVisionRnsdkFramework.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		5F9B8CF1242DEA5200A301A4 /* MsbMobileRetail-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MsbMobileRetail-Bridging-Header.h"; sourceTree = "<group>"; };
+		5F9B8CF2242DEA5300A301A4 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
+		5FAE7C0E77C9436996C7FDFB /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
+		64B4806586D744A0B6AC48C0 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
+		6F54860463CF47FA898701B3 /* EvilIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
+		7463035BD462416895DF89DC /* icomoonupdate.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonupdate.svg; path = ../app/assets/fonts/icomoonupdate.svg; sourceTree = "<group>"; };
+		773DB09AF918416B88467CA0 /* helveticaneuemedium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = helveticaneuemedium.ttf; path = ../app/assets/fonts/helveticaneuemedium.ttf; sourceTree = "<group>"; };
+		7BDAC4930BAA4C2995774583 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
+		82C1B2FEA59C43C08CC9A2E0 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
+		86990A65259A463E91CAAC6B /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
+		8881BEBE08544CD7A19E729B /* icomoonsetting.woff */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonsetting.woff; path = ../app/assets/fonts/icomoonsetting.woff; sourceTree = "<group>"; };
+		915A77DCE5154104B0A0A722 /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
+		951B16B698BB43928A992879 /* icomoon.woff */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoon.woff; path = ../app/assets/fonts/icomoon.woff; sourceTree = "<group>"; };
+		970844B0A913A9F6D389EFE6 /* libPods-MsbMobileRetail.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-MsbMobileRetail.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		979DC0DEA3774065B2CA19A7 /* iconupdate2.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = iconupdate2.svg; path = ../app/assets/fonts/iconupdate2.svg; sourceTree = "<group>"; };
+		9A69957EA7CF4B50AC924F36 /* icomoonupdate.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonupdate.ttf; path = ../app/assets/fonts/icomoonupdate.ttf; sourceTree = "<group>"; };
+		B0E5B1BD14CF439F80C2F769 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
+		B189F30028E940038D4E459A /* icomoonkyc.woff */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonkyc.woff; path = ../app/assets/fonts/icomoonkyc.woff; sourceTree = "<group>"; };
+		B2381CD9520A499CB1D58317 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
+		B7480A89E1E4422496F27864 /* icomoonaccount.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonaccount.ttf; path = ../app/assets/fonts/icomoonaccount.ttf; sourceTree = "<group>"; };
+		B81BED99138448D686519827 /* icomoonhome.woff */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonhome.woff; path = ../app/assets/fonts/icomoonhome.woff; sourceTree = "<group>"; };
+		BE39E97B255A445B0041D3EF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BEC43A40250627F60057638C /* mycert.cer */ = {isa = PBXFileReference; lastKnownFileType = file; path = mycert.cer; sourceTree = "<group>"; };
+		BEF640BF785C40338A23CF8F /* icomoonhome.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonhome.svg; path = ../app/assets/fonts/icomoonhome.svg; sourceTree = "<group>"; };
+		C95C0F6293304197BF78D4E1 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		CA274F3B241344DA848FB373 /* icomoon.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoon.ttf; path = ../app/assets/fonts/icomoon.ttf; sourceTree = "<group>"; };
+		CE9FB21AD63D43A5AE3FC15F /* helveticaneuelightitalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = helveticaneuelightitalic.ttf; path = ../app/assets/fonts/helveticaneuelightitalic.ttf; sourceTree = "<group>"; };
+		CF55B08CB88242B482D6E276 /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
+		D5B178FD69CC4EDF8B96C2A2 /* icomoonkyc.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonkyc.ttf; path = ../app/assets/fonts/icomoonkyc.ttf; sourceTree = "<group>"; };
+		DED23E3ECDED465C8DD56042 /* icomoonaccount.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonaccount.svg; path = ../app/assets/fonts/icomoonaccount.svg; sourceTree = "<group>"; };
+		E7C43BB8540A429F9AAB0606 /* icomoonkyc.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonkyc.svg; path = ../app/assets/fonts/icomoonkyc.svg; sourceTree = "<group>"; };
+		E7FF725F1998E3E59D7CB82A /* libPods-OneSignalNotificationServiceExtension.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-OneSignalNotificationServiceExtension.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
+		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
+		F2AAF955F3C84CDB95EE34C5 /* icomoonsetting.svg */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = icomoonsetting.svg; path = ../app/assets/fonts/icomoonsetting.svg; sourceTree = "<group>"; };
+		FF78D6542D014054B4BF2E90 /* iconupdate2.woff */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = iconupdate2.woff; path = ../app/assets/fonts/iconupdate2.woff; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		13B07F8C1A680F5B00A75B9A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				80E6F8F48E4E92D3149B17E6 /* libPods-MsbMobileRetail.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56A46BAE24C81F2C002751E2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				522F07D3DF610724CB377652 /* libPods-OneSignalNotificationServiceExtension.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00E356EF1AD99517003FC87E /* MsbMobileRetailTests */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F21AD99517003FC87E /* MsbMobileRetailTests.m */,
+				00E356F01AD99517003FC87E /* Supporting Files */,
+			);
+			path = MsbMobileRetailTests;
+			sourceTree = "<group>";
+		};
+		00E356F01AD99517003FC87E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				00E356F11AD99517003FC87E /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		13B07FAE1A68108700A75B9A /* MsbMobileRetail */ = {
+			isa = PBXGroup;
+			children = (
+				BE39E97B255A445B0041D3EF /* GoogleService-Info.plist */,
+				56E0FB30248555B800AC2139 /* MSB mBank.entitlements */,
+				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
+				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				13B07FB01A68108700A75B9A /* AppDelegate.m */,
+				13B07FB51A68108700A75B9A /* Images.xcassets */,
+				13B07FB61A68108700A75B9A /* Info.plist */,
+				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
+				13B07FB71A68108700A75B9A /* main.m */,
+			);
+			name = MsbMobileRetail;
+			sourceTree = "<group>";
+		};
+		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5F5E865124CF456C00DC5DCB /* libRNTrustVisionRnsdkFramework.a */,
+				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
+				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
+				970844B0A913A9F6D389EFE6 /* libPods-MsbMobileRetail.a */,
+				E7FF725F1998E3E59D7CB82A /* libPods-OneSignalNotificationServiceExtension.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		56A46BB224C81F2C002751E2 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXGroup;
+			children = (
+				56A46BB324C81F2C002751E2 /* NotificationService.swift */,
+				56A46BB524C81F2C002751E2 /* Info.plist */,
+			);
+			path = OneSignalNotificationServiceExtension;
+			sourceTree = "<group>";
+		};
+		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		83CBB9F61A601CBA00E9B192 = {
+			isa = PBXGroup;
+			children = (
+				56C1E151258383AE001B43E6 /* GoogleService-Info.plist */,
+				BEC43A40250627F60057638C /* mycert.cer */,
+				5F9B8CF2242DEA5300A301A4 /* File.swift */,
+				13B07FAE1A68108700A75B9A /* MsbMobileRetail */,
+				832341AE1AAA6A7D00B99B32 /* Libraries */,
+				00E356EF1AD99517003FC87E /* MsbMobileRetailTests */,
+				56A46BB224C81F2C002751E2 /* OneSignalNotificationServiceExtension */,
+				83CBBA001A601CBA00E9B192 /* Products */,
+				2D16E6871FA4F8E400B85C8A /* Frameworks */,
+				C99B81B33304F6020DBA43F4 /* Pods */,
+				FF7B38C9EF514595844061FE /* Resources */,
+				5F9B8CF1242DEA5200A301A4 /* MsbMobileRetail-Bridging-Header.h */,
+			);
+			indentWidth = 2;
+			sourceTree = "<group>";
+			tabWidth = 2;
+			usesTabs = 0;
+		};
+		83CBBA001A601CBA00E9B192 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				13B07F961A680F5B00A75B9A /* MSB mBank.app */,
+				56A46BB124C81F2C002751E2 /* OneSignalNotificationServiceExtension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C99B81B33304F6020DBA43F4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				44919D6F44A53CAE85446112 /* Pods-MsbMobileRetail.debug.xcconfig */,
+				5B29889588F8FBE15C9E54EE /* Pods-MsbMobileRetail.release.xcconfig */,
+				14CCC2D73E279EFC8E65323B /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */,
+				53546AE15C79241F7400C921 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		FF7B38C9EF514595844061FE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				915A77DCE5154104B0A0A722 /* AntDesign.ttf */,
+				385CA95861344D4AB4BC5DC7 /* Entypo.ttf */,
+				6F54860463CF47FA898701B3 /* EvilIcons.ttf */,
+				1C25C3C86A89455AAE5B76D0 /* Feather.ttf */,
+				008BBF9FC35140A992FBB4BA /* FontAwesome.ttf */,
+				B0E5B1BD14CF439F80C2F769 /* FontAwesome5_Brands.ttf */,
+				C95C0F6293304197BF78D4E1 /* FontAwesome5_Regular.ttf */,
+				CF55B08CB88242B482D6E276 /* FontAwesome5_Solid.ttf */,
+				5FAE7C0E77C9436996C7FDFB /* Fontisto.ttf */,
+				64B4806586D744A0B6AC48C0 /* Foundation.ttf */,
+				56CD469691CD4C649DBB23A5 /* Ionicons.ttf */,
+				7BDAC4930BAA4C2995774583 /* MaterialCommunityIcons.ttf */,
+				3FECC08325C947FBA91D377E /* MaterialIcons.ttf */,
+				82C1B2FEA59C43C08CC9A2E0 /* Octicons.ttf */,
+				B2381CD9520A499CB1D58317 /* SimpleLineIcons.ttf */,
+				86990A65259A463E91CAAC6B /* Zocial.ttf */,
+				093371D5642A4215A225CAEF /* Baloo-Regular.ttf */,
+				2C553BEE838F4137897EC1AE /* icomoon.svg */,
+				CA274F3B241344DA848FB373 /* icomoon.ttf */,
+				951B16B698BB43928A992879 /* icomoon.woff */,
+				3FF45D02AD444B48B27BA943 /* helveticaneuelight.ttf */,
+				CE9FB21AD63D43A5AE3FC15F /* helveticaneuelightitalic.ttf */,
+				773DB09AF918416B88467CA0 /* helveticaneuemedium.ttf */,
+				7463035BD462416895DF89DC /* icomoonupdate.svg */,
+				9A69957EA7CF4B50AC924F36 /* icomoonupdate.ttf */,
+				0B3F471FEE63416F987CEDB6 /* icomoonupdate.woff */,
+				E7C43BB8540A429F9AAB0606 /* icomoonkyc.svg */,
+				D5B178FD69CC4EDF8B96C2A2 /* icomoonkyc.ttf */,
+				B189F30028E940038D4E459A /* icomoonkyc.woff */,
+				979DC0DEA3774065B2CA19A7 /* iconupdate2.svg */,
+				243675F99F0E4D5FA1CD9B76 /* iconupdate2.ttf */,
+				FF78D6542D014054B4BF2E90 /* iconupdate2.woff */,
+				F2AAF955F3C84CDB95EE34C5 /* icomoonsetting.svg */,
+				4E22012248914094A786E853 /* icomoonsetting.ttf */,
+				8881BEBE08544CD7A19E729B /* icomoonsetting.woff */,
+				BEF640BF785C40338A23CF8F /* icomoonhome.svg */,
+				28DFF94EEBF0412A81F9AB9C /* icomoonhome.ttf */,
+				B81BED99138448D686519827 /* icomoonhome.woff */,
+				DED23E3ECDED465C8DD56042 /* icomoonaccount.svg */,
+				B7480A89E1E4422496F27864 /* icomoonaccount.ttf */,
+				1B07B6BBF7E14504980AD5BA /* icomoonaccount.woff */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		13B07F861A680F5B00A75B9A /* MsbMobileRetail */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "MsbMobileRetail" */;
+			buildPhases = (
+				5E48125D1A4C889DC61B3C9F /* [CP] Check Pods Manifest.lock */,
+				FD10A7F022414F080027D42C /* Start Packager */,
+				13B07F871A680F5B00A75B9A /* Sources */,
+				13B07F8C1A680F5B00A75B9A /* Frameworks */,
+				13B07F8E1A680F5B00A75B9A /* Resources */,
+				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				56A46BBC24C81F2C002751E2 /* Embed App Extensions */,
+				0AD0F0E2F3615060F59CAC98 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				56A46BB724C81F2C002751E2 /* PBXTargetDependency */,
+			);
+			name = MsbMobileRetail;
+			productName = MsbMobileRetail;
+			productReference = 13B07F961A680F5B00A75B9A /* MSB mBank.app */;
+			productType = "com.apple.product-type.application";
+		};
+		56A46BB024C81F2C002751E2 /* OneSignalNotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 56A46BB924C81F2C002751E2 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */;
+			buildPhases = (
+				AC35D5CC8E5B8E91866F0A53 /* [CP] Check Pods Manifest.lock */,
+				56A46BAD24C81F2C002751E2 /* Sources */,
+				56A46BAE24C81F2C002751E2 /* Frameworks */,
+				56A46BAF24C81F2C002751E2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OneSignalNotificationServiceExtension;
+			productName = OneSignalNotificationServiceExtension;
+			productReference = 56A46BB124C81F2C002751E2 /* OneSignalNotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		83CBB9F71A601CBA00E9B192 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				DefaultBuildSystemTypeForWorkspace = Original;
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = Facebook;
+				TargetAttributes = {
+					13B07F861A680F5B00A75B9A = {
+						DevelopmentTeam = 33A556SA84;
+						LastSwiftMigration = 1130;
+						ProvisioningStyle = Automatic;
+					};
+					56A46BB024C81F2C002751E2 = {
+						CreatedOnToolsVersion = 11.4.1;
+						DevelopmentTeam = 33A556SA84;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "MsbMobileRetail" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+				Base,
+			);
+			mainGroup = 83CBB9F61A601CBA00E9B192;
+			productRefGroup = 83CBBA001A601CBA00E9B192 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				13B07F861A680F5B00A75B9A /* MsbMobileRetail */,
+				56A46BB024C81F2C002751E2 /* OneSignalNotificationServiceExtension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		13B07F8E1A680F5B00A75B9A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				5A54DF307AE64A6FA96F3E46 /* AntDesign.ttf in Resources */,
+				9DD94F2BE60647EAA4E4265C /* Entypo.ttf in Resources */,
+				2DF66C57780B470782C24238 /* EvilIcons.ttf in Resources */,
+				FB71D141DB944D119B9C34B8 /* Feather.ttf in Resources */,
+				66B25FDCD09C478ABD7E138A /* FontAwesome.ttf in Resources */,
+				608E34494CC449DD873F0A0D /* FontAwesome5_Brands.ttf in Resources */,
+				53B3C69C48F941DA92390F81 /* FontAwesome5_Regular.ttf in Resources */,
+				82E1E9253FCE4B93A7FED000 /* FontAwesome5_Solid.ttf in Resources */,
+				4FB50F8CBA0641FEA8543F80 /* Fontisto.ttf in Resources */,
+				1229ABF5C1164FA79AFC9475 /* Foundation.ttf in Resources */,
+				37B28FC9403C4F0D9DB4D0E5 /* Ionicons.ttf in Resources */,
+				BEC43A41250627F60057638C /* mycert.cer in Resources */,
+				408DDED067824FE69A624E01 /* MaterialCommunityIcons.ttf in Resources */,
+				0F1DB4B75BCD4330B7738910 /* MaterialIcons.ttf in Resources */,
+				BBF338825F5F4F99947EC873 /* Octicons.ttf in Resources */,
+				11B22B602A6B4E12875D3A12 /* SimpleLineIcons.ttf in Resources */,
+				13A1C6B91EC54B0C8279DDAE /* Zocial.ttf in Resources */,
+				689B6A3B81754E1997266321 /* icomoon.svg in Resources */,
+				66FE9B4005E44E66A67823D0 /* icomoon.ttf in Resources */,
+				64B279C9EF9E422EBDDE32B2 /* icomoon.woff in Resources */,
+				84677601F21B463CBB570071 /* helveticaneuelight.ttf in Resources */,
+				B49275BE23AD46AFB70F3B63 /* helveticaneuelightitalic.ttf in Resources */,
+				56C1E152258383B8001B43E6 /* GoogleService-Info.plist in Resources */,
+				4137297FF64D405EBA4EF65C /* helveticaneuemedium.ttf in Resources */,
+				B4C0EC666C1F495D92694789 /* icomoonupdate.svg in Resources */,
+				AD82E19D4A224356B3E67EC3 /* icomoonupdate.ttf in Resources */,
+				444C3321BF0D458B82EB4575 /* icomoonupdate.woff in Resources */,
+				2D77244F56204981824CF48D /* icomoonkyc.svg in Resources */,
+				7E88C827D4364CA2801B296A /* icomoonkyc.ttf in Resources */,
+				D89FC83D583242FF863F4FFC /* icomoonkyc.woff in Resources */,
+				6828B42DE3564EB2A41D0ADA /* iconupdate2.svg in Resources */,
+				25D1BBE1768A4582AC37C4D6 /* iconupdate2.ttf in Resources */,
+				F78E65722BC34F59909A4E5C /* iconupdate2.woff in Resources */,
+				53C7A83711B842228F90595E /* icomoonsetting.svg in Resources */,
+				E2B3A7EC817E4A4992CA7799 /* icomoonsetting.ttf in Resources */,
+				63A12001A1DA4A4DA60C2848 /* icomoonsetting.woff in Resources */,
+				A8024533E7DF4DF8940C0D0D /* icomoonhome.svg in Resources */,
+				716C1A47FAA44BBC93F15314 /* icomoonhome.ttf in Resources */,
+				7F747233BB824A7E9B03C87B /* icomoonhome.woff in Resources */,
+				DD736F3ABD6547DA9E3862F9 /* icomoonaccount.svg in Resources */,
+				6FFDE6EEE4804B1DA9ABF712 /* icomoonaccount.ttf in Resources */,
+				7364055CB4594984A38C0D94 /* icomoonaccount.woff in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56A46BAF24C81F2C002751E2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BEC43A42250627F60057638C /* mycert.cer in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Bundle React Native code and images";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
+		};
+		0AD0F0E2F3615060F59CAC98 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MsbMobileRetail/Pods-MsbMobileRetail-resources.sh",
+				"${PODS_ROOT}/../../node_modules/react-native-trust-vision-SDK/ios/Frameworks/TrustVisionSDK.framework/TrustVisionSDK.bundle",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/AntDesign.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Entypo.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Feather.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Regular.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Solid.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Fontisto.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Foundation.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Ionicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
+				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TrustVisionSDK.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AntDesign.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Entypo.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EvilIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Feather.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Brands.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Regular.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FontAwesome5_Solid.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Fontisto.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Foundation.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Ionicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MsbMobileRetail/Pods-MsbMobileRetail-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5E48125D1A4C889DC61B3C9F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MsbMobileRetail-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AC35D5CC8E5B8E91866F0A53 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OneSignalNotificationServiceExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FD10A7F022414F080027D42C /* Start Packager */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Start Packager";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		13B07F871A680F5B00A75B9A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				5F9B8CF3242DEA5300A301A4 /* File.swift in Sources */,
+				13B07FC11A68108700A75B9A /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		56A46BAD24C81F2C002751E2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				56A46BB424C81F2C002751E2 /* NotificationService.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		56A46BB724C81F2C002751E2 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 56A46BB024C81F2C002751E2 /* OneSignalNotificationServiceExtension */;
+			targetProxy = 56A46BB624C81F2C002751E2 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		13B07FB11A68108700A75B9A /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				13B07FB21A68108700A75B9A /* Base */,
+			);
+			name = LaunchScreen.xib;
+			path = MsbMobileRetail;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		13B07F941A680F5B00A75B9A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44919D6F44A53CAE85446112 /* Pods-MsbMobileRetail.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "MsbMobileRetail/MSB mBank.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEAD_CODE_STRIPPING = NO;
+				DEVELOPMENT_TEAM = 33A556SA84;
+				EXCLUDED_ARCHS = "";
+				INFOPLIST_FILE = MsbMobileRetail/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 4.8.3;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.msb.mobileBanking;
+				PRODUCT_NAME = "MSB mBank";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MsbMobileRetail-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Debug;
+		};
+		13B07F951A680F5B00A75B9A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5B29889588F8FBE15C9E54EE /* Pods-MsbMobileRetail.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
+				ARCHS = "$(ARCHS_STANDARD)";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "MsbMobileRetail/MSB mBank.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEVELOPMENT_TEAM = 33A556SA84;
+				EXCLUDED_ARCHS = "";
+				INFOPLIST_FILE = MsbMobileRetail/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 4.8.3;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-lc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.msb.mobileBanking;
+				PRODUCT_NAME = "MSB mBank";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "MsbMobileRetail-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s x86_64";
+				VERSIONING_SYSTEM = "apple-generic";
+			};
+			name = Release;
+		};
+		56A46BBA24C81F2C002751E2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 14CCC2D73E279EFC8E65323B /* Pods-OneSignalNotificationServiceExtension.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 7;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 33A556SA84;
+				EXCLUDED_ARCHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 4.8.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.msb.mobileBanking.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		56A46BBB24C81F2C002751E2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 53546AE15C79241F7400C921 /* Pods-OneSignalNotificationServiceExtension.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 7;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 33A556SA84;
+				EXCLUDED_ARCHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = OneSignalNotificationServiceExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MARKETING_VERSION = 4.8.3;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.msb.mobileBanking.OneSignalNotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		83CBBA201A601CBA00E9B192 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				EXCLUDED_ARCHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		83CBBA211A601CBA00E9B192 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				EXCLUDED_ARCHS = "";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "MsbMobileRetail" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				13B07F941A680F5B00A75B9A /* Debug */,
+				13B07F951A680F5B00A75B9A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		56A46BB924C81F2C002751E2 /* Build configuration list for PBXNativeTarget "OneSignalNotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				56A46BBA24C81F2C002751E2 /* Debug */,
+				56A46BBB24C81F2C002751E2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		83CBB9FA1A601CBA00E9B192 /* Build configuration list for PBXProject "MsbMobileRetail" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				83CBBA201A601CBA00E9B192 /* Debug */,
+				83CBBA211A601CBA00E9B192 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 83CBB9F71A601CBA00E9B192 /* Project object */;
+}
