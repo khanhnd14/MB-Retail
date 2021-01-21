@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useState, useCallback } from 'react'
-import { View, Platform, BackHandler } from 'react-native'
+import { View, Platform, BackHandler,Alert } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useDispatch, useSelector } from 'react-redux'
 import EventEmitter from 'react-native-eventemitter'
@@ -91,7 +91,9 @@ const MainScreen = () => {
   }, [user])
 
   const updateNotifyId = async () => {
+    
     const fbToken = await storeService.getFireBaseId()
+    // Alert.alert(fbToken)
     let isTokenChange = false
     if (fbToken !== fireBaseToken && fbToken !== null) {
       isTokenChange = true

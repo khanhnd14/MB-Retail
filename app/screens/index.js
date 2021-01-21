@@ -111,6 +111,7 @@ export { default as SuccessSaveDeposit } from './account/SavingAcount/SuccessDep
 // saving overdraft
 export { default as ODServiceScreen } from './overdraft/saving/ODServiceScreen'
 export { default as CreateOD } from './overdraft/saving/CreateOD'
+export { default as CreateODConfirm } from './overdraft/saving/CreateODConfirm'
 
 // register
 export { default as OpenNewAccount } from './register/OpenNewAccount'

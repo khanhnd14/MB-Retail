@@ -51,7 +51,7 @@ const ODServiceScreen = () => {
             leftColor={Colors.yellow}
           />
           {/* <MenuItem
-            onPress={() => Navigation.push('ODServiceScreen')}
+            onPress={() => Navigation.push('CreateODConfirm')}
             text={I18n.t('overdraft.fromOnlineSaving.closeScreenTitle')}
             leftColor={Colors.yellow}
           /> */}

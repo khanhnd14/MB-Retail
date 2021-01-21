@@ -20,7 +20,7 @@ export default function (state = initialState, action) {
     case types.SEND_OTP_REGISTER_FAILED:
       return {
         ...state,
-        sendOTPRegister: action.payload
+        sendOTPRegister: null
       }
     case types.CREATION_INFO_COMPLETED:
       return {

@@ -74,11 +74,10 @@ const CreateOD = () => {
     dispatch(odSavingOperations.getPaymentAccount())
     dispatch(odSavingOperations.listTCType())
     dispatch(odSavingOperations.purposeList())
-    console.log('moment', moment().toDate());
     setStartDate(moment().toDate())
     endDateCal()
   }, [])
-  
+
   React.useEffect(() => {
     setCollatData(creationInfo)
     if (creationInfo?.FDList) {
@@ -86,17 +85,30 @@ const CreateOD = () => {
     }
   }, [creationInfo])
 
-  React.useEffect(() => {
-    console.log('sendOTPRegister',sendOTPRegister);
-    
-  }, [sendOTPRegister])
+
 
   React.useEffect(() => {
-    if (getPaymentAccount?.isExistOD) {
-      let expiredDate = new Date(getPaymentAccount.expiredDate)
-      setMaxDate(expiredDate)
-      setEndDate(expiredDate)
-      setPaymentAccount(getPaymentAccount.accounts)//.accountInString
+    console.log('purposeList', purposeList);
+    if (purposeList) {
+      setSelectedPurpose(purposeList[0])
+    }
+  }, [purposeList])
+
+  React.useEffect(() => {
+    if (getPaymentAccount) {
+      if (getPaymentAccount.isExistOD) {
+        let expiredDate = new Date(getPaymentAccount.expiredDate)
+        setMaxDate(expiredDate)
+        setEndDate(expiredDate)
+        // console.log('getPaymentAccount.accounts',getPaymentAccount.accounts);
+        setPaymentAccount(getPaymentAccount.accounts)//.accountInString
+      } else {
+        setPaymentAccount(getPaymentAccount?.accounts[0])
+        // console.log('getPaymentAccount',getPaymentAccount);
+      }
+
+    } else {
+
     }
   }, [getPaymentAccount])
 
@@ -110,7 +122,7 @@ const CreateOD = () => {
   }
 
   const completeFDSelected = (data, total, odl) => {
-    console.log(data,total,odl);
+    console.log(data, total, odl);
     setFDList(data.FDList)
     setTotalTSDB(total)
     setOdLimit(odl)
@@ -121,7 +133,7 @@ const CreateOD = () => {
     console.log(accId);
     getPaymentAccount.accounts.forEach(element => {
       if (element.acctNo == accId) {
-        setPaymentAccount(accId)
+        setPaymentAccount(element)
       }
     });
   }
@@ -130,6 +142,7 @@ const CreateOD = () => {
     setEndDate(date)
   }
   const onSelectPurpose = (pp) => {
+    console.log(pp);
     setSelectedPurpose(pp)
   }
   const handleSubmit = () => {
@@ -137,35 +150,48 @@ const CreateOD = () => {
       refToast.current.show(I18n.t('overdraft.fromOnlineSaving.error_odlimit_null'), 3000)
       return
     }
+    console.log('paymentAccount',paymentAccount);
+    
     if (!paymentAccount) {
       refToast.current.show(I18n.t('overdraft.fromOnlineSaving.error_ca_account_null'), 3000)
       return
     }
-    
+
     let fdListParam = ""
     fDList.forEach(fd => {
       if (fd.isSelected == true) {
         fdListParam += fd.receiptNo + ","
       }
     });
-    if (fdListParam.length>0) {
-      fdListParam = fdListParam.slice(0,-1)
+    if (fdListParam.length > 0) {
+      fdListParam = fdListParam.slice(0, -1)
     }
-    console.log('fdListParam',fdListParam);
+
     // rolloutAcctNo: 11001011414192
     // effectiveDate: 19/01/2021
     // expireDate: 19/01/2022
     // purpose: 41
+
     let body = {
-      fdList:fdListParam,
-      rolloutAcctNo:paymentAccount
+      fdList: fdListParam,
+      rolloutAcctNo: paymentAccount.acctNo,
+      effectiveDate: moment(startDate).format(momentFormat),
+      expireDate: moment(endDate).format(momentFormat),
+      purpose: selectedPurpose.code
     }
-    // dispatch(odSavingOperations.sendOTPRegister())
+    console.log('body', body);
+    dispatch(odSavingOperations.sendOTPRegister(body))
   }
-  
+
+  React.useEffect(() => {
+    console.log('sendOTPRegister', sendOTPRegister);
+    if (sendOTPRegister) {
+      Navigation.push('CreateODConfirm', { title: 'CreateODConfirm' })
+    }
+  }, [sendOTPRegister])
 
   if (creationInfo && getPaymentAccount && listTCType && purposeList) {
-    console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
+    // console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
   } else {
     return null
   }
@@ -255,7 +281,7 @@ const CreateOD = () => {
             setNoteVisible(true)
           }} />
           <ModalSelect
-            title={I18n.t('overdraft.fromOnlineSaving.openingPurpose')}
+            title={I18n.t('application.note')}
             visible={noteVisible}
             maxHeight={100}
             handleModal={() => setNoteVisible(false)}
@@ -265,7 +291,7 @@ const CreateOD = () => {
             </View>
           </ModalSelect>
         </View>
-        <Toast ref={refToast} position="bottom" />
+
         {/* nut tiep tuc */}
         <ConfirmButton
           onPress={() => handleSubmit()}
@@ -282,6 +308,7 @@ const CreateOD = () => {
           }}
         />
       </ScrollView>
+      <Toast ref={refToast} position="bottom" />
     </>
   )
 }
