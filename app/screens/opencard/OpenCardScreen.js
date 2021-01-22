@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-empty */
 /* eslint-disable radix */
@@ -6,19 +7,15 @@ import { View, StyleSheet, ActivityIndicator, TouchableOpacity, Linking } from '
 import { useSelector, useDispatch } from 'react-redux'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import _ from 'lodash'
+import Carousel from 'react-native-snap-carousel'
 import { Helpers, Metrics, Colors } from '../../theme'
-import {
-  Topbar,
-  Text,
-  ConfirmButton,
-  AmountLabel,
-  PhotoSlider,
-} from '../../components'
+import { Topbar, Text, ConfirmButton, AmountLabel } from '../../components'
 import * as Navigation from '../../navigation'
 import { openCardOperations } from '../../state/opencard'
 import I18n from '../../translations'
 import { Utils } from '../../utilities'
 import Preview from './Preview'
+import Indicator from '../../components/PhotoSlider/Indicator'
 
 const styles = StyleSheet.create({
   maincontainer: {
@@ -32,9 +29,8 @@ const styles = StyleSheet.create({
     paddingBottom: Metrics.small,
     borderBottomLeftRadius: 10,
     borderBottomRightRadius: 10,
-    paddingTop: Metrics.medium,
     alignItems: 'center',
-    width: '100%'
+    width: '100%',
   },
   titleContainer: {
     paddingHorizontal: Metrics.small * 1.8,
@@ -100,8 +96,14 @@ const styles = StyleSheet.create({
     color: '#00AEC7',
     textDecorationLine: 'underline',
     alignSelf: 'center',
-    padding: Metrics.small
-  }
+    padding: Metrics.small,
+  },
+  paginationDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginHorizontal: 1,
+  },
 })
 
 const OpenCardScreen = () => {
@@ -112,6 +114,7 @@ const OpenCardScreen = () => {
   const [isInit, setInit] = useState(false)
   const [isShowError, setError] = useState(true)
   const [selectCard, setSelectCard] = useState({})
+  const [currIndex, setIndex] = useState(0)
 
   useEffect(() => {
     setLoading(true)
@@ -119,9 +122,10 @@ const OpenCardScreen = () => {
   }, [])
 
   useEffect(() => {
-    if (loading && listCreditCardInfo) {
+    if (loading && !_.isEmpty(listCreditCardInfo)) {
       setLoading(false)
       setError(false)
+
       setSelectCard(listCreditCardInfo[0] || {})
     }
   }, [listCreditCardInfo])
@@ -147,6 +151,7 @@ const OpenCardScreen = () => {
   }, [initError])
 
   const onSelect = (card) => {
+    console.log('nnnn:', card)
     setSelectCard(card)
   }
 
@@ -162,7 +167,7 @@ const OpenCardScreen = () => {
       const body = {
         cardCode: selectCard.cardCode,
         liabilityContract: selectCard.liabilityContract || null,
-        creditCardMax
+        creditCardMax,
       }
       setInit(true)
       dispatch(openCardOperations.init(body))
@@ -203,47 +208,68 @@ const OpenCardScreen = () => {
         </View>
       )}
       {!loading && !isShowError && (
-      <View style={[Helpers.fill, styles.maincontainer]}>
-        <View style={{ height: Utils.getRatioDimension(200) }}>
-          <PhotoSlider
-            height={Utils.getRatioDimension(180)}
-            data={listCreditCardInfo}
-            onPress={onSelect}
-            contentRender={item => <Preview item={item} />}
-          />
+        <View style={[Helpers.fill, styles.maincontainer]}>
+          <View style={{ height: Utils.getRatioDimension(200) }}>
+            {!_.isEmpty(listCreditCardInfo) && (
+              <Carousel
+                removeClippedSubviews
+                data={listCreditCardInfo}
+                renderItem={({ item }) => <Preview item={item} />}
+                sliderWidth={Utils.getWindowWidth()}
+                itemWidth={Utils.getWindowWidth() * 0.6}
+                inactiveSlideScale={0.7}
+                inactiveSlideOpacity={1}
+                onSnapToItem={(index) => {
+                  setIndex(index)
+                  setSelectCard(listCreditCardInfo[index])
+                }}
+              />
+            )}
+            {!_.isEmpty(listCreditCardInfo) && (
+              <Indicator
+                itemCount={listCreditCardInfo?.length}
+                currentIndex={0}
+                indicatorActiveColor={Colors.primary2}
+                indicatorInActiveColor="#D0D1D3"
+                currentIndex={currIndex}
+              />
+            )}
+          </View>
+          <View style={[Helpers.fill, styles.container]}>
+            <KeyboardAwareScrollView
+              style={[Helpers.fullWidth]}
+              showsVerticalScrollIndicator
+              extraHeight={300}
+              keyboardShouldPersistTaps="handled"
+            >
+              <View style={[styles.titleContainer, Helpers.fullWidth]}>
+                <Text style={styles.title}>{selectCard?.cardName.toUpperCase()}</Text>
+                <Text style={styles.content}>{selectCard?.description}</Text>
+                <TouchableOpacity onPress={onLink}>
+                  <Text style={styles.link}>{I18n.t('opencard.detail')}</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={[styles.contentContainer, Helpers.fullWidth]}>
+                {ItemDisplay(
+                  I18n.t('opencard.open_fee'),
+                  selectCard.openFee === 0 ? I18n.t('opencard.free') : selectCard.openFee,
+                  selectCard.openFee !== 0
+                )}
+                {ItemDisplay(
+                  I18n.t('opencard.card_fee'),
+                  selectCard.annualFee === 0 ? I18n.t('opencard.free') : selectCard.annualFee,
+                  selectCard.annualFee !== 0
+                )}
+                {ItemDisplay('Cashback', selectCard.cashBackDesc)}
+              </View>
+            </KeyboardAwareScrollView>
+            <ConfirmButton
+              onPress={onRegister}
+              text={I18n.t('opencard.btn_open')}
+              loading={isInit}
+            />
+          </View>
         </View>
-        <View style={[Helpers.fill, styles.container]}>
-          <KeyboardAwareScrollView
-            style={[Helpers.fullWidth]}
-            showsVerticalScrollIndicator
-            extraHeight={300}
-            keyboardShouldPersistTaps="handled"
-          >
-            <View style={[styles.titleContainer, Helpers.fullWidth]}>
-              <Text style={styles.title}>{selectCard?.cardName.toUpperCase()}</Text>
-              <Text style={styles.content}>{selectCard?.description}</Text>
-              <TouchableOpacity onPress={onLink}>
-                <Text style={styles.link}>{I18n.t('opencard.detail')}</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={[styles.contentContainer, Helpers.fullWidth]}>
-              {ItemDisplay(
-                'Phí mở thẻ',
-                selectCard.openFee === 0 ? I18n.t('opencard.free') : selectCard.openFee,
-                selectCard.openFee !== 0,
-
-              )}
-              {ItemDisplay(
-                'Phí thường niên',
-                selectCard.annualFee === 0 ? I18n.t('opencard.free') : selectCard.annualFee,
-                selectCard.annualFee !== 0,
-              )}
-              {ItemDisplay('Cashback', selectCard.cashBackDesc)}
-            </View>
-          </KeyboardAwareScrollView>
-          <ConfirmButton onPress={onRegister} text={I18n.t('opencard.btn_open')} loading={isInit} />
-        </View>
-      </View>
       )}
     </Fragment>
   )

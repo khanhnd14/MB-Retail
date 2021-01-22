@@ -7,7 +7,7 @@ import MsbIcon from '../MsbIcon'
 import { Text } from '..'
 import { Utils } from '../../utilities'
 
-const screenWidth = Dimensions.get('window').width;
+const screenWidth = Dimensions.get('window').width
 const styles = StyleSheet.create({
   container: {
     margin: 0,
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   },
   layoutSelect: {
     width: '100%',
-    minHeight: Metrics.medium
+    minHeight: Metrics.medium,
   },
   header: {
     backgroundColor: Colors.primary2,
@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignContent: 'center',
     textAlign: 'center',
-    textAlignVertical: 'center'
+    textAlignVertical: 'center',
   },
   accountContainer: {
     flexDirection: 'row',
-    width: '90%'
+    width: '90%',
   },
   accountContainerChild1: {
     width: '25%',
@@ -62,14 +62,14 @@ const styles = StyleSheet.create({
     fontFamily: 'Calibri',
     lineHeight: 20,
     marginBottom: 8,
-    marginTop: 8
+    marginTop: 8,
   },
   accountText2: {
     color: '#878E9C',
     fontSize: 14,
     lineHeight: 17,
     fontFamily: 'Calibri',
-    marginBottom: 8
+    marginBottom: 8,
   },
   circle: {
     width: 24,
@@ -78,61 +78,60 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: 'lightgray',
     alignSelf: 'flex-end',
-    marginRight: Metrics.normal + 1
+    marginRight: Metrics.normal + 1,
   },
   hr: {
     width: screenWidth * (90 / 100),
     borderColor: '#EEEEEE',
     borderWidth: 0.5,
-    borderStyle: 'solid'
-  }
+    borderStyle: 'solid',
+  },
 })
 
 const ModalSelect = ({ children, title = '', visible, handleModal, maxHeight }) => {
   const [showKeyboard, setShowKeyboard] = React.useState(false)
   const [height, setHeight] = React.useState(new Animated.Value(maxHeight || 280))
   const _keyboardDidShow = () => {
-    Platform.OS === 'ios' && Animated.timing(height, {
-      toValue: Utils.getWindowHeight() / 1.5,
-      duration: 300,
-      easing: Easing.inOut(Easing.ease),
-
-    }).start()
-  };
+    Platform.OS === 'ios' &&
+      Animated.timing(height, {
+        toValue: Utils.getWindowHeight() / 1.5,
+        duration: 300,
+        easing: Easing.inOut(Easing.ease),
+      }).start()
+  }
 
   const _keyboardDidHide = () => {
     // Animated.timing(height, {
     //   toValue: 300,
     //   duration: 300,
     // }).start()
-  };
+  }
   React.useEffect(() => {
-    Keyboard.addListener('keyboardDidShow', _keyboardDidShow);
-    Keyboard.addListener('keyboardDidHide', _keyboardDidHide);
+    Keyboard.addListener('keyboardDidShow', _keyboardDidShow)
+    Keyboard.addListener('keyboardDidHide', _keyboardDidHide)
 
     // cleanup function
     return () => {
-      Keyboard.removeListener('keyboardDidShow', _keyboardDidShow);
-      Keyboard.removeListener('keyboardDidHide', _keyboardDidHide);
-    };
-  }, [Keyboard]);
+      Keyboard.removeListener('keyboardDidShow', _keyboardDidShow)
+      Keyboard.removeListener('keyboardDidHide', _keyboardDidHide)
+    }
+  }, [Keyboard])
 
   React.useEffect(() => {
-   if (!visible) {
-    Animated.timing(height, {
-      toValue: 0,
-      duration: 300,
-      easing: Easing.inOut(Easing.ease),
-    }).start()
-   } else {
-    Animated.timing(height, {
-      toValue: maxHeight || 280,
-      duration: 300,
-      easing: Easing.inOut(Easing.ease),
-
-    }).start()
-   }
-  }, [visible]);
+    if (!visible) {
+      Animated.timing(height, {
+        toValue: 0,
+        duration: 300,
+        easing: Easing.inOut(Easing.ease),
+      }).start()
+    } else {
+      Animated.timing(height, {
+        toValue: maxHeight || 280,
+        duration: 300,
+        easing: Easing.inOut(Easing.ease),
+      }).start()
+    }
+  }, [visible])
 
   return (
     <Modal
@@ -156,7 +155,9 @@ const ModalSelect = ({ children, title = '', visible, handleModal, maxHeight }) 
             />
           </TouchableOpacity>
         </View>
-        <Animated.View style={[styles.content, { maxHeight: height, height }]}>{children}</Animated.View>
+        <Animated.View style={[styles.content, { maxHeight: height, height }]}>
+          {children}
+        </Animated.View>
       </View>
     </Modal>
   )

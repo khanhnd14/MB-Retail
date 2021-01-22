@@ -579,6 +579,8 @@ export default {
   uploadProfilePicture: {
     id: 'upload/profilePicture',
     uri: 'upload/profilePicture',
+    type: 'form-data',
+    isGetFullResponse: true,
   },
   registerForgotPass: {
     id: 'register/forgotPass',

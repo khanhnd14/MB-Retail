@@ -38,3 +38,16 @@ export const changeNotifyStatus = (body) => ({
     body,
   },
 })
+export const updateAvatar = (body) => ({
+  type: types.UPDATE_AVATAR,
+  meta: {
+    ...resourceHttp.uploadProfilePicture,
+    body,
+  },
+})
+
+export const updateLocalAvatar = (uri) => ({
+  type: types.UPDATE_LOCAL_AVATAR,
+  payload: uri
+
+})

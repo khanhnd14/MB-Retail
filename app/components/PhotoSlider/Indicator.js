@@ -1,12 +1,14 @@
 /* eslint-disable no-use-before-define */
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
+import { Metrics } from '../../theme';
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     alignSelf: 'center',
+    padding: Metrics.normal
   },
   indicator: {
     width: 6,
