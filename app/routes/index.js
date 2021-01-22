@@ -132,7 +132,9 @@ import {
   OpenCardVerify,
   OpenCardSuccess,
   ExchangeScreen,
-  ATMScreen
+  ATMScreen,
+  MessageScreen,
+  MessageDetail
 } from '../screens'
 import { withAuthentication } from '../enhancers'
 
@@ -303,7 +305,7 @@ const routes = {
   DepositSaving: { name: 'DepositSaving', component: DepositSaving },
   ScheduleSaving: { name: 'ScheduleSaving', component: ScheduleSaving },
   SuccessSaveDeposit: { name: 'SuccessSaveDeposit', component: SuccessSaveDeposit },
-  
+
   TransferSuccess: { name: 'TransferSuccess', component: TransferSuccess },
   Failed: { name: 'Failed', component: Failed },
   ManagerBenefit: { name: 'ManagerBenefit', component: withAuthentication(ManagerBenefit) },
@@ -464,7 +466,14 @@ const routes = {
     name: 'ATMScreen',
     component: withAuthentication(ATMScreen),
   },
-
+  MessageScreen: {
+    name: 'MessageScreen',
+    component: withAuthentication(MessageScreen),
+  },
+  MessageDetail: {
+    name: 'MessageDetail',
+    component: withAuthentication(MessageDetail),
+  }
 }
 
 export { routes }

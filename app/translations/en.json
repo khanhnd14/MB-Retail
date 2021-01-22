@@ -1076,5 +1076,12 @@
     "min_amount":"Limit is lower than minimum granting limit ({0})",
     "open_fee":"Card opening fee",
     "card_fee":"Annual card fee"
+  },
+  "investigate":{
+    "title":"Investigate",
+    "replyed": "Replyed",
+    "notReply": "Not Reply",
+    "infoNotification":"Content"
+
   }
 }

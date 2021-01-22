@@ -173,6 +173,10 @@ const SettingScreen = () => {
     Navigation.push('OpenCardScreen')
   }
 
+  const onMessage = () => {
+    Navigation.push('MessageScreen')
+  }
+
   // Verify transactions
 
   const changeVerify = (sType) => {
@@ -549,6 +553,12 @@ const SettingScreen = () => {
             icon="icon-247"
             title={I18n.t('login.247')}
             onSelectItem={() => Communications.phonecall(Config.phoneNumber, true)}
+          />
+          <ItemSetting
+            style={styles.line}
+            icon="icon-247"
+            title="Tra soát"
+            onSelectItem={onMessage}
           />
           <ItemSetting
             icon="setting_employee"

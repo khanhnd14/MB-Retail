@@ -1082,5 +1082,11 @@
     "min_amount":"Hạn mức tối thiểu là {0} đồng. Quý khách vui lòng nhập lại",
     "open_fee":"Phí mở thẻ",
     "card_fee":"Phí thường niên"
+  },
+  "investigate":{
+    "title":"Tra soát",
+    "replyed": "Đã trà lời",
+    "notReply": "Chưa trả lời",
+    "infoNotification":"Thông tin thông báo"
   }
 }
