@@ -53,7 +53,6 @@ class Avatar extends React.Component {
   }
 
   componentDidUpdate(_prevProps, _prevState) {
-    console.log('this.state.height:', this.state.height, this.state.isVisible);
     if (this.state.isVisible !== _prevState.isVisible) {
       if (!this.state.isVisible) {
         Animated.timing(this.state.height, {
@@ -93,7 +92,6 @@ class Avatar extends React.Component {
   }
 
   onClose() {
-    console.log('asssss')
     this.setState({
       isVisible: false,
     })
