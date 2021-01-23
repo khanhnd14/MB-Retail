@@ -119,11 +119,11 @@ const SendComment = () => {
         <View style={Helpers.fill}>
           <View style={[styles.container]}>
             <SelectBox
-              title="Loại dịch vụ"
+              title={I18n.t('investigate.serviceType')}
               data={dataDetail}
               defaultValue={service}
               onSelect={onSelect}
-              textHolder="Chọn loại dịch vụ"
+              textHolder={I18n.t('investigate.serviceType')}
               keyValue="discription"
             />
             <Text style={[styles.title]}>{I18n.t('investigate.topic')}</Text>

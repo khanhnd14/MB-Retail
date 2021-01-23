@@ -1094,7 +1094,9 @@
     "des":"Miêu tả",
     "empty":"Vui lòng nhập đầy đủ nội dung và tiêu để muốn gửi đến chúng tôi!",
     "confirmSendMessage": "Bạn chắc chắn muốn gửi ý kiến",
-    "confirmTitle": "Xác nhận trước khi gửi"
+    "confirmTitle": "Xác nhận trước khi gửi",
+    "serviceType": "Loại dịch vụ"
+
 
   }
 }
