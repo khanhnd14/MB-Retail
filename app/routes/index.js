@@ -134,7 +134,9 @@ import {
   ExchangeScreen,
   ATMScreen,
   MessageScreen,
-  MessageDetail
+  MessageDetail,
+  CommentScreen,
+  SendComment
 } from '../screens'
 import { withAuthentication } from '../enhancers'
 
@@ -473,7 +475,16 @@ const routes = {
   MessageDetail: {
     name: 'MessageDetail',
     component: withAuthentication(MessageDetail),
-  }
+  },
+  CommentScreen: {
+    name: 'CommentScreen',
+    component: withAuthentication(CommentScreen),
+  },
+  SendComment: {
+    name: 'SendComment',
+    component: withAuthentication(SendComment),
+  },
+
 }
 
 export { routes }

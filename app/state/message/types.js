@@ -13,3 +13,7 @@ export const GET_DETAIL_FAILED = 'message/GET_DETAIL_FAILED'
 export const DELETE = 'message/DELETE'
 export const DELETE_COMPLETED = 'message/DELETE_COMPLETED'
 export const DELETE_FAILED = 'message/DELETE_FAILED'
+
+export const COMMENT = 'message/COMMENT'
+export const COMMENT_COMPLETED = 'message/COMMENT_COMPLETED'
+export const COMMENT_FAILED = 'message/COMMENT_FAILED'

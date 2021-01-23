@@ -8,10 +8,14 @@ const initialState = {
   dataDetail: null,
   delet: null,
   deletError: null,
+  comment: null,
+  commentError: null,
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case types.GET_DATA:
+      return { ...state, data: null, dataError: null }
     case types.GET_DATA_COMPLETED:
       return { ...state, data: action.payload.listMessage }
     case types.GET_DATA_FAILED:
@@ -24,10 +28,17 @@ export default function(state = initialState, action) {
       return {
         ...state,
         data: data.filter((el) => el.messageId !== messageId),
-        delet: true
+        delet: true,
       }
     case types.DELETE_FAILED:
       return { ...state, deletError: action.payload }
+    case types.COMMENT_COMPLETED:
+      return {
+        ...state,
+        comment: true,
+      }
+    case types.COMMENT_FAILED:
+      return { ...state, commentError: action.payload }
     case types.GET_DETAIL_COMPLETED:
       return { ...state, dataDetail: action.payload }
     case types.LOADMORE_COMPLETED:

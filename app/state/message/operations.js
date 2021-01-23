@@ -1,3 +1,3 @@
-import { getData, loadMore, getDetail, deleteMess } from './actions'
+import { getData, loadMore, getDetail, deleteMess, comment } from './actions'
 
-export { getData, loadMore, getDetail, deleteMess }
+export { getData, loadMore, getDetail, deleteMess, comment }

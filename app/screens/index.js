@@ -165,3 +165,5 @@ export { default as ATMScreen } from './atm/ATMScreen'
 
 export { default as MessageScreen } from './message/MessageScreen'
 export { default as MessageDetail } from './message/MessageDetail'
+export { default as CommentScreen } from './message/CommentScreen'
+export { default as SendComment } from './message/SendComment'
