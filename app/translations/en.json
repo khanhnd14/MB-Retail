@@ -1088,7 +1088,9 @@
     "des":"Description",
     "empty":"Please enter full content and title!",
     "confirmSendMessage": "Do you want to send comments",
-    "confirmTitle": "Confirm"
+    "confirmTitle": "Confirm",
+    "serviceType": "Service Type"
+
 
   }
 }
