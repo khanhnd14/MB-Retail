@@ -176,7 +176,9 @@ const SettingScreen = () => {
   const onMessage = () => {
     Navigation.push('MessageScreen')
   }
-
+  const onComment = () => {
+    Navigation.push('CommentScreen')
+  }
   // Verify transactions
 
   const changeVerify = (sType) => {
@@ -559,6 +561,12 @@ const SettingScreen = () => {
             icon="icon-247"
             title="Tra soát"
             onSelectItem={onMessage}
+          />
+          <ItemSetting
+            style={styles.line}
+            icon="icon-247"
+            title="Khiếu nại"
+            onSelectItem={onComment}
           />
           <ItemSetting
             icon="setting_employee"

@@ -19,6 +19,7 @@
     "note": "Note",
     "result": "Result",
     "message_success": "The transaction is successful!",
+    "success": "Successful!",
     "message_congrat": "Congratulation!",
     "payment_success": "Congratulation!",
     "another_transaction": "Other",
@@ -1079,9 +1080,15 @@
   },
   "investigate":{
     "title":"Investigate",
+    "title2":"Message Board",
     "replyed": "Replyed",
     "notReply": "Not Reply",
-    "infoNotification":"Content"
+    "infoNotification":"Content",
+    "topic":"Topic",
+    "des":"Description",
+    "empty":"Please enter full content and title!",
+    "confirmSendMessage": "Do you want to send comments",
+    "confirmTitle": "Confirm"
 
   }
 }

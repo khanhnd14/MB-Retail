@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
 
 const MessageDetail = ({ route }) => {
   const { notification } = route.params
-  const { serviceType, acceptContent, content, messageId, typeCode } = notification || {}
+  const { serviceType, acceptContent, content, messageId } = notification || {}
   const { activeCode } = useSelector((state) => state.user)
   const { dataDetail, delet, deletError } = useSelector((state) => state.message)
   const [service, setService] = useState(I18n.t('investigate.infoNotification'))

@@ -19,6 +19,7 @@
     "note": "Ghi chú",
     "result": "Kết quả",
     "message_success": "Giao dịch thành công",
+    "success": "Thao tác thành công",
     "payment_success": "Thanh toán thành công",
     "message_congrat": "Chúc mừng bạn!",
     "another_transaction": "Giao dịch khác",
@@ -1085,8 +1086,15 @@
   },
   "investigate":{
     "title":"Tra soát",
+    "title2":"Liên hệ góp ý",
     "replyed": "Đã trà lời",
     "notReply": "Chưa trả lời",
-    "infoNotification":"Thông tin thông báo"
+    "infoNotification":"Thông tin thông báo",
+    "topic":"Chủ đề",
+    "des":"Miêu tả",
+    "empty":"Vui lòng nhập đầy đủ nội dung và tiêu để muốn gửi đến chúng tôi!",
+    "confirmSendMessage": "Bạn chắc chắn muốn gửi ý kiến",
+    "confirmTitle": "Xác nhận trước khi gửi"
+
   }
 }

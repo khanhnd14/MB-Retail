@@ -30,3 +30,10 @@ export const deleteMess = (body) => ({
     body,
   },
 })
+export const comment = (body) => ({
+  type: types.COMMENT,
+  meta: {
+    ...resourceHttp.sendMessage,
+    body,
+  },
+})
