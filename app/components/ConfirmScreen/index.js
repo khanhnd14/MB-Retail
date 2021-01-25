@@ -12,7 +12,8 @@ import * as Navigation from '../../navigation'
 import ConfirmItem from '../ConfirmItem'
 
 const ConfirmScreen = ({ route }) => {
-  const { acctNo, amount, fields } = route.params
+  console.log('route.params:', route.params);
+  const { acctNo, amount, fields, isNow } = route.params
   const { title, typeSave, catCode, index, savingOnlineAccounts, currentAccount } = route.params
   const dispatch = useDispatch()
   const {
@@ -31,18 +32,16 @@ const ConfirmScreen = ({ route }) => {
   }
 
   const onSubmit = () => {
-//       tokenTransaction: cda90bac543e7035816c1483cc17c05fa9032877
-      // category: FSDK
-      // productType:
-      // renewMatter:
-      // tokenNo: 193b32be-0fe3-42e7-a683-67bca7359d1e
-      // lang: vi_VN
       const body = {
         tokenTransaction: resultCreateCAtoFD.tokenTransaction,
         category: 'FSDK'
       }
       Utils.showLoading()
-      dispatch(saveOperations.savingCompleteCAtoFD(body))
+      if (isNow) {
+        dispatch(saveOperations.savingCompleteCAtoFDNow(body))
+      } else {
+        dispatch(saveOperations.savingCompleteCAtoFD(body))
+      }
   }
 
   const onLeftPress = () => {
