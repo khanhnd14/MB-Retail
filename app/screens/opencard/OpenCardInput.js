@@ -163,7 +163,7 @@ const OpenCardInput = ({ route }) => {
         rolloutAcctNo: auto ? rolloutAccountNo : null,
         subBranch: branch.subBranch,
         isAutoDept: auto,
-        scretAnswer: Utils.cleanVietnamese(answer),
+        scretAnswer: Utils.clean_vietnamese(answer),
         minOrMaxBilling: isFullPayment ? 1 : 0,
         liabilityContract,
         cardCode,
