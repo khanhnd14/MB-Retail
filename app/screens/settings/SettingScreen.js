@@ -558,14 +558,14 @@ const SettingScreen = () => {
           />
           <ItemSetting
             style={styles.line}
-            icon="icon-247"
-            title="Tra soát"
+            icon="icon-hotline"
+            title={I18n.t('investigate.title')}
             onSelectItem={onMessage}
           />
           <ItemSetting
             style={styles.line}
-            icon="icon-247"
-            title="Khiếu nại"
+            icon="icon-hoidap"
+            title={I18n.t('investigate.title2')}
             onSelectItem={onComment}
           />
           <ItemSetting
