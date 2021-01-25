@@ -139,7 +139,7 @@ const SavingAcountScreen = ({ navigation, route }) => {
   const accountSave = route.params.page === 'StoreSaveScreen' ? savingLocalizeAccounts : savingOnlineAccounts
   const { account, resultFinalization, errorSavingResult } = useSelector((state) => state.save)
   const dispatch = useDispatch()
-  let scrollView = useRef()
+  const scrollView = useRef(null)
 
   const dataSaving = useMemo(
     () =>
@@ -294,7 +294,7 @@ const SavingAcountScreen = ({ navigation, route }) => {
         if (route.params.page !== 'StoreSaveScreen') {
           if (!selectCheckbox) {
             showAlert(true, I18n.t('saving.please'), I18n.t('saving.confirm_finalization'))
-            scrollView.scrollToEnd({ animated: true })
+            scrollView?.current?.scrollToEnd({ animated: true })
             return
           }
           refAccount.current.setVisible(true)
@@ -399,7 +399,7 @@ const SavingAcountScreen = ({ navigation, route }) => {
       <ActionBarPaymentAcount loading={loading} data={actionData} onAction={onAction} />
 
       <ScrollView
-        ref={ref => { scrollView = ref }}
+        ref={scrollView}
         showsVerticalScrollIndicator={false}
         style={{
           backgroundColor: Colors.white,
@@ -418,7 +418,7 @@ const SavingAcountScreen = ({ navigation, route }) => {
             {route.params.page !== 'StoreSaveScreen' && (
               <TouchableOpacity
                 onPress={() => {
-                scrollView?.scrollTo(0)
+                  scrollView?.current?.scrollTo(0)
                 setSelectCheckbox(!selectCheckbox)
               }}
                 style={styles.viewCheckBox}
@@ -432,7 +432,7 @@ const SavingAcountScreen = ({ navigation, route }) => {
                     },
                   ]}
                   onPress={() => {
-                    scrollView?.scrollTo(0)
+                    scrollView?.current?.scrollTo(0)
                     setSelectCheckbox(!selectCheckbox)
                   }}
                   activeOpacity={0.75}
