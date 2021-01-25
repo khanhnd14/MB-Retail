@@ -163,13 +163,12 @@ const OpenCardInput = ({ route }) => {
         rolloutAcctNo: auto ? rolloutAccountNo : null,
         subBranch: branch.subBranch,
         isAutoDept: auto,
-        scretAnswer: answer,
+        scretAnswer: Utils.cleanVietnamese(answer),
         minOrMaxBilling: isFullPayment ? 1 : 0,
         liabilityContract,
         cardCode,
         scretQuestion: I18n.t('opencard.sec_question'),
       }
-      console.log('1');
 
       Navigation.push('OpenCardCondition', { body })
     } catch (error) {}
@@ -288,7 +287,7 @@ const OpenCardInput = ({ route }) => {
                 }}
                 multiline
                 editable={_.isEmpty(securityName)}
-                maxLength={100}
+                maxLength={30}
                 returnKeyType="next"
               />
             </View>
