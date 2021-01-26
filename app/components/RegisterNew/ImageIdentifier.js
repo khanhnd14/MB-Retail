@@ -126,7 +126,7 @@ const ImageIdentifier = forwardRef(({ showAlert, phone, toastAlert, setLoading }
       if (errorMessage) {
         showErrorCard(error, errorMessage, messageJupiter, funcName)
       } else {
-        checkErrorSelfiePortraitSanity(error)
+        checkErrorSelfiePortraitSanity(error, funcName)
       }
     }
   }
@@ -149,7 +149,7 @@ const ImageIdentifier = forwardRef(({ showAlert, phone, toastAlert, setLoading }
     }
   }
 
-  const checkErrorSelfiePortraitSanity = (error) => {
+  const checkErrorSelfiePortraitSanity = (error, funcName) => {
     if (error) {
       const { code, message } = error
       console.log('====================================');
@@ -159,7 +159,7 @@ const ImageIdentifier = forwardRef(({ showAlert, phone, toastAlert, setLoading }
       const messageJupiter = _.get(configJupiter.SELFIE_PORTRAIT_SANITY_ERROR, code)
 
       if (errorMessage) {
-        showErrorCard(error, errorMessage, messageJupiter, SELF_FUNC)
+        showErrorCard(error, errorMessage, messageJupiter, funcName)
       } else {
         checkErrorTampering(error)
       }
@@ -248,7 +248,7 @@ const ImageIdentifier = forwardRef(({ showAlert, phone, toastAlert, setLoading }
       setSelfieImage(selfieImage)
     } catch (error) {
       logContent = 'startSelfieCapturing'
-      checkErrorSelfiePortraitSanity(error)
+      checkErrorSelfiePortraitSanity(error, SELF_FUNC)
     }
   }
 
