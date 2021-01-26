@@ -96,7 +96,7 @@ const MainScreen = () => {
     if (fbToken !== fireBaseToken && fbToken !== null) {
       isTokenChange = true
     }
-    if (!isUpdatePushId || !isUpdateFireBaseId || isTokenChange) {
+    // if (!isUpdatePushId || !isUpdateFireBaseId || isTokenChange) {
       const pushId = await storeService.getPushId()
       dispatch(
         appOperations.updatePushIdServer({
@@ -106,7 +106,7 @@ const MainScreen = () => {
           fireBaseToken: fbToken
         })
       )
-     }
+    //  }
   }
 
   const onUserLogOut = () => {
