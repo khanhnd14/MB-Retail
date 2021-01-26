@@ -238,7 +238,7 @@ const App = () => {
         .then((token) => {
           console.log(`token :${token}`)
           storeService.setFireBaseId(token)
-          Clipboard.setString(token)
+          // Clipboard.setString(token)
         })
     })
   }

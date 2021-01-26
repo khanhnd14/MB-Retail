@@ -121,25 +121,35 @@ const SettingScreen = () => {
   }
 
   const getCamera = () => {
-    ImagePicker.openCamera({
-      width: 300,
-      height: 300,
-      cropping: true,
-    }).then((image) => {
+    if (isTimeout) {
       avatarRef && avatarRef.current?.onClose()
-      uploadAvatar(image)
-    })
+      signIn()
+    } else {
+      ImagePicker.openCamera({
+        width: 300,
+        height: 300,
+        cropping: true,
+      }).then((image) => {
+        avatarRef && avatarRef.current?.onClose()
+        uploadAvatar(image)
+      })
+    }
   }
 
   const getGalery = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 300,
-      cropping: true,
-    }).then((image) => {
+    if (isTimeout) {
       avatarRef && avatarRef.current?.onClose()
-      uploadAvatar(image)
-    })
+      signIn()
+    } else {
+      ImagePicker.openPicker({
+        width: 300,
+        height: 300,
+        cropping: true,
+      }).then((image) => {
+        avatarRef && avatarRef.current?.onClose()
+        uploadAvatar(image)
+      })
+    }
   }
 
   const changeLimit = () => {
