@@ -961,4 +961,11 @@ export default {
     cache: true,
     cacheOptions: { interval: 1 },
   },
+  overdraftCompleteRegister: {
+    id: 'overdraftCompleteRegister',
+    uri: 'overdraft/completeRegister',
+    cache: true,
+    cacheOptions: { interval: 1 },
+    isGetFullResponse: true,
+  },
 }

@@ -1,3 +1,3 @@
-import { creationInfo, listTCType, getPaymentAccount, purposeList, sendOTPRegister } from './actions'
+import { creationInfo, listTCType, getPaymentAccount, purposeList, sendOTPRegister, completeRegister, sendOtpOnly, completeTransaction } from './actions'
 
-export { creationInfo, listTCType, getPaymentAccount, purposeList, sendOTPRegister }
+export { creationInfo, listTCType, getPaymentAccount, purposeList, sendOTPRegister, completeRegister, sendOtpOnly, completeTransaction }

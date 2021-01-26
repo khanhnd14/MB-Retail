@@ -1027,6 +1027,8 @@
       "openingPurposePlaceHolder": "Vui lòng chọn mục đích mở thấu chi",
       "error_odlimit_null": "Vui lòng chọn sổ tiết kiệm làm tài sản bảo đảm",
       "error_ca_account_null": "Vui lòng chọn tài khoản thanh toán",
+      "odOpenRequest": "Yêu cầu cấp thấu chi",
+      "conditionTitle": "ĐIỀU KHOẢN & ĐIỀU KIỆN MỞ THẤU CHI ONLINE",
     },
     "title": "Cấp thấu chi cho CBNV",
     "sub_title": "Yêu cầu cấp thấu chi",

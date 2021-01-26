@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const CreateOD = () => {
+const CloseODScreen = () => {
   const dispatch = useDispatch()
   const { creationInfo, getPaymentAccount, listTCType, purposeList, sendOTPRegister,sendOTPRegisterError } = useSelector((state) => state.overdraft)
   const [totalTSDB, setTotalTSDB] = React.useState(0)
@@ -319,4 +319,4 @@ const CreateOD = () => {
     </>
   )
 }
-export default CreateOD
+export default CloseODScreen

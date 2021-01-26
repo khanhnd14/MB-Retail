@@ -4,23 +4,54 @@ import { appTypes } from '../application'
 
 const initialState = {
   creationInfo: null,
-  listTCType:null,
-  getPaymentAccount:null,
-  purposeList:null,
-  sendOTPRegister:null,
+  listTCType: null,
+  getPaymentAccount: null,
+  purposeList: null,
+  sendOTPRegister: null,
+  sendOTPRegisterError: null,
+  sendOTPOnly:null,
+  sendOTPOnlyError:null,
+  completeRegister: null,
+  completeRegisterError: null,
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    case types.COMPLETE_REGISTER_COMPLETED:
+      return {
+        ...state,
+        completeRegister: action.payload,
+        completeRegisterError: null
+      }
+    case types.COMPLETE_REGISTER_FAILED:
+      return {
+        ...state,
+        completeRegister: null,
+        completeRegisterError: action.payload
+      }
+    case types.SEND_OTP_ONLY_COMPLETED:
+      return {
+        ...state,
+        sendOTPOnly: action.payload,
+        sendOTPOnlyError: null
+      }
+    case types.SEND_OTP_ONLY_FAILED:
+      return {
+        ...state,
+        sendOTPOnly: null,
+        sendOTPOnlyError: action.payload
+      }
     case types.SEND_OTP_REGISTER_COMPLETED:
       return {
         ...state,
-        sendOTPRegister: action.payload
+        sendOTPRegister: action.payload,
+        sendOTPRegisterError: null
       }
     case types.SEND_OTP_REGISTER_FAILED:
       return {
         ...state,
-        sendOTPRegister: null
+        sendOTPRegister: null,
+        sendOTPRegisterError: action.payload
       }
     case types.CREATION_INFO_COMPLETED:
       return {
@@ -64,6 +95,8 @@ export default function (state = initialState, action) {
       }
     case appTypes.REACTIVE:
       return initialState
+    case appTypes.COMPLETE_TRANSACTION:
+        return initialState
     default:
       return state
   }

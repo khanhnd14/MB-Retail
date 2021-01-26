@@ -2,6 +2,34 @@ import * as types from './types'
 import { resourceHttp } from '../../services'
 
 
+
+
+export const completeTransaction = () => (dispatch) => {
+  dispatch({
+    type: types.COMPLETE_TRANSACTION
+  })
+}
+
+export const sendOtpOnly = (body) => (dispatch) => {
+  dispatch({
+    type: types.SEND_OTP_ONLY,
+    meta: {
+      ...resourceHttp.sendOTPOnly,
+      body
+    },
+  })
+}
+
+export const completeRegister = (body) => (dispatch) => {
+  dispatch({
+    type: types.COMPLETE_REGISTER,
+    meta: {
+      ...resourceHttp.overdraftCompleteRegister,
+      body
+    },
+  })
+}
+
 export const sendOTPRegister = (body) => (dispatch) => {
   dispatch({
     type: types.SEND_OTP_REGISTER,

@@ -133,7 +133,10 @@ import {
   OpenCardVerify,
   OpenCardSuccess,
   ExchangeScreen,
-  ATMScreen
+  ATMScreen,
+  CreateODVerify,
+  CreateODSuccessScreen,
+  CloseODScreen
 } from '../screens'
 import { withAuthentication } from '../enhancers'
 
@@ -312,6 +315,11 @@ const routes = {
   ODServiceScreen: { name: 'ODServiceScreen', component: withAuthentication(ODServiceScreen) },
   CreateOD: { name: 'CreateOD', component: withAuthentication(CreateOD) },
   CreateODConfirm: { name: 'CreateODConfirm', component: withAuthentication(CreateODConfirm) },
+  CreateODVerify: { name: 'CreateODVerify', component: withAuthentication(CreateODVerify) },
+  CreateODSuccessScreen: { name: 'CreateODSuccessScreen', component: withAuthentication(CreateODSuccessScreen) },
+  CloseODScreen: { name: 'CloseODScreen', component: withAuthentication(CloseODScreen) },
+  
+  
   // softtoken
   SoftTokenOTP: { name: 'SoftTokenOTP', component: SoftTokenOTP },
   SoftTokenScanQr: { name: 'SoftTokenScanQr', component: SoftTokenScanQr },

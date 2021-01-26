@@ -26,6 +26,7 @@ import MenuTranslate from '../intro/MenuTranslate'
 import { withAuthentication } from '../../enhancers'
 import { storeService } from '../../services'
 import UpdateVesion from './UpdateVesion'
+import Clipboard from '@react-native-community/clipboard';
 
 var isFocusScreen = false
 const MainScreen = () => {
@@ -93,6 +94,7 @@ const MainScreen = () => {
   const updateNotifyId = async () => {
     
     const fbToken = await storeService.getFireBaseId()
+    // Clipboard.setString(fbToken)
     // Alert.alert(fbToken)
     let isTokenChange = false
     if (fbToken !== fireBaseToken && fbToken !== null) {
