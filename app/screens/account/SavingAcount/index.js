@@ -135,8 +135,11 @@ let keyboardDidShowListener
 let keyboardDidHideListener
 let aliasName
 const SavingAcountScreen = ({ navigation, route }) => {
-  const { savingOnlineAccounts, savingLocalizeAccounts, resultChangeAliasName } = useSelector((state) => state.save)
-  const accountSave = route.params.page === 'StoreSaveScreen' ? savingLocalizeAccounts : savingOnlineAccounts
+  const { savingOnlineAccounts, savingLocalizeAccounts, resultChangeAliasName } = useSelector(
+    (state) => state.save
+  )
+  const accountSave =
+    route.params.page === 'StoreSaveScreen' ? savingLocalizeAccounts : savingOnlineAccounts
   const { account, resultFinalization, errorSavingResult } = useSelector((state) => state.save)
   const dispatch = useDispatch()
   const scrollView = useRef(null)
@@ -152,7 +155,7 @@ const SavingAcountScreen = ({ navigation, route }) => {
             ? I18n.t('account.live_save').toLocaleUpperCase()
             : I18n.t('account.store_save').toLocaleUpperCase(),
         category: num.category,
-        currencyCode: num.currencyCode
+        currencyCode: num.currencyCode,
       })),
     [accountSave]
   )
@@ -164,9 +167,7 @@ const SavingAcountScreen = ({ navigation, route }) => {
   const [loadingRename, setLoadingRename] = useState(false)
   const [selectCheckbox, setSelectCheckbox] = useState(false)
   const [newName, setNewName] = useState('')
-  const [indexCarousel, setIndexCarousel] = useState(
-    route.params.element
-  )
+  const [indexCarousel, setIndexCarousel] = useState(route.params.element)
   const [keyboardOffset, setKeyboardOffset] = useState(-100)
   const [loading, setLoading] = useState(false)
 
@@ -177,15 +178,13 @@ const SavingAcountScreen = ({ navigation, route }) => {
         { title: I18n.t('saving.finalize'), icon: 'account_tattoan' },
         { title: I18n.t('account.card_payment.rename'), icon: 'account_doiten' },
         { title: I18n.t('saving.deposit'), icon: 'account_guigop' },
-
       ]
     }
-      return [
-        { title: I18n.t('account.card_payment.detail'), icon: 'account_chitiet' },
-        { title: I18n.t('saving.finalize'), icon: 'account_tattoan' },
-        { title: I18n.t('account.card_payment.rename'), icon: 'account_doiten' },
-
-      ]
+    return [
+      { title: I18n.t('account.card_payment.detail'), icon: 'account_chitiet' },
+      { title: I18n.t('saving.finalize'), icon: 'account_tattoan' },
+      { title: I18n.t('account.card_payment.rename'), icon: 'account_doiten' },
+    ]
   }, [indexCarousel, accountSave])
 
   const _keyboardDidShow = (event) => {
@@ -212,46 +211,51 @@ const SavingAcountScreen = ({ navigation, route }) => {
   }, [])
 
   useEffect(() => {
-    if (resultFinalization) {
+    if (loading && resultFinalization) {
       setLoading(false)
       navigation.navigate('VerifyFinalization')
     }
   }, [resultFinalization])
 
   useEffect(() => {
-    if (errorSavingResult) {
+    if (loading && errorSavingResult) {
       setLoading(false)
     }
   }, [errorSavingResult])
 
   useEffect(() => {
-    if (resultChangeAliasName === RESULT_TYPE.SUCCESS) {
-      Keyboard.dismiss()
-      setLoadingRename(false)
-      aliasName = dataSaving[indexCarousel].title
-      setNewName(aliasName)
-      setTimeout(() => {
-        Utils.alert(I18n.t('saving.change_name_success'), '', () => {
-          navigation.goBack()
-          dispatch(accountOperations.getListSaveAcount())
-        })
-      }, 500)
-    } else if (resultChangeAliasName === RESULT_TYPE.FAIL) {
-      setLoadingRename(false)
-      setTimeout(() => {
-        Alert.alert(I18n.t('saving.error'))
-      }, 500)
+    if (loadingRename && resultChangeAliasName) {
+      if (resultChangeAliasName === RESULT_TYPE.SUCCESS) {
+        Keyboard.dismiss()
+        setLoadingRename(false)
+        aliasName = dataSaving[indexCarousel].title
+        setNewName(aliasName)
+        setTimeout(() => {
+          Utils.alert(I18n.t('saving.change_name_success'), '', () => {
+            navigation.goBack()
+            dispatch(accountOperations.getListSaveAcount())
+          })
+        }, 500)
+      } else if (resultChangeAliasName === RESULT_TYPE.FAIL) {
+        setLoadingRename(false)
+        setTimeout(() => {
+          Alert.alert(I18n.t('saving.error'))
+        }, 500)
+      }
     }
   }, [resultChangeAliasName])
 
   // unmount
-  useEffect(() => () => {
-    dispatch([
-      {
-        type: RESET_CARD_CHANGE_STATUS
-      }
-    ])
-  }, [])
+  useEffect(
+    () => () => {
+      dispatch([
+        {
+          type: RESET_CARD_CHANGE_STATUS,
+        },
+      ])
+    },
+    []
+  )
 
   // eslint-disable-next-line no-shadow
   const showAlert = (isShow, title, content) => {
@@ -310,7 +314,7 @@ const SavingAcountScreen = ({ navigation, route }) => {
         Navigation.push('DepositSaving', {
           ...route.params,
           savingOnlineAccounts,
-          currentAccount: dataSaving[indexCarousel]
+          currentAccount: dataSaving[indexCarousel],
         })
         break
       default:
@@ -318,16 +322,19 @@ const SavingAcountScreen = ({ navigation, route }) => {
     }
   }
 
-  const changeFromAccount = useCallback((acc) => {
-    const bnfAcc = dataSaving[indexCarousel].content.replace(/-/g, '')
-    const { category } = dataSaving[indexCarousel]
-    setTimeout(() => {
-      Utils.confirm(I18n.t('saving.confirm_final'), '', () => {
-        setLoading(true)
-        dispatch(saveOperations.createFinalization(bnfAcc, category, acc))
-      })
-    }, 500);
-  }, [dataSaving])
+  const changeFromAccount = useCallback(
+    (acc) => {
+      const bnfAcc = dataSaving[indexCarousel].content.replace(/-/g, '')
+      const { category } = dataSaving[indexCarousel]
+      setTimeout(() => {
+        Utils.confirm(I18n.t('saving.confirm_final'), '', () => {
+          setLoading(true)
+          dispatch(saveOperations.createFinalization(bnfAcc, category, acc))
+        })
+      }, 500)
+    },
+    [dataSaving]
+  )
 
   const changeAliasAccount = useCallback(() => {
     const accNo = dataSaving[indexCarousel].content.replace(/-/g, '')
@@ -403,7 +410,7 @@ const SavingAcountScreen = ({ navigation, route }) => {
         showsVerticalScrollIndicator={false}
         style={{
           backgroundColor: Colors.white,
-          marginHorizontal: Metrics.normal
+          marginHorizontal: Metrics.normal,
         }}
       >
         <View style={{ alignItems: 'center', paddingBottom: Metrics.normal * 3 }}>
@@ -411,7 +418,7 @@ const SavingAcountScreen = ({ navigation, route }) => {
             style={{
               width: Utils.getWindowWidth() / 1.1,
               backgroundColor: Colors.white,
-              paddingHorizontal: Metrics.small
+              paddingHorizontal: Metrics.small,
             }}
           >
             <DetailAccount item={accountSave[indexCarousel]} />
@@ -419,8 +426,8 @@ const SavingAcountScreen = ({ navigation, route }) => {
               <TouchableOpacity
                 onPress={() => {
                   scrollView?.current?.scrollTo(0)
-                setSelectCheckbox(!selectCheckbox)
-              }}
+                  setSelectCheckbox(!selectCheckbox)
+                }}
                 style={styles.viewCheckBox}
               >
                 <TouchableOpacity

@@ -96,7 +96,7 @@ export const createFinalization = (fdAcc, category, bnfAcc) => (dispatch) => {
         fdAcc,
         category,
         bnfAcc,
-        isFullSettle: false
+        isFullSettle: category === 'FSPW'
       }
     },
   })
