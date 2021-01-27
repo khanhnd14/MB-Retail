@@ -38,7 +38,7 @@ const VerifyFinalization = () => {
   }
 
   useEffect(() => {
-    if (resultVerifyOtpFinlization) {
+    if (loading && resultVerifyOtpFinlization) {
       setLoading(false)
       Navigation.popToPop()
       navigateResult('SuccessFinalizationScreen', {
@@ -49,7 +49,7 @@ const VerifyFinalization = () => {
   }, [resultVerifyOtpFinlization])
 
   useEffect(() => {
-    if (resultVerifyOtpFinlizationError) {
+    if (loading && resultVerifyOtpFinlizationError) {
       setLoading(false)
       if (resultVerifyOtpFinlizationError?.status === '230') {
         return
@@ -59,11 +59,11 @@ const VerifyFinalization = () => {
     }
   }, [resultVerifyOtpFinlizationError])
 
-  useEffect(() => () => {
-    dispatch({
-      type: RESET_STORE,
-    })
-  }, [])
+  // useEffect(() => () => {
+  //   dispatch({
+  //     type: RESET_STORE,
+  //   })
+  // }, [])
 
   const resend = () => {
     const { bnfAcc, category, fdAcc } = dataFinalization

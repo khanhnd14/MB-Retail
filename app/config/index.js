@@ -10,8 +10,8 @@ export const Config = {
   // API_URL: 'http://192.168.2.1:8080/IBSRetail/', // quangbd local
 
   APP_ID_ONESIGNAL: '6b47034d-71b9-4b05-b3d4-43e273ad72b1',
-  URL_TRUSTING: 'https://vn-vision-msb-reatogar.trustingsocial.com/api',
-  // URL_TRUSTING: null,
+  // URL_TRUSTING: 'https://vn-vision-msb-reatogar.trustingsocial.com/api',
+  URL_TRUSTING: null,
 
   SREEN_TIMEOUT: 2,
   PINSTFailMaxCount: 5,

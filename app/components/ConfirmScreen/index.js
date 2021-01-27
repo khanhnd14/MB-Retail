@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, ScrollView } from 'react-native'
 import I18n from 'i18n-js'
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,6 +23,7 @@ const ConfirmScreen = ({ route }) => {
     resultCompleteCAtoFD,
     errorCompleteCAtoFD,
   } = useSelector((state) => state.save)
+  const [loading, setLoading] = useState(false)
 
   const reset = () => {
     dispatch({
@@ -32,11 +33,11 @@ const ConfirmScreen = ({ route }) => {
   }
 
   const onSubmit = () => {
+    setLoading(true)
     const body = {
       tokenTransaction: resultCreateCAtoFD.tokenTransaction,
       category: 'FSDK',
     }
-    Utils.showLoading()
     if (isNow) {
       dispatch(saveOperations.savingCompleteCAtoFDNow(body))
     } else {
@@ -58,8 +59,8 @@ const ConfirmScreen = ({ route }) => {
 
   // di sang màn sucess
   React.useEffect(() => {
-    if (resultCompleteCAtoFD) {
-      Utils.hideLoading()
+    if (loading && resultCompleteCAtoFD) {
+      setLoading(false)
       Navigation.popToPop()
       Navigation.push('SuccessSaveDeposit', {
         content: I18n.t('saving.deposit_saving'),
@@ -72,8 +73,8 @@ const ConfirmScreen = ({ route }) => {
   }, [resultCompleteCAtoFD])
 
   useEffect(() => {
-    if (errorCompleteCAtoFD) {
-      Utils.hideLoading()
+    if (loading && errorCompleteCAtoFD) {
+      setLoading(false)
       Navigation.popToPop()
       Navigation.push('Failed', {
         route,
@@ -112,7 +113,7 @@ const ConfirmScreen = ({ route }) => {
         </View>
       </ScrollView>
 
-      <ConfirmButton onPress={onSubmit} loading={false} style={styles.buttonConfirm} />
+      <ConfirmButton onPress={onSubmit} loading={loading} style={styles.buttonConfirm} />
     </View>
   )
 }

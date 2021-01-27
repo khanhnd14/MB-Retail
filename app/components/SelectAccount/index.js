@@ -135,7 +135,7 @@ const SelectAccount = ({ data, onSelectRolloutAccountNo, changeFromAccount, titl
   return (
     <TouchableWithoutFeedback onPress={() => setVisible(true)}>
       <View style={[styles.container, style]}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.title}>{title || I18n.t('transfer.rollout_account')}</Text>
         <View style={styles.contentLayout}>
           {currentAcc === null ? (
             <Text style={styles.label}>{I18n.t('transfer.holder_account')}</Text>
@@ -226,7 +226,6 @@ const SelectAccount = ({ data, onSelectRolloutAccountNo, changeFromAccount, titl
 }
 
 SelectAccount.defaultProps = {
-  title: I18n.t('transfer.rollout_account'),
 }
 
 SelectAccount.propTypes = {
