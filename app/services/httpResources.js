@@ -938,6 +938,7 @@ export default {
     uri: 'overdraft/creationInfo',
     cache: true,
     cacheOptions: { interval: 1 },
+    hideError: true
   },
   listTCType: {
     id: 'listTCType',
@@ -962,5 +963,12 @@ export default {
     uri: 'overdraft/sendOTPRegister',
     cache: true,
     cacheOptions: { interval: 1 },
+  },
+  overdraftCompleteRegister: {
+    id: 'overdraftCompleteRegister',
+    uri: 'overdraft/completeRegister',
+    cache: true,
+    cacheOptions: { interval: 1 },
+    isGetFullResponse: true,
   },
 }

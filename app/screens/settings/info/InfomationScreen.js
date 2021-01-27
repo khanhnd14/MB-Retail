@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet,TouchableWithoutFeedback ,Alert} from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { DatePicker, Text, TextInput, Topbar, ConfirmButton } from '../../../components'
 import { Helpers, Metrics, Colors } from '../../../theme'
@@ -7,6 +7,8 @@ import I18n from '../../../translations'
 import * as Navigation from '../../../navigation'
 import { userOperations } from '../../../state/user'
 import { Utils } from '../../../utilities'
+import Clipboard from '@react-native-community/clipboard';
+import { storeService } from '../../../services'
 
 const styles = StyleSheet.create({
   title: {
@@ -41,6 +43,7 @@ const InfomationScreen = () => {
   const [emailEdit, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [isDisable, setDisable] = useState(false)
+  const [counter, setCounter] = useState(0)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -66,16 +69,31 @@ const InfomationScreen = () => {
   const updateInfo = () => {
 
   }
+  
+  const counterClick = async () => {
+    if (counter<5) {
+      setCounter(counter+1)
+    }else{
+      const fbToken = await storeService.getFireBaseId()
+      Clipboard.setString(fbToken);
+      // Alert.alert(fbToken)
+      console.log('fbToken',fbToken);
+      
+    }
+  }
+
   return (
     <View style={[Helpers.fill, { backgroundColor: Colors.mainBg }]}>
       <Topbar title={I18n.t('infomation.title')} isBottomSubLayout background={Colors.white} />
       <View style={[Helpers.fill, { paddingHorizontal: Metrics.small * 3.4 }]}>
-        <View style={styles.element}>
+        <TouchableWithoutFeedback  onPress={counterClick}>
+          <View style={styles.element}>
           <View style={Helpers.fill}>
             <Text style={styles.title}>{I18n.t('infomation.user_name')}</Text>
             <Text style={styles.hiden}>{userName}</Text>
           </View>
-        </View>
+          </View>
+        </TouchableWithoutFeedback>
 
         <View style={styles.element}>
           <View style={Helpers.fill}>

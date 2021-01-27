@@ -38,6 +38,7 @@ import {
   OpenSaveScreen,
   ODServiceScreen,
   CreateOD,
+  CreateODConfirm,
   SubOpenSaveScreen,
   SuccessSaveScreen,
   OpenSaveConfirmScreen,
@@ -133,6 +134,9 @@ import {
   OpenCardSuccess,
   ExchangeScreen,
   ATMScreen,
+  CreateODVerify,
+  CreateODSuccessScreen,
+  CloseODScreen,
   MessageScreen,
   MessageDetail,
   CommentScreen,
@@ -314,6 +318,12 @@ const routes = {
   // saving overdraft
   ODServiceScreen: { name: 'ODServiceScreen', component: withAuthentication(ODServiceScreen) },
   CreateOD: { name: 'CreateOD', component: withAuthentication(CreateOD) },
+  CreateODConfirm: { name: 'CreateODConfirm', component: withAuthentication(CreateODConfirm) },
+  CreateODVerify: { name: 'CreateODVerify', component: withAuthentication(CreateODVerify) },
+  CreateODSuccessScreen: { name: 'CreateODSuccessScreen', component: withAuthentication(CreateODSuccessScreen) },
+  CloseODScreen: { name: 'CloseODScreen', component: withAuthentication(CloseODScreen) },
+  
+  
   // softtoken
   SoftTokenOTP: { name: 'SoftTokenOTP', component: SoftTokenOTP },
   SoftTokenScanQr: { name: 'SoftTokenScanQr', component: SoftTokenScanQr },

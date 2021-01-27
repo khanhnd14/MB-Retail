@@ -4,28 +4,69 @@ import { appTypes } from '../application'
 
 const initialState = {
   creationInfo: null,
-  listTCType:null,
-  getPaymentAccount:null,
-  purposeList:null,
-  sendOTPRegister:null,
+  creationInfoError: null,
+  listTCType: null,
+  getPaymentAccount: null,
+  purposeList: null,
+  sendOTPRegister: null,
+  sendOTPRegisterError: null,
+  sendOTPOnly:null,
+  sendOTPOnlyError:null,
+  completeRegister: null,
+  completeRegisterError: null,
+  openODInfo:null
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    
+    case types.OPEN_OD_INFO:
+      return {
+        ...state,
+        openODInfo: action.payload,
+      }
+
+    case types.COMPLETE_REGISTER_COMPLETED:
+      return {
+        ...state,
+        completeRegister: action.payload,
+        completeRegisterError: null
+      }
+    case types.COMPLETE_REGISTER_FAILED:
+      return {
+        ...state,
+        completeRegister: null,
+        completeRegisterError: action.payload
+      }
+    case types.SEND_OTP_ONLY_COMPLETED:
+      return {
+        ...state,
+        sendOTPOnly: action.payload,
+        sendOTPOnlyError: null
+      }
+    case types.SEND_OTP_ONLY_FAILED:
+      return {
+        ...state,
+        sendOTPOnly: null,
+        sendOTPOnlyError: action.payload
+      }
     case types.SEND_OTP_REGISTER_COMPLETED:
       return {
         ...state,
-        sendOTPRegister: action.payload
+        sendOTPRegister: action.payload,
+        sendOTPRegisterError: null
       }
     case types.SEND_OTP_REGISTER_FAILED:
       return {
         ...state,
-        sendOTPRegister: action.payload
+        sendOTPRegister: null,
+        sendOTPRegisterError: action.payload
       }
     case types.CREATION_INFO_COMPLETED:
       return {
         ...state,
-        creationInfo: action.payload
+        creationInfo: action.payload,
+        creationInfoError:null
       }
     case types.LIST_TC_TYPE_COMPLETED:
       return {
@@ -45,7 +86,8 @@ export default function (state = initialState, action) {
     case types.CREATION_INFO_FAILED:
       return {
         ...state,
-        creationInfo: null
+        creationInfo: null,
+        creationInfoError:action.payload
       }
     case types.LIST_TC_TYPE_FAILED:
       return {
@@ -64,6 +106,8 @@ export default function (state = initialState, action) {
       }
     case appTypes.REACTIVE:
       return initialState
+    case appTypes.COMPLETE_TRANSACTION:
+        return initialState
     default:
       return state
   }

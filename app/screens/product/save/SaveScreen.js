@@ -102,12 +102,12 @@ const SaveScreen = () => {
             leftColor={Colors.yellow}
             icon="icon-tietkiem"
           />
-          {/* <MenuItem
+          <MenuItem
             onPress={() => Navigation.push('ODServiceScreen')}
             text={I18n.t('overdraft.fromOnlineSaving.title')}
             leftColor={Colors.yellow}
-            icon="icon-tietkiem"
-          /> */}
+            icon="icon-product"
+          />
         </View>
 
         {dataSavingOnline.length ? (

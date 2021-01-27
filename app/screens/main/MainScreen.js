@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useState, useCallback } from 'react'
-import { View, Platform, BackHandler } from 'react-native'
+import { View, Platform, BackHandler,Alert } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useDispatch, useSelector } from 'react-redux'
 import EventEmitter from 'react-native-eventemitter'
@@ -26,6 +26,7 @@ import MenuTranslate from '../intro/MenuTranslate'
 import { withAuthentication } from '../../enhancers'
 import { storeService } from '../../services'
 import UpdateVesion from './UpdateVesion'
+import Clipboard from '@react-native-community/clipboard';
 
 var isFocusScreen = false
 const MainScreen = () => {
@@ -91,7 +92,10 @@ const MainScreen = () => {
   }, [user])
 
   const updateNotifyId = async () => {
+    
     const fbToken = await storeService.getFireBaseId()
+    // Clipboard.setString(fbToken)
+    // Alert.alert(fbToken)
     let isTokenChange = false
     if (fbToken !== fireBaseToken && fbToken !== null) {
       isTokenChange = true
