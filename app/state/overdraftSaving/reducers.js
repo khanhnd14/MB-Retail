@@ -4,6 +4,7 @@ import { appTypes } from '../application'
 
 const initialState = {
   creationInfo: null,
+  creationInfoError: null,
   listTCType: null,
   getPaymentAccount: null,
   purposeList: null,
@@ -13,10 +14,18 @@ const initialState = {
   sendOTPOnlyError:null,
   completeRegister: null,
   completeRegisterError: null,
+  openODInfo:null
 }
 
 export default function (state = initialState, action) {
   switch (action.type) {
+    
+    case types.OPEN_OD_INFO:
+      return {
+        ...state,
+        openODInfo: action.payload,
+      }
+
     case types.COMPLETE_REGISTER_COMPLETED:
       return {
         ...state,
@@ -56,7 +65,8 @@ export default function (state = initialState, action) {
     case types.CREATION_INFO_COMPLETED:
       return {
         ...state,
-        creationInfo: action.payload
+        creationInfo: action.payload,
+        creationInfoError:null
       }
     case types.LIST_TC_TYPE_COMPLETED:
       return {
@@ -76,7 +86,8 @@ export default function (state = initialState, action) {
     case types.CREATION_INFO_FAILED:
       return {
         ...state,
-        creationInfo: null
+        creationInfo: null,
+        creationInfoError:action.payload
       }
     case types.LIST_TC_TYPE_FAILED:
       return {

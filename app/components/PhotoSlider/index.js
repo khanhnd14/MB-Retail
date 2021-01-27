@@ -19,7 +19,7 @@ export default class PhotoSlider extends Component {
     this.moveDistance = this.width * 0.733
     this.ratio = 0.872
     this.x0 = this.moveDistance - (this.width - this.moveDistance) / 2
-    this.currentPageFloat = 1
+    this.currentPageFloat = 0
 
     this.arr = this.props.data
     this.arrLength = this.arr.length
@@ -136,9 +136,10 @@ export default class PhotoSlider extends Component {
   }
 
   _cardAnimated(currentPageFloat) {
+    const currentPageInt = parseInt(currentPageFloat)
+
     for (let i = 0; i < this.arrLength + 4; i++) {
       let ratio = 0
-      const currentPageInt = parseInt(currentPageFloat)
       if (i == 2) {
         ratio = Math.abs(currentPageFloat - (this.arrLength + 1)) < 0.1 ? 1 : 0
       }
@@ -162,13 +163,16 @@ export default class PhotoSlider extends Component {
         duration: 0,
         useNativeDriver: true,
       }).start()
-      if (this.state.currentPage !== currentPageInt) {
-        this.setState({
-          currentPage: currentPageInt,
-        })
-        if (this.props.onPress) {
-          this.props.onPress(this.arr[currentPageInt + 2])
-        }
+    }
+
+    console.log('currentPageInt:', currentPageInt)
+    console.log('currentPage:', this.state.currentPage)
+    if (this.state.currentPage !== currentPageInt) {
+      this.setState({
+        currentPage: currentPageInt,
+      })
+      if (this.props.onPress) {
+        this.props.onPress(this.arr[currentPageInt + 2])
       }
     }
   }

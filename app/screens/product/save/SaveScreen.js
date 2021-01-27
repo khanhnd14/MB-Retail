@@ -106,7 +106,7 @@ const SaveScreen = () => {
             onPress={() => Navigation.push('ODServiceScreen')}
             text={I18n.t('overdraft.fromOnlineSaving.title')}
             leftColor={Colors.yellow}
-            icon="icon-tietkiem"
+            icon="icon-product"
           />
         </View>
 

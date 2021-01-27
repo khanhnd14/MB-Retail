@@ -579,6 +579,8 @@ export default {
   uploadProfilePicture: {
     id: 'upload/profilePicture',
     uri: 'upload/profilePicture',
+    type: 'form-data',
+    isGetFullResponse: true,
   },
   registerForgotPass: {
     id: 'register/forgotPass',
@@ -936,6 +938,7 @@ export default {
     uri: 'overdraft/creationInfo',
     cache: true,
     cacheOptions: { interval: 1 },
+    hideError: true
   },
   listTCType: {
     id: 'listTCType',

@@ -3,6 +3,12 @@ import { resourceHttp } from '../../services'
 
 
 
+export const openODInfo = (body) => (dispatch) => {
+  dispatch({
+    type: types.OPEN_OD_INFO,
+    payload: body
+  })
+}
 
 export const completeTransaction = () => (dispatch) => {
   dispatch({

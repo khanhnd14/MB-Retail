@@ -67,13 +67,14 @@ const SelectBox = ({
   hideTitle,
   isSearch,
   readOnly,
-  textHolder
+  textHolder,
+  keyValue
 }) => {
   const [isVisible, setVisible] = React.useState(false)
   const [currentItem, setCurrentItem] = React.useState(defaultValue)
   const [textSearch, setTextSearch] = React.useState('')
   const [lists, setData] = React.useState(data)
-
+  console.log('keyValue:', keyValue);
   React.useEffect(() => {
     setData(data)
   }, [data])
@@ -110,7 +111,7 @@ const SelectBox = ({
       <View style={styles.container}>
         {!hideTitle && <Text style={styles.title}>{title}</Text>}
         <View style={styles.contentLayout}>
-          <Text style={readOnly ? styles.labelReadOnly : styles.label}>{defaultValue ? defaultValue.value : textHolder}</Text>
+          <Text style={readOnly ? styles.labelReadOnly : styles.label}>{defaultValue ? (defaultValue[keyValue] || defaultValue.value) : textHolder}</Text>
           {!readOnly && <MsbIcon name="icon-detail" size={18} color={Colors.primary2} />}
         </View>
         <ModalSelect
@@ -142,7 +143,7 @@ const SelectBox = ({
                   onSelect && onSelect(item)
                 }}
               >
-                <Text numberOfLines={1}>{item.value}</Text>
+                <Text numberOfLines={1}>{item[keyValue] || item.value}</Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
@@ -161,6 +162,7 @@ SelectBox.defaultProps = {
   readOnly: false,
   isSearch: false,
   textHolder: 'Vui lòng chọn',
+  keyValue: 'value'
 }
 
 SelectBox.propTypes = {
@@ -173,5 +175,6 @@ SelectBox.propTypes = {
   readOnly: PropTypes.bool,
   isSearch: PropTypes.bool,
   textHolder: PropTypes.string,
+  keyValue: PropTypes.string
 }
 export default SelectBox

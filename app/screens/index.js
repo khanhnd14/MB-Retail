@@ -167,3 +167,8 @@ export { default as OpenCardVerify } from './opencard/OpenCardVerify'
 export { default as OpenCardSuccess } from './opencard/OpenCardSuccess'
 export { default as ExchangeScreen } from './exchange/ExchangeScreen'
 export { default as ATMScreen } from './atm/ATMScreen'
+
+export { default as MessageScreen } from './message/MessageScreen'
+export { default as MessageDetail } from './message/MessageDetail'
+export { default as CommentScreen } from './message/CommentScreen'
+export { default as SendComment } from './message/SendComment'

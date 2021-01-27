@@ -88,7 +88,7 @@ const CloseODScreen = () => {
   }, [creationInfo])
 
   React.useEffect(() => {
-    console.log('purposeList', purposeList);
+    // console.log('purposeList', purposeList);
     if (purposeList) {
       setSelectedPurpose(purposeList[0])
     }
@@ -122,7 +122,7 @@ const CloseODScreen = () => {
   }
 
   const completeFDSelected = (data, total, odl) => {
-    console.log(data, total, odl);
+    // console.log(data, total, odl);
     setFDList(data.FDList)
     setTotalTSDB(total)
     setOdLimit(odl)
@@ -130,7 +130,7 @@ const CloseODScreen = () => {
   }
 
   const changeFromAccount = (accId) => {
-    console.log(accId);
+    // console.log(accId);
     getPaymentAccount.accounts.forEach(element => {
       if (element.acctNo == accId) {
         setPaymentAccount(element)
@@ -142,7 +142,6 @@ const CloseODScreen = () => {
     setEndDate(date)
   }
   const onSelectPurpose = (pp) => {
-    console.log(pp);
     setSelectedPurpose(pp)
   }
   const handleSubmit = () => {
@@ -181,7 +180,7 @@ const CloseODScreen = () => {
       notSendOTP: true
     }
     setLoading(true)
-    setIsSetup(true)
+    
     dispatch(odSavingOperations.sendOTPRegister(body))
   }
 

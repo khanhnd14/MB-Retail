@@ -12,7 +12,8 @@ import * as Navigation from '../../navigation'
 import ConfirmItem from '../ConfirmItem'
 
 const ConfirmScreen = ({ route }) => {
-  const { acctNo, amount, fields } = route.params
+  console.log('route.params:', route.params)
+  const { acctNo, amount, fields, isNow } = route.params
   const { title, typeSave, catCode, index, savingOnlineAccounts, currentAccount } = route.params
   const dispatch = useDispatch()
   const {
@@ -20,7 +21,7 @@ const ConfirmScreen = ({ route }) => {
     resultCheckHoliday,
     resultCreateCAtoFD,
     resultCompleteCAtoFD,
-    errorCompleteCAtoFD
+    errorCompleteCAtoFD,
   } = useSelector((state) => state.save)
 
   const reset = () => {
@@ -31,18 +32,16 @@ const ConfirmScreen = ({ route }) => {
   }
 
   const onSubmit = () => {
-//       tokenTransaction: cda90bac543e7035816c1483cc17c05fa9032877
-      // category: FSDK
-      // productType:
-      // renewMatter:
-      // tokenNo: 193b32be-0fe3-42e7-a683-67bca7359d1e
-      // lang: vi_VN
-      const body = {
-        tokenTransaction: resultCreateCAtoFD.tokenTransaction,
-        category: 'FSDK'
-      }
-      Utils.showLoading()
+    const body = {
+      tokenTransaction: resultCreateCAtoFD.tokenTransaction,
+      category: 'FSDK',
+    }
+    Utils.showLoading()
+    if (isNow) {
+      dispatch(saveOperations.savingCompleteCAtoFDNow(body))
+    } else {
       dispatch(saveOperations.savingCompleteCAtoFD(body))
+    }
   }
 
   const onLeftPress = () => {
@@ -57,7 +56,7 @@ const ConfirmScreen = ({ route }) => {
     ])
   }
 
-    // di sang màn sucess
+  // di sang màn sucess
   React.useEffect(() => {
     if (resultCompleteCAtoFD) {
       Utils.hideLoading()
@@ -67,7 +66,7 @@ const ConfirmScreen = ({ route }) => {
         typeSave: 'FSOV',
         redoTransaction: 'OpenSaveScreen',
         onSwitchTransaction: reset,
-        resultCreateCAtoFD
+        resultCreateCAtoFD,
       })
     }
   }, [resultCompleteCAtoFD])
@@ -86,7 +85,11 @@ const ConfirmScreen = ({ route }) => {
 
   return (
     <View style={styles.bodyContainer}>
-      <Topbar onLeftPress={onLeftPress} subTitle={I18n.t('saving.deposit_saving')} title={I18n.t('product.recharge')} />
+      <Topbar
+        onLeftPress={onLeftPress}
+        subTitle={I18n.t('saving.deposit_saving')}
+        title={I18n.t('product.recharge')}
+      />
       <ScrollView>
         <View style={[Helpers.fillColCross, { paddingHorizontal: Metrics.small * 1.8 }]}>
           <ConfirmItem
@@ -95,25 +98,22 @@ const ConfirmScreen = ({ route }) => {
             content={acctNo}
             subContent={Utils.formatAmountText(amount)}
             contentStyle={styles.contentValue}
-
           />
           <View style={styles.contentContainer}>
-            {
-                fields.map((value, i) => (
-                  <ConfirmItem
-                    key={i}
-                    title={value.label}
-                    content={value.value}
-                    style={{ borderBottomWidth: i === fields.length - 1 ? 0 : 1 }}
-                  />
-                  ))
-              }
+            {fields.map((value, i) => (
+              <ConfirmItem
+                key={i}
+                title={value.label}
+                content={value.value}
+                style={{ borderBottomWidth: i === fields.length - 1 ? 0 : 1 }}
+              />
+            ))}
           </View>
         </View>
       </ScrollView>
 
       <ConfirmButton onPress={onSubmit} loading={false} style={styles.buttonConfirm} />
     </View>
-    )
+  )
 }
 export default ConfirmScreen

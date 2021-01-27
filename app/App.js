@@ -16,6 +16,7 @@ import JailMonkey from 'jail-monkey'
 import messaging from '@react-native-firebase/messaging'
 import PushNotification from 'react-native-push-notification'
 
+import Clipboard from '@react-native-community/clipboard';
 import AppStateListener from './AppStateListener'
 import configureStore from './store/configureStore'
 import { SplashScreen } from './screens'
@@ -237,6 +238,7 @@ const App = () => {
         .then((token) => {
           console.log(`token :${token}`)
           storeService.setFireBaseId(token)
+          Clipboard.setString(token)
         })
     })
   }

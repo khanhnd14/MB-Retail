@@ -19,6 +19,7 @@
     "note": "Ghi chú",
     "result": "Kết quả",
     "message_success": "Giao dịch thành công",
+    "success": "Thao tác thành công",
     "payment_success": "Thanh toán thành công",
     "message_congrat": "Chúc mừng bạn!",
     "another_transaction": "Giao dịch khác",
@@ -626,7 +627,10 @@
     "change_login_fp": "Bạn muốn chuyển sang hình thức đăng nhập sinh trắc học?",
     "sms_notify": "Thông báo biến động số dư qua SMS",
     "sms_on_notify":"Bạn muốn kích hoạt dịch vụ nhận biến động số dư qua SMS?",
-    "sms_off_notify":"Bạn muốn ngừng nhận thông báo biến động số dư qua SMS?"
+    "sms_off_notify":"Bạn muốn ngừng nhận thông báo biến động số dư qua SMS?",
+    "info_user":"Thông tin tài khoản",
+    "upload_camera":"Chụp hình đại diện",
+    "upload_galery":"Tải hình đại diện"
   },
   "employee": {
     "title": "Dành cho CBNV",
@@ -1084,10 +1088,27 @@
     "account_title":"Tài khoản trích nợ tự động",
     "free":"Miễn phí",
     "detail":"Xem chi tiết",
-    "mess_succ":"Quý khách sẽ nhận được thẻ sau 5 ngày",
+    "mess_succ":"Chúc mừng quý khách đã mở thẻ tín dụng thành công\nQuý khách sẽ nhận được thẻ sau 5 ngày làm việc tại Phòng giao dịch đã chọn",
     "empty_amount": "Quý khách cần nhập hạn mức ",
     "empty_ques":"Vui lòng nhập câu trả lời",
     "max_amount":"Hạn mức yêu cầu lớn hơn hạn mức tối đa. Quý khách vui lòng nhập lại",
-    "min_amount":"Hạn mức tối thiểu là {0} đồng. Quý khách vui lòng nhập lại"
+    "min_amount":"Hạn mức tối thiểu là {0} đồng. Quý khách vui lòng nhập lại",
+    "open_fee":"Phí mở thẻ",
+    "card_fee":"Phí thường niên"
+  },
+  "investigate":{
+    "title":"Tra soát",
+    "title2":"Liên hệ góp ý",
+    "replyed": "Đã trà lời",
+    "notReply": "Chưa trả lời",
+    "infoNotification":"Thông tin thông báo",
+    "topic":"Chủ đề",
+    "des":"Miêu tả",
+    "empty":"Vui lòng nhập đầy đủ nội dung và tiêu để muốn gửi đến chúng tôi!",
+    "confirmSendMessage": "Bạn chắc chắn muốn gửi ý kiến",
+    "confirmTitle": "Xác nhận trước khi gửi",
+    "serviceType": "Loại dịch vụ"
+
+
   }
 }

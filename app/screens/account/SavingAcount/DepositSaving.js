@@ -179,6 +179,7 @@ const DepositSaving = ({ route }) => {
           },
         ],
         ...route.params,
+        isNow: !!_.isEmpty(schedule)
       })
     }
   }, [resultCreateCAtoFD])

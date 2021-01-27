@@ -154,6 +154,7 @@ android {
         versionName "5.0.0"
         missingDimensionStrategy 'react-native-camera', 'general'
         multiDexEnabled true
+        vectorDrawables.useSupportLibrary = true
 
     }
     splits {

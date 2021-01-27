@@ -27,6 +27,7 @@ export const SEND_OTP_REGISTER_COMPLETED = 'overdraft/SEND_OTP_REGISTER_COMPLETE
 export const SEND_OTP_REGISTER_FAILED = 'overdraft/SEND_OTP_REGISTER_FAILED'
 
 export const COMPLETE_TRANSACTION = 'overdraft/COMPLETE_TRANSACTION'
+export const OPEN_OD_INFO = 'overdraft/OPEN_OD_INFO'
 
 
 export const GROUP_TYPE_TERM = 5

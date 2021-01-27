@@ -180,6 +180,15 @@ export const savingCompleteCAtoFD = (body) => (dispatch) => {
     },
   })
 }
+export const savingCompleteCAtoFDNow = (body) => (dispatch) => {
+  dispatch({
+    type: types.SAVING_COMPLETE_CA_FD,
+    meta: {
+      ...resourceHttp.savingCompleteCAtoFD,
+      body
+    },
+  })
+}
 
 export const checkHoliday = () => (dispatch) => {
   dispatch({

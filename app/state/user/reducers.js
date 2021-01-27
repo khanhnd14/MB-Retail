@@ -8,7 +8,8 @@ const initialState = {
   userName: '',
   securityTypeMB: appTypes.SECURITY_TYPE.OTP,
   loginSecurityType: appTypes.SECURITY_TYPE.PW, // PW,PIN,FP
-  isOpenSMS: 'Y'
+  isOpenSMS: 'Y',
+  localProfilePicture: null,
 }
 
 export default function(state = initialState, action) {
@@ -16,7 +17,7 @@ export default function(state = initialState, action) {
     case types.SET_USER_INFO:
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
       }
     case types.GET_INFO_COMPLETED:
       return {
@@ -82,11 +83,27 @@ export default function(state = initialState, action) {
         ...state,
         securityTypeMB: action.meta.body.securityType,
       }
-      case types.CHANGE_NOTIFY_STATUS_COMPLETED:
-        return {
-          ...state,
-          isOpenSMS: action.meta.body.isOn === true ? 'Y' : 'N',
-        }
+    case types.CHANGE_NOTIFY_STATUS_COMPLETED:
+      return {
+        ...state,
+        isOpenSMS: action.meta.body.isOn === true ? 'Y' : 'N',
+      }
+    case types.UPDATE_LOCAL_AVATAR:
+      return {
+        ...state,
+        localProfilePicture: action.payload,
+      }
+    case types.UPDATE_AVATAR_COMPLETED:
+      return {
+        ...state,
+        profilePicture: action.payload.message,
+        localProfilePicture: null,
+      }
+    case types.UPDATE_AVATAR_FAILED:
+      return {
+        ...state,
+        localProfilePicture: null,
+      }
     case appTypes.REACTIVE:
       return initialState
     default:

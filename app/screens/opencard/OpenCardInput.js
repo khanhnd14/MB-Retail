@@ -106,7 +106,7 @@ const OpenCardInput = ({ route }) => {
   const { initData, listData, branch } = useSelector((state) => state.opencard)
   const { rolloutAcc } = useSelector((state) => state.employee)
   const { cardCode, liabilityContract } = initData || {}
-  const { creditCardMax } = listData || {}
+  const { creditCardMax, securityName, typeCreditCardMax } = listData || {}
 
   const [loading, setLoading] = useState(false)
   const [auto, setAuto] = useState(false)
@@ -119,6 +119,16 @@ const OpenCardInput = ({ route }) => {
     dispatch(employeeOperations.getRolloutAcc())
   }, [])
 
+  useEffect(() => {
+    setAmountInput(creditCardMax)
+  }, [creditCardMax])
+
+  useEffect(() => {
+    if (!_.isEmpty(securityName)) {
+      setAnswer(securityName)
+    }
+  }, [securityName])
+
   const onAmoutChange = (val) => {
     setAmountInput(val)
   }
@@ -129,7 +139,7 @@ const OpenCardInput = ({ route }) => {
     const amount = `${amountInput}`
     try {
       if (parseInt(amount.replace(/,/g, '')) < limitMin) {
-        Utils.toast((I18n.t('opencard.min_amount').replace('{0}', Utils.formatAmountText(limitMin))))
+        Utils.toast(I18n.t('opencard.min_amount').replace('{0}', Utils.formatAmountText(limitMin)))
         return
       }
       if (parseInt(amount.replace(/,/g, '')) > creditCardMax) {
@@ -148,18 +158,18 @@ const OpenCardInput = ({ route }) => {
         Utils.toast(I18n.t('opencard.empty_ques'))
         return
       }
-
       const body = {
-        amountCredit: amountInput.replace(/,/g, ''),
+        amountCredit: amount.replace(/,/g, ''),
         rolloutAcctNo: auto ? rolloutAccountNo : null,
         subBranch: branch.subBranch,
         isAutoDept: auto,
-        scretAnswer: answer,
+        scretAnswer: Utils.clean_vietnamese(answer),
         minOrMaxBilling: isFullPayment ? 1 : 0,
         liabilityContract,
         cardCode,
         scretQuestion: I18n.t('opencard.sec_question'),
       }
+
       Navigation.push('OpenCardCondition', { body })
     } catch (error) {}
   }
@@ -251,6 +261,7 @@ const OpenCardInput = ({ route }) => {
                 placeholderTextColor="#15181B"
                 onChangeText={onAmoutChange}
                 returnKeyType="next"
+                defaultValue={typeCreditCardMax === '1' ? creditCardMax : null}
                 maxLength={13}
               />
             </View>
@@ -274,6 +285,9 @@ const OpenCardInput = ({ route }) => {
                 onChangeText={(val) => {
                   setAnswer(val)
                 }}
+                multiline
+                editable={_.isEmpty(securityName)}
+                maxLength={30}
                 returnKeyType="next"
               />
             </View>

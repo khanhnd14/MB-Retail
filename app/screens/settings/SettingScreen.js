@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react'
+/* eslint-disable no-undef */
+import React, { useEffect, useState, useRef, createRef } from 'react'
 import { View, StyleSheet, ScrollView, TouchableOpacity, StatusBar, Image } from 'react-native'
 import { useSelector, useDispatch } from 'react-redux'
 import EventEmitter from 'react-native-eventemitter'
 import TouchID from 'react-native-touch-id'
 import DeviceInfo from 'react-native-device-info'
 import Communications from 'react-native-communications'
+import ImagePicker from 'react-native-image-crop-picker'
 import ItemSetting from './ItemSetting'
 import { Text, Avatar } from '../../components'
 import { Metrics, Helpers, Colors, Images, ApplicationStyles } from '../../theme'
@@ -59,6 +61,7 @@ const styles = StyleSheet.create({
 })
 
 const SettingScreen = () => {
+  const avatarRef = useRef(null)
   const user = useSelector((state) => state.user)
   const { fullName, securityTypeMB, loginSecurityType, isOpenSMS } = user || {}
   const { otpVerifyComplete, otpVerifyError } = useSelector((state) => state.setting)
@@ -110,6 +113,35 @@ const SettingScreen = () => {
     }
   }
 
+  const uploadAvatar = (image) => {
+    const body = new FormData()
+    body.append('fileData', { uri: image.path, name: 'image.jpg', type: 'image/jpg' })
+    dispatch(userOperations.updateAvatar(body))
+    dispatch(userOperations.updateLocalAvatar(image.path))
+  }
+
+  const getCamera = () => {
+    ImagePicker.openCamera({
+      width: 300,
+      height: 300,
+      cropping: true,
+    }).then((image) => {
+      avatarRef && avatarRef.current?.onClose()
+      uploadAvatar(image)
+    })
+  }
+
+  const getGalery = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+    }).then((image) => {
+      avatarRef && avatarRef.current?.onClose()
+      uploadAvatar(image)
+    })
+  }
+
   const changeLimit = () => {
     Navigation.push('ChangeLimit')
   }
@@ -141,6 +173,12 @@ const SettingScreen = () => {
     Navigation.push('OpenCardScreen')
   }
 
+  const onMessage = () => {
+    Navigation.push('MessageScreen')
+  }
+  const onComment = () => {
+    Navigation.push('CommentScreen')
+  }
   // Verify transactions
 
   const changeVerify = (sType) => {
@@ -338,7 +376,14 @@ const SettingScreen = () => {
           }}
         >
           <View style={Helpers.rowCross}>
-            <Avatar user={user} onPress={showInfo} />
+            <Avatar
+              ref={avatarRef}
+              user={user}
+              onPressInfo={showInfo}
+              readOnly={false}
+              onPressCamera={getCamera}
+              onPressGalery={getGalery}
+            />
             <View style={{ flex: 1, paddingHorizontal: 10 }}>
               <Text style={styles.nameUser}>{I18n.t('main.welcome')}</Text>
               <Text style={styles.idUser}>{fullName}</Text>
@@ -512,6 +557,18 @@ const SettingScreen = () => {
             onSelectItem={() => Communications.phonecall(Config.phoneNumber, true)}
           />
           <ItemSetting
+            style={styles.line}
+            icon="icon-hotline"
+            title={I18n.t('investigate.title')}
+            onSelectItem={onMessage}
+          />
+          <ItemSetting
+            style={styles.line}
+            icon="icon-hoidap"
+            title={I18n.t('investigate.title2')}
+            onSelectItem={onComment}
+          />
+          <ItemSetting
             icon="setting_employee"
             title={I18n.t('action.action_reactive')}
             onSelectItem={() => switchAccount()}
@@ -529,14 +586,16 @@ const SettingScreen = () => {
             title={I18n.t('overdraft.title')}
             onSelectItem={() => overdraft()}
           />
-          {/* <ItemSetting
+          <ItemSetting
             style={styles.line}
             icon="napthe"
             title={I18n.t('opencard.title')}
             onSelectItem={() => openCard()}
-          /> */}
+          />
           <View style={[Helpers.fullWidth, Helpers.center, { padding: Metrics.normal }]}>
-            <Text style={{ color: Colors.primary2 }}>{I18n.t('application.version')} {version}</Text>
+            <Text style={{ color: Colors.primary2 }}>
+              {I18n.t('application.version')} {version}
+            </Text>
           </View>
         </ScrollView>
       </View>
