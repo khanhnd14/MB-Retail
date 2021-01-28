@@ -333,12 +333,12 @@ const CreateOD = () => {
                 </Text>
                 <DatePicker
                   onPress={toggleFrqDatePicker}
-                  dateStyle={paymentAccount?.expiredDate ? { color: Colors.gray } : {}}
+                  dateStyle={getPaymentAccount?.expiredDate ? { color: Colors.gray } : {}}
                   style={{ flex: 1 }}
                   date={endDate}
                   minDate={minDate}
                   maxDate={maxDate}
-                  disable={paymentAccount?.expiredDate != null}
+                  disable={getPaymentAccount?.expiredDate != null}
                 />
               </TouchableOpacity>
             </View>

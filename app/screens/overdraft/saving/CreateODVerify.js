@@ -15,10 +15,12 @@ import { odSavingOperations } from '../../../state/overdraftSaving'
 
 
 const CreateODVerify = () => {
-
+  const reset = () => {
+    // console.log('goi reset data o day');
+  }
   const dispatch = useDispatch()
   const { sendOTPOnly, completeRegister, completeRegisterError } = useSelector((state) => state.overdraft)
-  const [checked, setCheck] = useState(false)
+  // const [checked, setCheck] = useState(false)
   const [loading, setLoading] = useState(false)
   const [isSetup, setIsSetup] = useState(false)
   React.useEffect(() => {
@@ -26,34 +28,34 @@ const CreateODVerify = () => {
     if (isSetup) {
       setIsSetup(false)
       if (completeRegister) {
+        Navigation.popToPop()
         Navigation.push('CreateODSuccessScreen', {
-          title: 'CreateODSuccessScreen', redoTransaction: 'ODServiceScreen',
+          title: 'CreateODSuccessScreen',
+redoTransaction: 'ODServiceScreen',
           onSwitchTransaction: reset
         })
       } else {
+        Navigation.popToPop()
         Navigation.push('Failed', {
-          title: 'CreateODSuccessScreen', redoTransaction: 'ODServiceScreen',
+          title: 'CreateODSuccessScreen',
+redoTransaction: 'ODServiceScreen',
           onSwitchTransaction: reset
         })
       }
     }
-    
   }, [completeRegister])
 
   React.useEffect(() => {
     setLoading(false)
     if (isSetup && completeRegisterError) {
+      Navigation.popToPop()
       Navigation.push('Failed', {
-        title: 'CreateODSuccessScreen', redoTransaction: 'ODServiceScreen',
+        title: 'CreateODSuccessScreen',
+        redoTransaction: 'ODServiceScreen',
         onSwitchTransaction: reset
       })
     }
   }, [completeRegisterError])
-
-  const reset = () => {
-    // console.log('goi reset data o day');
-    dispatch(odSavingOperations.completeRegister)
-  }
 
   function sendOtp(pin) {
     const body = {
