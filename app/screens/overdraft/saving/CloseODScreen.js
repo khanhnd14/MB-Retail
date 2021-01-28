@@ -120,13 +120,13 @@ const CloseODScreen = () => {
 
   const onConfirm = () => {
     if (_.isEmpty(listSelect)) {
-      Utils.showToast('Vui lòng chọn sổ')
+      Utils.showToast('Vui lòng chọn hạn mức đóng')
       return
     }
     const data = Object.keys(listSelect).filter((key) => listSelect[key])
     console.log('data:', data)
     if (_.isEmpty(data)) {
-      Utils.showToast('Vui lòng chọn sổ')
+      Utils.showToast('Vui lòng chọn hạn mức đóng')
       return
     }
     const body = {}
@@ -140,6 +140,7 @@ const CloseODScreen = () => {
     } else {
       Navigation.push('CloseODSelect', {
         listSelect,
+        totalbl: totalBl - totalLimit > 0 ? totalBl - totalLimit : 0
       })
     }
   }
@@ -203,7 +204,7 @@ const CloseODScreen = () => {
           <View style={styles.totalItem}>
             <Text style={styles.totalLimit}>Dư nợ cần thanh toán</Text>
             <AmountLabel
-              value={totalBl}
+              value={totalBl - totalLimit > 0 ? totalBl - totalLimit : 0}
               currency="VND"
               style={[styles.totalLimit, { color: Colors.primary2 }]}
             />

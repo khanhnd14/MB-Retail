@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingHorizontal: Metrics.medium,
-    flex: 1
+    flex: 1,
   },
   itemView: {
     paddingVertical: Metrics.medium,
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
   },
   limitContent: {
     fontWeight: '600',
-    color: '#1C1939'
+    color: '#1C1939',
   },
   titleLimit: {
     fontSize: 12,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
 })
 
 const CloseODSelect = ({ route }) => {
-  const { listSelect } = route.params
+  const { listSelect, totalbl } = route.params
   const dispatch = useDispatch()
   const { registedInfo, prepareData, prepareError } = useSelector((state) => state.overdraft)
   const { odAccount, odTier } = registedInfo || {}
@@ -131,8 +131,10 @@ const CloseODSelect = ({ route }) => {
     let total = 0
     listSaving?.map((item, index) => {
       if (selects[item.receiptNo]) {
-        const { receiptInfo } = item;
-        total += parseInt(receiptInfo.principal + receiptInfo.interestAmount - receiptInfo.penaltyAmount)
+        const { receiptInfo } = item
+        total += parseInt(
+          receiptInfo.principal + receiptInfo.interestAmount - receiptInfo.penaltyAmount
+        )
       }
     })
     return total
@@ -145,7 +147,7 @@ const CloseODSelect = ({ route }) => {
   }
 
   const onConfirm = () => {
-     if (_.isEmpty(listSelect)) {
+    if (_.isEmpty(listSelect)) {
       Utils.showToast('Vui lòng chọn sổ')
       return
     }
@@ -174,13 +176,25 @@ const CloseODSelect = ({ route }) => {
           onPress={() => onSelectItem(item)}
         />
         <View style={Helpers.fill}>
-          <View style={{ justifyContent: 'space-between', flexDirection: 'row', marginBottom: Metrics.small }}>
+          <View
+            style={{
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              marginBottom: Metrics.small,
+            }}
+          >
             <Text style={styles.titleLimit}>{alias}</Text>
-            <Text style={[styles.titleLimit, { color: '#8B97A8', fontWeight: 'normal' }]}>{settlementDate}</Text>
+            <Text style={[styles.titleLimit, { color: '#8B97A8', fontWeight: 'normal' }]}>
+              {settlementDate}
+            </Text>
           </View>
           <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
             <Text style={styles.limitContent}>{receiptNoInString}</Text>
-            <AmountLabel style={[styles.limitContent, { fontWeight: 'normal' }]} value={principal} currency="VND" />
+            <AmountLabel
+              style={[styles.limitContent, { fontWeight: 'normal' }]}
+              value={principal}
+              currency="VND"
+            />
           </View>
         </View>
       </View>
@@ -200,6 +214,14 @@ const CloseODSelect = ({ route }) => {
             {listSaving?.map((item, index) => renderItemLimit(item, index))}
           </ScrollView>
           <View style={styles.totalItem}>
+            <Text style={styles.totalLimit}>Dư nợ cần thanh toán</Text>
+            <AmountLabel
+              value={totalbl}
+              currency="VND"
+              style={[styles.totalLimit, { color: Colors.primary2 }]}
+            />
+          </View>
+          <View style={styles.totalItem}>
             <Text style={styles.totalLimit}>Tổng số tiền tất toán</Text>
             <AmountLabel
               value={totalSaving}
@@ -217,14 +239,18 @@ const CloseODSelect = ({ route }) => {
             text="Đồng ý tất toán trước hạn và hưởng lãi suất không kỳ hạn"
             checked={checked}
             onPress={() => {
-            setCheck(!checked)
-          }}
+              setCheck(!checked)
+            }}
           />
         </View>
-
       </View>
 
-      <ConfirmButton loading={loading} onPress={onConfirm} />
+      <ConfirmButton
+        loading={loading}
+        onPress={onConfirm}
+        disabled={!checked}
+        color={checked ? Colors.primary2 : Colors.gray5}
+      />
     </>
   )
 }
