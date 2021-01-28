@@ -52,8 +52,8 @@ const styles = StyleSheet.create({
 
 const CloseODScreen = () => {
   const dispatch = useDispatch()
-  const { creationInfo, getPaymentAccount, listTCType, purposeList, sendOTPRegister,sendOTPRegisterError } = useSelector((state) => state.overdraft)
-  const [totalTSDB, setTotalTSDB] = React.useState(0)
+  const { creationInfo, getPaymentAccount, listTCType, purposeList, sendOTPRegister } = useSelector((state) => state.overdraft)
+  const [, setTotalTSDB] = React.useState(0)
   const [odLimit, setOdLimit] = React.useState(0)
   const [fDList, setFDList] = React.useState(0)
   const [startDate, setStartDate] = React.useState(null)
@@ -66,10 +66,19 @@ const CloseODScreen = () => {
   const [collatData, setCollatData] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
   const [isSetup, setIsSetup] = React.useState(false)
-  const momentFormat = "DD/MM/YYYY"
+  const momentFormat = 'DD/MM/YYYY'
   const note = useMemo(() =>
-    `Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ`, [])
+    'Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ', [])
   const refToast = useRef(null)
+
+  const endDateCal = () => {
+    // let currentDate = new Date()
+    let minDate = moment().add(1, 'M').toDate();
+    let maxDate = moment().add(12, 'M').toDate();
+    setMinDate(minDate)
+    setMaxDate(maxDate)
+    setEndDate(maxDate)
+  }
 
   React.useEffect(() => {
     dispatch(odSavingOperations.creationInfo())
@@ -97,29 +106,20 @@ const CloseODScreen = () => {
   React.useEffect(() => {
     if (getPaymentAccount) {
       if (getPaymentAccount.isExistOD) {
-        let expiredDate = new Date(getPaymentAccount.expiredDate)
+        const expiredDate = new Date(getPaymentAccount.expiredDate)
         setMaxDate(expiredDate)
         setEndDate(expiredDate)
         // console.log('getPaymentAccount.accounts',getPaymentAccount.accounts);
-        setPaymentAccount(getPaymentAccount.accounts)//.accountInString
+        setPaymentAccount(getPaymentAccount.accounts)// .accountInString
       } else {
         setPaymentAccount(getPaymentAccount?.accounts[0])
         // console.log('getPaymentAccount',getPaymentAccount);
       }
 
-    } else {
-
     }
   }, [getPaymentAccount])
 
-  const endDateCal = () => {
-    // let currentDate = new Date()
-    let minDate = moment().add(1, 'M').toDate();
-    let maxDate = moment().add(12, 'M').toDate();
-    setMinDate(minDate)
-    setMaxDate(maxDate)
-    setEndDate(maxDate)
-  }
+  
 
   const completeFDSelected = (data, total, odl) => {
     // console.log(data, total, odl);
@@ -249,7 +249,7 @@ const CloseODScreen = () => {
                 dateStyle={styles.text}
                 style={{ flex: 1 }}
                 date={startDate}
-                disable={true}
+                disable="true"
               />
             </TouchableOpacity>
             <TouchableOpacity style={[styles.lineItem, { flex: 1 }]}>
