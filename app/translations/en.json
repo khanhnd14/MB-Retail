@@ -1035,6 +1035,8 @@
       "error_ca_account_null": "Vui lòng chọn tài khoản thanh toán",
       "odOpenRequest": "Yêu cầu cấp thấu chi",
       "conditionTitle": "ĐIỀU KHOẢN & ĐIỀU KIỆN MỞ THẤU CHI ONLINE",
+      "selectCollateral": "Chọn sổ tiết kiệm để tất toán"
+
     },
     "overdraft_saving_screen": "Overdraft Service",
     "title": "Overdraft service for employees",

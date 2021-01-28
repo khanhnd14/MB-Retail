@@ -2,6 +2,8 @@ import React, { Fragment, useRef, useMemo, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ScrollView, StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import I18n from 'i18n-js'
+import moment from 'moment'
+import Modal from 'react-native-modal'
 import { Helpers, Metrics, Colors, ApplicationStyles } from '../../../theme'
 import { Topbar, Toast, Text, AmountLabel, Loader, SelectAccount, DatePicker, ModalSelect, ConfirmButton } from '../../../components'
 import * as Navigation from '../../../navigation'
@@ -9,8 +11,6 @@ import { productOperations } from '../../../state/product'
 import { SelectFDCollatComponent, SelectPurpose } from '../../../components/Overdraft'
 import Note from '../../../components/SaveMoney/Note'
 import { odSavingOperations } from '../../../state/overdraftSaving'
-import moment from 'moment'
-import Modal from 'react-native-modal'
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -107,9 +107,9 @@ const CreateOD = () => {
   const [loading, setLoading] = React.useState(false)
   const [isSetup, setIsSetup] = React.useState(false)
   const [showAlert, setShowAlert] = React.useState(false)
-  const momentFormat = "DD/MM/YYYY"
+  const momentFormat = 'DD/MM/YYYY'
   const note = useMemo(() =>
-    `Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ`, [])
+    'Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ', [])
   const refToast = useRef(null)
 
   React.useEffect(() => {
@@ -128,7 +128,6 @@ const CreateOD = () => {
     }
   }, [creationInfo])
 
-
   React.useEffect(() => {
     // console.log('creationInfoError',creationInfoError);
     // let msg = creationInfoError.message
@@ -144,15 +143,14 @@ const CreateOD = () => {
   React.useEffect(() => {
     if (getPaymentAccount) {
       if (getPaymentAccount.isExistOD) {
-        let expiredDate = new Date(getPaymentAccount.expiredDate)
+        const expiredDate = new Date(getPaymentAccount.expiredDate)
         setMaxDate(expiredDate)
         setEndDate(expiredDate)
-        setPaymentAccount(getPaymentAccount.accounts)//.accountInString
+        setPaymentAccount(getPaymentAccount.accounts)// .accountInString
       } else {
         setPaymentAccount(getPaymentAccount?.accounts[0])
         // console.log('getPaymentAccount',getPaymentAccount);
       }
-
     } else {
 
     }
@@ -160,8 +158,8 @@ const CreateOD = () => {
 
   const endDateCal = () => {
     // let currentDate = new Date()
-    let minDate = moment().add(1, 'M').toDate();
-    let maxDate = moment().add(12, 'M').toDate();
+    const minDate = moment().add(1, 'M').toDate();
+    const maxDate = moment().add(12, 'M').toDate();
     setMinDate(minDate)
     setMaxDate(maxDate)
     setEndDate(maxDate)
@@ -202,10 +200,10 @@ const CreateOD = () => {
       return
     }
 
-    let fdListParam = ""
+    let fdListParam = ''
     fDList.forEach(fd => {
       if (fd.isSelected == true) {
-        fdListParam += fd.receiptNo + ","
+        fdListParam += `${fd.receiptNo},`
       }
     });
     if (fdListParam.length > 0) {
@@ -217,7 +215,7 @@ const CreateOD = () => {
     // expireDate: 19/01/2022
     // purpose: 41
 
-    let body = {
+    const body = {
       fdList: fdListParam,
       rolloutAcctNo: paymentAccount.acctNo,
       effectiveDate: moment(startDate).format(momentFormat),
@@ -235,10 +233,10 @@ const CreateOD = () => {
     // console.log('sendOTPRegister', sendOTPRegister);
     if (isSetup && sendOTPRegister) {
       // set cho man thanh cong
-      let openInfo = {
-        odLimit:odLimit,
-        expireDate:endDate,
-        rate:creationInfo?.laiSuatTC
+      const openInfo = {
+        odLimit,
+        expireDate: endDate,
+        rate: creationInfo?.laiSuatTC
       }
       dispatch(odSavingOperations.openODInfo(openInfo))
 
@@ -259,12 +257,12 @@ const CreateOD = () => {
   return (
     <>
       <Topbar subTitle={I18n.t('overdraft.fromOnlineSaving.openScreenTitle')} background={Colors.mainBg} title={I18n.t('overdraft.fromOnlineSaving.title')} />
-      {creationInfoError &&
+      {creationInfoError && (
         <View style={[Helpers.fill, styles.scrollView]}>
           {showAlert && (
             <Modal isVisible={showAlert} onBackdropPress={() => onHide()} onModalHide={() => onHide()}>
               <TouchableWithoutFeedback accessible={false}>
-                <View style={[styles.containerAlert, {  }]}>
+                <View style={[styles.containerAlert, { }]}>
                   <View style={styles.header}>
                     <Text style={styles.titleAlert}>{I18n.t('application.title_alert_notification').toUpperCase()}</Text>
                   </View>
@@ -277,8 +275,8 @@ const CreateOD = () => {
             </Modal>
           )}
         </View>
-      }
-      {!creationInfoError &&
+      )}
+      {!creationInfoError && (
         <ScrollView style={[Helpers.fill, styles.scrollView]}>
           <View style={[Helpers.fill, styles.container]}>
 
@@ -288,7 +286,7 @@ const CreateOD = () => {
             {/* han muc thau chi */}
             <View style={styles.lineItem}>
               <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.overdraftLimit')}</Text>
-              <AmountLabel style={styles.readOnlyText} value={odLimit} currency={'VND'} />
+              <AmountLabel style={styles.readOnlyText} value={odLimit} currency="VND" />
             </View>
 
             {/* note */}
@@ -325,7 +323,7 @@ const CreateOD = () => {
                   dateStyle={styles.text}
                   style={{ flex: 1 }}
                   date={startDate}
-                  disable={true}
+                  disable
                 />
               </TouchableOpacity>
               <TouchableOpacity style={[styles.lineItem, { flex: 1 }]}>
@@ -361,7 +359,8 @@ const CreateOD = () => {
           <View style={{ borderBottomLeftRadius: 10, borderBottomRightRadius: 10, backgroundColor: 'white', paddingBottom: 10 }}>
             <Note onPress={() => {
               setNoteVisible(true)
-            }} />
+            }}
+            />
             <ModalSelect
               title={I18n.t('application.note')}
               visible={noteVisible}
@@ -390,7 +389,7 @@ const CreateOD = () => {
             }}
           />
         </ScrollView>
-      }
+      )}
 
       <Toast ref={refToast} position="bottom" />
       <Loader modalVisible={loading} />

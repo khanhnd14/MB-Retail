@@ -26,9 +26,20 @@ export const SEND_OTP_REGISTER = 'overdraft/SEND_OTP_REGISTER'
 export const SEND_OTP_REGISTER_COMPLETED = 'overdraft/SEND_OTP_REGISTER_COMPLETED'
 export const SEND_OTP_REGISTER_FAILED = 'overdraft/SEND_OTP_REGISTER_FAILED'
 
+export const GET_REGISTER_INFO = 'overdraft/GET_REGISTER_INFO'
+export const GET_REGISTER_INFO_COMPLETED = 'overdraft/GET_REGISTER_INFO_COMPLETED'
+export const GET_REGISTER_INFO_FAILED = 'overdraft/GET_REGISTER_INFO_FAILED'
+
+export const PREPARE = 'overdraft/PREPARE'
+export const PREPARE_COMPLETED = 'overdraft/PREPARE_COMPLETED'
+export const PREPARE_FAILED = 'overdraft/PREPARE_FAILED'
+
+export const CLOSE = 'overdraft/CLOSE'
+export const CLOSE_COMPLETED = 'overdraft/CLOSE_COMPLETED'
+export const CLOSE_FAILED = 'overdraft/CLOSE_FAILED'
+
 export const COMPLETE_TRANSACTION = 'overdraft/COMPLETE_TRANSACTION'
 export const OPEN_OD_INFO = 'overdraft/OPEN_OD_INFO'
-
 
 export const GROUP_TYPE_TERM = 5
 export const SECURITY_TYPE = {

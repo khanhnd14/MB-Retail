@@ -1,8 +1,6 @@
 import * as types from './types'
 import { resourceHttp } from '../../services'
 
-
-
 export const openODInfo = (body) => (dispatch) => {
   dispatch({
     type: types.OPEN_OD_INFO,
@@ -82,7 +80,7 @@ export const purposeList = () => (dispatch) => {
     },
   })
 }
-//====== old ======
+//= ===== old ======
 export const getAcount = () => (dispatch) => {
   dispatch({
     type: types.GET_ACCOUNT,
@@ -271,6 +269,29 @@ export const checkHoliday = () => (dispatch) => {
     },
   })
 }
+
+export const getRegistedInfo = () => ({
+  type: types.GET_REGISTER_INFO,
+  meta: {
+    ...resourceHttp.getRegistedOverDraffInfo,
+  },
+})
+
+export const prepareClose = (body) => ({
+  type: types.PREPARE,
+  meta: {
+    ...resourceHttp.overdraftPrepareClose,
+    body
+  },
+})
+
+export const completeClose = (body) => ({
+  type: types.CLOSE,
+  meta: {
+    ...resourceHttp.overdraftCompleteClose,
+    body
+  },
+})
 
 export const dispatchSchedule = (form) => (dispatch) => {
   dispatch({

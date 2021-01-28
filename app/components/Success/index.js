@@ -92,7 +92,7 @@ const Success = (props) => {
   const descReward = typeof messReward === 'object' ? messReward?.wordMessage : messReward;
   useEffect(
     () => () => {
-      console.log(props,route.params)
+      console.log(props, route.params)
       onSwitchTransaction && onSwitchTransaction()
     },
     []
@@ -121,8 +121,6 @@ const Success = (props) => {
     if (buttonComfirm) {
       return buttonComfirm
     }
-    console.log(redoTransaction,onSwitchTransaction);
-    
     if (redoTransaction || onSwitchTransaction) {
       return (
         <ConfirmButton

@@ -10,16 +10,22 @@ const initialState = {
   purposeList: null,
   sendOTPRegister: null,
   sendOTPRegisterError: null,
-  sendOTPOnly:null,
-  sendOTPOnlyError:null,
+  sendOTPOnly: null,
+  sendOTPOnlyError: null,
   completeRegister: null,
   completeRegisterError: null,
-  openODInfo:null
+  openODInfo: null,
+
+  registedInfo: null,
+  registedInfoError: null,
+  prepareData: null,
+  prepareError: null,
+  completeData: null,
+  completeError: null,
 }
 
-export default function (state = initialState, action) {
+export default function(state = initialState, action) {
   switch (action.type) {
-    
     case types.OPEN_OD_INFO:
       return {
         ...state,
@@ -30,84 +36,127 @@ export default function (state = initialState, action) {
       return {
         ...state,
         completeRegister: action.payload,
-        completeRegisterError: null
+        completeRegisterError: null,
       }
     case types.COMPLETE_REGISTER_FAILED:
       return {
         ...state,
         completeRegister: null,
-        completeRegisterError: action.payload
+        completeRegisterError: action.payload,
       }
     case types.SEND_OTP_ONLY_COMPLETED:
       return {
         ...state,
         sendOTPOnly: action.payload,
-        sendOTPOnlyError: null
+        sendOTPOnlyError: null,
       }
     case types.SEND_OTP_ONLY_FAILED:
       return {
         ...state,
         sendOTPOnly: null,
-        sendOTPOnlyError: action.payload
+        sendOTPOnlyError: action.payload,
       }
     case types.SEND_OTP_REGISTER_COMPLETED:
       return {
         ...state,
         sendOTPRegister: action.payload,
-        sendOTPRegisterError: null
+        sendOTPRegisterError: null,
       }
     case types.SEND_OTP_REGISTER_FAILED:
       return {
         ...state,
         sendOTPRegister: null,
-        sendOTPRegisterError: action.payload
+        sendOTPRegisterError: action.payload,
       }
     case types.CREATION_INFO_COMPLETED:
       return {
         ...state,
         creationInfo: action.payload,
-        creationInfoError:null
+        creationInfoError: null,
       }
     case types.LIST_TC_TYPE_COMPLETED:
       return {
         ...state,
-        listTCType: action.payload
+        listTCType: action.payload,
       }
     case types.GET_PAYMENT_ACCOUNT_COMPLETED:
       return {
         ...state,
-        getPaymentAccount: action.payload
+        getPaymentAccount: action.payload,
       }
     case types.PURPOSE_LIST_COMPLETED:
       return {
         ...state,
-        purposeList: action.payload
+        purposeList: action.payload,
       }
     case types.CREATION_INFO_FAILED:
       return {
         ...state,
         creationInfo: null,
-        creationInfoError:action.payload
+        creationInfoError: action.payload,
       }
     case types.LIST_TC_TYPE_FAILED:
       return {
         ...state,
-        listTCType: null
+        listTCType: null,
       }
     case types.GET_PAYMENT_ACCOUNT_FAILED:
       return {
         ...state,
-        getPaymentAccount: null
+        getPaymentAccount: null,
       }
     case types.PURPOSE_LIST_FAILED:
       return {
         ...state,
-        purposeList: null
+        purposeList: null,
       }
+    case types.GET_REGISTER_INFO:
+      return {
+        ...state,
+        registedInfo: null,
+        registedInfoError: null,
+      }
+    case types.GET_REGISTER_INFO_COMPLETED:
+      return {
+        ...state,
+        registedInfo: action.payload,
+      }
+    case types.GET_REGISTER_INFO_FAILED:
+      return {
+        ...state,
+        registedInfoError: action.payload,
+      }
+    case types.PREPARE_COMPLETED:
+      return {
+        ...state,
+        prepareData: action.payload,
+      }
+    case types.PREPARE_FAILED:
+      return {
+        ...state,
+        prepareError: action.payload,
+      }
+    case types.CLOSE:
+      return {
+        ...state,
+        completeData: null,
+        completeError: null,
+      }
+    case types.CLOSE_COMPLETED:
+      return {
+        ...state,
+        completeData: action.payload,
+      }
+    case types.CLOSE_FAILED:
+      return {
+        ...state,
+        completeError: action.payload,
+      }
+
     case appTypes.REACTIVE:
       return initialState
     case appTypes.COMPLETE_TRANSACTION:
-        return initialState
+      return initialState
     default:
       return state
   }

@@ -16,8 +16,8 @@ import { Config } from '../../config'
 
 const styles = StyleSheet.create({
   container: {
-    minHeight: Metrics.small * 23.2,
-    width: Metrics.small * 29.6,
+    minHeight: Metrics.small * 27.2,
+    width: Metrics.small * 33,
     backgroundColor: Colors.white,
     alignSelf: 'center',
     borderRadius: 10,

@@ -1033,6 +1033,7 @@
       "error_ca_account_null": "Vui lòng chọn tài khoản thanh toán",
       "odOpenRequest": "Yêu cầu cấp thấu chi",
       "conditionTitle": "ĐIỀU KHOẢN & ĐIỀU KIỆN MỞ THẤU CHI ONLINE",
+      "selectCollateral": "Chọn sổ tiết kiệm để tất toán"
     },
     "title": "Cấp thấu chi cho CBNV",
     "sub_title": "Yêu cầu cấp thấu chi",

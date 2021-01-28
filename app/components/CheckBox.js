@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
   },
 })
 
-class MsbRadio extends Component {
+class CheckBox extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -60,12 +60,11 @@ class MsbRadio extends Component {
 
   render() {
     const { checked } = this.state
-    const { color, size, text, textSize, style, textStyle, circle } = this.props
-
+    const { color, size, text, textSize, style, textStyle } = this.props
     const customStyle = {
       width: size,
       height: size,
-      borderRadius: circle ? size / 2 : 4,
+      borderRadius: size / 2,
       backgroundColor: checked ? color : Colors.transparent,
       borderWidth: checked ? 0 : 1,
       borderColor: '#D0D1D3',
@@ -78,35 +77,36 @@ class MsbRadio extends Component {
             flexDirection: 'row',
             alignItems: 'center',
           },
+          customStyle,
           style,
         ]}
         onPress={this.onPress}
       >
-        <View style={[styles.container, customStyle]}>
-          {checked && <Icon name="icon-check" size={size / 3} color={Colors.white} />}
-        </View>
+        {checked ? (
+          <Icon name="icon-check" size={size} color={Colors.primary} />
+        ) : (
+          <Icon name="checkbox-unchecked" size={size} color={Colors.primary} />
+        )}
         <Text style={[styles.text, { fontSize: textSize }, textStyle]}>{text}</Text>
       </TouchableOpacity>
     )
   }
 }
 
-MsbRadio.defaultProps = {
-  size: Metrics.small * 2.4,
+CheckBox.defaultProps = {
+  size: 20,
   text: null,
   style: {},
   textSize: 14,
   color: Colors.primary2,
-  circle: true
 }
 
-MsbRadio.propTypes = {
+CheckBox.propTypes = {
   size: PropTypes.number,
   onPress: PropTypes.func,
   text: PropTypes.string,
   textSize: PropTypes.number,
   color: PropTypes.string,
   textStyle: PropTypes.object,
-  circle: PropTypes.bool
 }
-export default MsbRadio
+export default CheckBox
