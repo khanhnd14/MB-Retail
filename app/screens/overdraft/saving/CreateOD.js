@@ -1,16 +1,15 @@
-import React, { Fragment, useRef, useMemo, useEffect } from 'react'
+import React, { Fragment, useRef, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ScrollView, StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import I18n from 'i18n-js'
-import { Helpers, Metrics, Colors, ApplicationStyles } from '../../../theme'
+import Modal from 'react-native-modal'
+import moment from 'moment'
+import { Helpers, Metrics, Colors } from '../../../theme'
 import { Topbar, Toast, Text, AmountLabel, Loader, SelectAccount, DatePicker, ModalSelect, ConfirmButton } from '../../../components'
 import * as Navigation from '../../../navigation'
-import { productOperations } from '../../../state/product'
 import { SelectFDCollatComponent, SelectPurpose } from '../../../components/Overdraft'
 import Note from '../../../components/SaveMoney/Note'
 import { odSavingOperations } from '../../../state/overdraftSaving'
-import moment from 'moment'
-import Modal from 'react-native-modal'
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -92,8 +91,8 @@ const styles = StyleSheet.create({
 
 const CreateOD = () => {
   const dispatch = useDispatch()
-  const { creationInfo, getPaymentAccount, listTCType, purposeList, sendOTPRegister, sendOTPRegisterError, creationInfoError } = useSelector((state) => state.overdraft)
-  const [totalTSDB, setTotalTSDB] = React.useState(0)
+  const { creationInfo, getPaymentAccount, listTCType, purposeList, sendOTPRegister, creationInfoError } = useSelector((state) => state.overdraft)
+  const [, setTotalTSDB] = React.useState(0)
   const [odLimit, setOdLimit] = React.useState(0)
   const [fDList, setFDList] = React.useState(0)
   const [startDate, setStartDate] = React.useState(null)
@@ -107,10 +106,20 @@ const CreateOD = () => {
   const [loading, setLoading] = React.useState(false)
   const [isSetup, setIsSetup] = React.useState(false)
   const [showAlert, setShowAlert] = React.useState(false)
-  const momentFormat = "DD/MM/YYYY"
+  const momentFormat = 'DD/MM/YYYY'
   const note = useMemo(() =>
-    `Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ`, [])
+    'Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ', [])
   const refToast = useRef(null)
+
+  const endDateCal = () => {
+    // let currentDate = new Date()
+    let minDate = moment().add(1, 'M').toDate();
+    let maxDate = moment().add(12, 'M').toDate();
+    setMinDate(minDate)
+    setMaxDate(maxDate)
+    setEndDate(minDate)
+    console.log('endDateCal');
+  }
 
   React.useEffect(() => {
     dispatch(odSavingOperations.creationInfo())
@@ -147,25 +156,16 @@ const CreateOD = () => {
         let expiredDate = new Date(getPaymentAccount.expiredDate)
         setMaxDate(expiredDate)
         setEndDate(expiredDate)
-        setPaymentAccount(getPaymentAccount.accounts)//.accountInString
+        console.log('React.useEffect getPaymentAccount');
+        setPaymentAccount(getPaymentAccount.accounts)// .accountInString
       } else {
         setPaymentAccount(getPaymentAccount?.accounts[0])
         // console.log('getPaymentAccount',getPaymentAccount);
       }
-
-    } else {
-
     }
   }, [getPaymentAccount])
 
-  const endDateCal = () => {
-    // let currentDate = new Date()
-    let minDate = moment().add(1, 'M').toDate();
-    let maxDate = moment().add(12, 'M').toDate();
-    setMinDate(minDate)
-    setMaxDate(maxDate)
-    setEndDate(maxDate)
-  }
+  
 
   const completeFDSelected = (data, total, odl) => {
     console.log(data, total, odl);
@@ -178,7 +178,7 @@ const CreateOD = () => {
   const changeFromAccount = (accId) => {
     console.log(accId);
     getPaymentAccount.accounts.forEach(element => {
-      if (element.acctNo == accId) {
+      if (element.acctNo === accId) {
         setPaymentAccount(element)
       }
     });
@@ -202,10 +202,10 @@ const CreateOD = () => {
       return
     }
 
-    let fdListParam = ""
+    let fdListParam = ''
     fDList.forEach(fd => {
-      if (fd.isSelected == true) {
-        fdListParam += fd.receiptNo + ","
+      if (fd.isSelected === true) {
+        fdListParam += `${fd.receiptNo},`
       }
     });
     if (fdListParam.length > 0) {
@@ -217,7 +217,7 @@ const CreateOD = () => {
     // expireDate: 19/01/2022
     // purpose: 41
 
-    let body = {
+    const body = {
       fdList: fdListParam,
       rolloutAcctNo: paymentAccount.acctNo,
       effectiveDate: moment(startDate).format(momentFormat),
@@ -235,10 +235,10 @@ const CreateOD = () => {
     // console.log('sendOTPRegister', sendOTPRegister);
     if (isSetup && sendOTPRegister) {
       // set cho man thanh cong
-      let openInfo = {
-        odLimit:odLimit,
-        expireDate:endDate,
-        rate:creationInfo?.laiSuatTC
+      const openInfo = {
+        odLimit,
+        expireDate: endDate,
+        rate: creationInfo?.laiSuatTC
       }
       dispatch(odSavingOperations.openODInfo(openInfo))
 
@@ -252,19 +252,19 @@ const CreateOD = () => {
   }
 
   if (getPaymentAccount && listTCType && purposeList) {
-    console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
+    // console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
   } else {
     return null
   }
   return (
     <>
       <Topbar subTitle={I18n.t('overdraft.fromOnlineSaving.openScreenTitle')} background={Colors.mainBg} title={I18n.t('overdraft.fromOnlineSaving.title')} />
-      {creationInfoError &&
+      {creationInfoError && (
         <View style={[Helpers.fill, styles.scrollView]}>
           {showAlert && (
             <Modal isVisible={showAlert} onBackdropPress={() => onHide()} onModalHide={() => onHide()}>
               <TouchableWithoutFeedback accessible={false}>
-                <View style={[styles.containerAlert, {  }]}>
+                <View style={[styles.containerAlert, {}]}>
                   <View style={styles.header}>
                     <Text style={styles.titleAlert}>{I18n.t('application.title_alert_notification').toUpperCase()}</Text>
                   </View>
@@ -277,8 +277,8 @@ const CreateOD = () => {
             </Modal>
           )}
         </View>
-      }
-      {!creationInfoError &&
+      )}
+      {!creationInfoError && (
         <ScrollView style={[Helpers.fill, styles.scrollView]}>
           <View style={[Helpers.fill, styles.container]}>
 
@@ -288,7 +288,7 @@ const CreateOD = () => {
             {/* han muc thau chi */}
             <View style={styles.lineItem}>
               <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.overdraftLimit')}</Text>
-              <AmountLabel style={styles.readOnlyText} value={odLimit} currency={'VND'} />
+              <AmountLabel style={styles.readOnlyText} value={odLimit} currency="VND" />
             </View>
 
             {/* note */}
@@ -322,22 +322,23 @@ const CreateOD = () => {
               <TouchableOpacity style={[styles.lineItem, { flex: 1 }]}>
                 <Text style={styles.textDetail}>{I18n.t('overdraft.fromOnlineSaving.effectiveDate')}</Text>
                 <DatePicker
-                  dateStyle={styles.text}
+                  dateStyle={{ color: Colors.gray }}
                   style={{ flex: 1 }}
                   date={startDate}
-                  disable={true}
+                  disable="true"
                 />
               </TouchableOpacity>
               <TouchableOpacity style={[styles.lineItem, { flex: 1 }]}>
-                <Text style={styles.textDetail}>{I18n.t('overdraft.fromOnlineSaving.expireDate')}</Text>
+                <Text style={styles.textDetail}>{I18n.t('overdraft.fromOnlineSaving.expireDate')}
+                </Text>
                 <DatePicker
                   onPress={toggleFrqDatePicker}
-                  dateStyle={styles.text}
+                  dateStyle={paymentAccount?.expiredDate ? { color: Colors.gray } : {}}
                   style={{ flex: 1 }}
                   date={endDate}
                   minDate={minDate}
                   maxDate={maxDate}
-                  disable={!paymentAccount?.isExistOD}
+                  disable={paymentAccount?.expiredDate != null}
                 />
               </TouchableOpacity>
             </View>
@@ -390,7 +391,7 @@ const CreateOD = () => {
             }}
           />
         </ScrollView>
-      }
+      )}
 
       <Toast ref={refToast} position="bottom" />
       <Loader modalVisible={loading} />
