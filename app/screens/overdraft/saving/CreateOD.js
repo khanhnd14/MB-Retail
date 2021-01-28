@@ -1,13 +1,12 @@
-import React, { Fragment, useRef, useMemo, useEffect } from 'react'
+import React, { Fragment, useRef, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { ScrollView, StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
 import I18n from 'i18n-js'
-import moment from 'moment'
 import Modal from 'react-native-modal'
-import { Helpers, Metrics, Colors, ApplicationStyles } from '../../../theme'
+import moment from 'moment'
+import { Helpers, Metrics, Colors } from '../../../theme'
 import { Topbar, Toast, Text, AmountLabel, Loader, SelectAccount, DatePicker, ModalSelect, ConfirmButton } from '../../../components'
 import * as Navigation from '../../../navigation'
-import { productOperations } from '../../../state/product'
 import { SelectFDCollatComponent, SelectPurpose } from '../../../components/Overdraft'
 import Note from '../../../components/SaveMoney/Note'
 import { odSavingOperations } from '../../../state/overdraftSaving'
@@ -92,8 +91,8 @@ const styles = StyleSheet.create({
 
 const CreateOD = () => {
   const dispatch = useDispatch()
-  const { creationInfo, getPaymentAccount, listTCType, purposeList, sendOTPRegister, sendOTPRegisterError, creationInfoError } = useSelector((state) => state.overdraft)
-  const [totalTSDB, setTotalTSDB] = React.useState(0)
+  const { creationInfo, getPaymentAccount, listTCType, purposeList, sendOTPRegister, creationInfoError } = useSelector((state) => state.overdraft)
+  const [, setTotalTSDB] = React.useState(0)
   const [odLimit, setOdLimit] = React.useState(0)
   const [fDList, setFDList] = React.useState(0)
   const [startDate, setStartDate] = React.useState(null)
@@ -111,6 +110,16 @@ const CreateOD = () => {
   const note = useMemo(() =>
     'Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ', [])
   const refToast = useRef(null)
+
+  const endDateCal = () => {
+    // let currentDate = new Date()
+    const minDate = moment().add(1, 'M').toDate();
+    const maxDate = moment().add(12, 'M').toDate();
+    setMinDate(minDate)
+    setMaxDate(maxDate)
+    setEndDate(minDate)
+    console.log('endDateCal');
+  }
 
   React.useEffect(() => {
     dispatch(odSavingOperations.creationInfo())
@@ -146,24 +155,14 @@ const CreateOD = () => {
         const expiredDate = new Date(getPaymentAccount.expiredDate)
         setMaxDate(expiredDate)
         setEndDate(expiredDate)
+        console.log('React.useEffect getPaymentAccount');
         setPaymentAccount(getPaymentAccount.accounts)// .accountInString
       } else {
         setPaymentAccount(getPaymentAccount?.accounts[0])
         // console.log('getPaymentAccount',getPaymentAccount);
       }
-    } else {
-
     }
   }, [getPaymentAccount])
-
-  const endDateCal = () => {
-    // let currentDate = new Date()
-    const minDate = moment().add(1, 'M').toDate();
-    const maxDate = moment().add(12, 'M').toDate();
-    setMinDate(minDate)
-    setMaxDate(maxDate)
-    setEndDate(maxDate)
-  }
 
   const completeFDSelected = (data, total, odl) => {
     console.log(data, total, odl);
@@ -176,7 +175,7 @@ const CreateOD = () => {
   const changeFromAccount = (accId) => {
     console.log(accId);
     getPaymentAccount.accounts.forEach(element => {
-      if (element.acctNo == accId) {
+      if (element.acctNo === accId) {
         setPaymentAccount(element)
       }
     });
@@ -202,7 +201,7 @@ const CreateOD = () => {
 
     let fdListParam = ''
     fDList.forEach(fd => {
-      if (fd.isSelected == true) {
+      if (fd.isSelected === true) {
         fdListParam += `${fd.receiptNo},`
       }
     });
@@ -250,7 +249,7 @@ const CreateOD = () => {
   }
 
   if (getPaymentAccount && listTCType && purposeList) {
-    console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
+    // console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
   } else {
     return null
   }
@@ -262,7 +261,7 @@ const CreateOD = () => {
           {showAlert && (
             <Modal isVisible={showAlert} onBackdropPress={() => onHide()} onModalHide={() => onHide()}>
               <TouchableWithoutFeedback accessible={false}>
-                <View style={[styles.containerAlert, { }]}>
+                <View style={[styles.containerAlert, {}]}>
                   <View style={styles.header}>
                     <Text style={styles.titleAlert}>{I18n.t('application.title_alert_notification').toUpperCase()}</Text>
                   </View>
@@ -320,22 +319,23 @@ const CreateOD = () => {
               <TouchableOpacity style={[styles.lineItem, { flex: 1 }]}>
                 <Text style={styles.textDetail}>{I18n.t('overdraft.fromOnlineSaving.effectiveDate')}</Text>
                 <DatePicker
-                  dateStyle={styles.text}
+                  dateStyle={{ color: Colors.gray }}
                   style={{ flex: 1 }}
                   date={startDate}
-                  disable
+                  disable="true"
                 />
               </TouchableOpacity>
               <TouchableOpacity style={[styles.lineItem, { flex: 1 }]}>
-                <Text style={styles.textDetail}>{I18n.t('overdraft.fromOnlineSaving.expireDate')}</Text>
+                <Text style={styles.textDetail}>{I18n.t('overdraft.fromOnlineSaving.expireDate')}
+                </Text>
                 <DatePicker
                   onPress={toggleFrqDatePicker}
-                  dateStyle={styles.text}
+                  dateStyle={paymentAccount?.expiredDate ? { color: Colors.gray } : {}}
                   style={{ flex: 1 }}
                   date={endDate}
                   minDate={minDate}
                   maxDate={maxDate}
-                  disable={!paymentAccount?.isExistOD}
+                  disable={paymentAccount?.expiredDate != null}
                 />
               </TouchableOpacity>
             </View>

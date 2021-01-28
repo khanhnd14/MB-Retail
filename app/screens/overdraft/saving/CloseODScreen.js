@@ -68,12 +68,8 @@ const CloseODScreen = () => {
   const { odAccount, odTier } = registedInfo || {}
   const {
     accountInString,
-    acctNo,
     overdraftLimit,
-    accruedExcesssInt,
     accruedInterestOverdraf,
-    holdAmount,
-    interestRate,
     ledgerBalance
   } = odAccount || {}
 
