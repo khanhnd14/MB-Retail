@@ -1,6 +1,6 @@
 import React, { Fragment, useRef, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ScrollView, StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { ScrollView, StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback, ActivityIndicator } from 'react-native'
 import I18n from 'i18n-js'
 import Modal from 'react-native-modal'
 import moment from 'moment'
@@ -105,6 +105,7 @@ const CreateOD = () => {
   const [loading, setLoading] = React.useState(false)
   const [isSetup, setIsSetup] = React.useState(false)
   const [showAlert, setShowAlert] = React.useState(false)
+  const [isInit, setIsInit] = React.useState(true)
   const momentFormat = 'DD/MM/YYYY'
   const note = useMemo(() =>
     'Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ', [])
@@ -116,7 +117,7 @@ const CreateOD = () => {
     const maxDate = moment().add(12, 'M').toDate();
     setMinDate(minDate)
     setMaxDate(maxDate)
-    setEndDate(minDate)
+    setEndDate(maxDate)
     console.log('endDateCal');
   }
 
@@ -147,6 +148,12 @@ const CreateOD = () => {
       setSelectedPurpose(purposeList[0])
     }
   }, [purposeList])
+
+  React.useEffect(() => {
+    if (!isInit) {
+      setIsInit(true)
+    }
+  }, [creationInfo, purposeList, getPaymentAccount, listTCType])
 
   React.useEffect(() => {
     if (getPaymentAccount) {
@@ -251,20 +258,46 @@ const CreateOD = () => {
     if (creationInfoError) {
       return creationInfoError.message
     }
-    if (creationInfo.FDList.length === 0) {
+    if (creationInfo?.FDList.length === 0) {
       return 'Không có sổ tiết kiệm nào'
     }
     return null
   }
 
-  if (getPaymentAccount && listTCType && purposeList) {
-    // console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
-  } else {
+  const renderAccountCA = () => {
+    if (getPaymentAccount) {
+      if (getPaymentAccount.isExistOD) {
+        return (
+          <View style={[styles.lineItem]}>
+            <Text style={styles.title}>{I18n.t('overdraft.account')}</Text>
+            <Text style={styles.readOnlyText}>{paymentAccount?.accountInString}</Text>
+          </View>
+        )
+      }
+      return (
+        <SelectAccount onSelectRolloutAccountNo={changeFromAccount} data={getPaymentAccount?.accounts} />
+      )
+    }
     return null
   }
+  // if (getPaymentAccount && listTCType && purposeList) {
+  //   // console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
+  // } else {
+  //   return null
+  // }
   return (
     <>
       <Topbar subTitle={I18n.t('overdraft.fromOnlineSaving.openScreenTitle')} background={Colors.mainBg} title={I18n.t('overdraft.fromOnlineSaving.title')} />
+      {!isInit && (
+        <View style={[Helpers.fill, styles.container, Helpers.center]}>
+          <ActivityIndicator
+            style={Helpers.mainCenter}
+            animating={loading}
+            color={Colors.primary2}
+            size="large"
+          />
+        </View>
+      )}
       {getErrorMessage() != null && (
         <View style={[Helpers.fill, styles.scrollView]}>
           {showAlert && (
@@ -350,16 +383,7 @@ const CreateOD = () => {
             </View>
 
             {/* ca account */}
-            {getPaymentAccount.isExistOD
-              ? (
-                <View style={[styles.lineItem]}>
-                  <Text style={styles.title}>{I18n.t('overdraft.account')}</Text>
-                  <Text style={styles.readOnlyText}>{paymentAccount?.accountInString}</Text>
-                </View>
-              ) : (
-                <SelectAccount onSelectRolloutAccountNo={changeFromAccount} data={getPaymentAccount.accounts} />
-              )
-            }
+            {renderAccountCA()}
 
             {/* purpose */}
             <SelectPurpose data={purposeList} onSubmit={onSelectPurpose} />
