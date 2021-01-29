@@ -140,7 +140,7 @@ const CloseODSuccess = (props) => {
               {listItemSaving.map((item, index) =>
                 renderItemLimit(item.receiptInfo.receiptNoInString, item.principal)
               )}
-              {renderItemLimit('Tổng số tiền tất toán', totalSaving, false)}
+              {renderItemLimit('Tổng số tiền tất toán', totalSaving, true, false)}
             </View>
           )}
         </View>
