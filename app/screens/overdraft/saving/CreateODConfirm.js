@@ -272,7 +272,6 @@ const CreateODConfirm = () => {
   }, [sendOTPOnlyError])
   // I18n.t('overdraft.fromOnlineSaving.conditionTitle').toUpperCase()
 
-  
   return (
     <Fragment>
       <Topbar subTitle={I18n.t('overdraft.fromOnlineSaving.openScreenTitle')} background={Colors.mainBg} title={I18n.t('overdraft.fromOnlineSaving.title')} />

@@ -48,7 +48,6 @@ const styles = StyleSheet.create({
   textDetail: {
     color: Colors.primary2
   },
-
   containerAlert: {
     minHeight: Metrics.small * 23.2,
     width: Metrics.small * 29.6,
@@ -248,6 +247,16 @@ const CreateOD = () => {
     Navigation.pop()
   }
 
+  const getErrorMessage = () => {
+    if (creationInfoError) {
+      return creationInfoError.message
+    }
+    if (creationInfo.FDList.length === 0) {
+      return 'Không có sổ tiết kiệm nào'
+    }
+    return null
+  }
+
   if (getPaymentAccount && listTCType && purposeList) {
     // console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
   } else {
@@ -256,7 +265,7 @@ const CreateOD = () => {
   return (
     <>
       <Topbar subTitle={I18n.t('overdraft.fromOnlineSaving.openScreenTitle')} background={Colors.mainBg} title={I18n.t('overdraft.fromOnlineSaving.title')} />
-      {creationInfoError && (
+      {getErrorMessage() != null && (
         <View style={[Helpers.fill, styles.scrollView]}>
           {showAlert && (
             <Modal isVisible={showAlert} onBackdropPress={() => onHide()} onModalHide={() => onHide()}>
@@ -265,7 +274,7 @@ const CreateOD = () => {
                   <View style={styles.header}>
                     <Text style={styles.titleAlert}>{I18n.t('application.title_alert_notification').toUpperCase()}</Text>
                   </View>
-                  <Text style={styles.input}>{creationInfoError?.message}</Text>
+                  <Text style={styles.input}>{getErrorMessage()}</Text>
                   <TouchableOpacity onPress={() => onHide()} style={styles.button}>
                     <Text style={styles.titleAlert}>{I18n.t('action.action_close').toUpperCase()}</Text>
                   </TouchableOpacity>
@@ -275,7 +284,7 @@ const CreateOD = () => {
           )}
         </View>
       )}
-      {!creationInfoError && (
+      {getErrorMessage() == null && (
         <ScrollView style={[Helpers.fill, styles.scrollView]}>
           <View style={[Helpers.fill, styles.container]}>
 
