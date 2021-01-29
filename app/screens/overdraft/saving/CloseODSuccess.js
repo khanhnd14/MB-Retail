@@ -89,6 +89,7 @@ const CloseODSuccess = (props) => {
 
   const totalSaving = useMemo(() => {
     let total = 0
+    if (_.isEmpty(listSaving)) return 0
     Object.keys(listSaving)?.map((item, index) => {
       const itemSelect = listSaving[item]
       if (itemSelect) {
@@ -103,6 +104,7 @@ const CloseODSuccess = (props) => {
 
   const listItemSaving = useMemo(() => {
     const list = []
+    if (_.isEmpty(listSaving)) return list
     Object.keys(listSaving)?.map((item, index) => {
       const itemSelect = listSaving[item]
       if (itemSelect) {

@@ -1,7 +1,7 @@
 /* eslint-disable array-callback-return */
 import React, { useMemo, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View, ActivityIndicator } from 'react-native'
 import I18n from 'i18n-js'
 import _ from 'lodash'
 import { Helpers, Metrics, Colors } from '../../../theme'
@@ -64,7 +64,9 @@ const styles = StyleSheet.create({
 
 const CloseODScreen = () => {
   const dispatch = useDispatch()
-  const { registedInfo, prepareData, prepareError } = useSelector((state) => state.overdraft)
+  const { registedInfo, prepareData, prepareError, registedInfoError } = useSelector(
+    (state) => state.overdraft
+  )
   const { odAccount, odTier } = registedInfo || {}
   const { accountInString, overdraftLimit, accruedInterestOverdraf, ledgerBalance } =
     odAccount || {}
@@ -72,10 +74,25 @@ const CloseODScreen = () => {
   const [loading, setLoading] = useState(false)
   const [checked, setCheck] = useState(true)
   const [listSelect, setListSelect] = useState({})
+  const [isShowError, setError] = useState(true)
 
   useEffect(() => {
+    setLoading(true)
     dispatch(odSavingOperations.getRegistedInfo())
   }, [])
+  useEffect(() => {
+    if (loading && !_.isEmpty(registedInfo)) {
+      setLoading(false)
+      setError(false)
+    }
+  }, [registedInfo])
+
+  useEffect(() => {
+    if (loading) {
+      setLoading(false)
+      setError(true)
+    }
+  }, [registedInfoError])
 
   useEffect(() => {
     if (loading && prepareData) {
@@ -185,60 +202,84 @@ const CloseODScreen = () => {
         background={Colors.mainBg}
         title={I18n.t('overdraft.fromOnlineSaving.title')}
       />
-      <ScrollView style={[Helpers.fill, styles.scrollView]}>
-        <View style={[styles.headerContainer]}>
-          {renderItemView('Tài khoản thấu chi', accountInString, false)}
-          {renderItemView('Hạn mức thấu chi', overdraftLimit)}
-          {renderItemView('Lãi suất', `${odTier ? odTier[0].odInterest : '-' || ''}%/năm`, false)}
-          {renderItemView('Dư nợ thấu chi', -ledgerBalance)}
-          {renderItemView('Lãi thấu chi dự thu', accruedInterestOverdraf, true, false)}
+      {loading && (
+        <View style={[Helpers.fill, styles.container, Helpers.center]}>
+          <ActivityIndicator
+            style={Helpers.mainCenter}
+            animating={loading}
+            color={Colors.primary2}
+            size="large"
+          />
         </View>
-        <View style={[styles.headerContainer, { paddingVertical: Metrics.medium }]}>
-          <Text style={{ paddingBottom: Metrics.tiny }}>Chọn hạn mức đóng</Text>
-          {odTier?.map((item, index) => renderItemLimit(item, index))}
-          <View style={styles.totalItem}>
-            <Text style={styles.totalLimit}>Dư nợ cần thanh toán</Text>
-            <AmountLabel
-              value={totalBl - totalLimit > 0 ? totalBl - totalLimit : 0}
-              currency="VND"
-              style={[styles.totalLimit, { color: Colors.primary2 }]}
+      )}
+      {!loading && isShowError && (
+        <View style={[Helpers.fill, styles.container]}>
+          <Text style={[Helpers.textCenter, { marginTop: Metrics.medium }]}>
+            {registedInfoError?.message}
+          </Text>
+        </View>
+      )}
+      {!loading && !isShowError && (
+        <ScrollView style={[Helpers.fill, styles.scrollView]}>
+          <View style={[styles.headerContainer]}>
+            {renderItemView('Tài khoản thấu chi', accountInString, false)}
+            {renderItemView('Hạn mức thấu chi', overdraftLimit)}
+            {renderItemView('Lãi suất', `${odTier ? odTier[0].odInterest : '-' || ''}%/năm`, false)}
+            {renderItemView('Dư nợ thấu chi', -ledgerBalance)}
+            {renderItemView('Lãi thấu chi dự thu', accruedInterestOverdraf, true, false)}
+          </View>
+          <View style={[styles.headerContainer, { paddingVertical: Metrics.medium }]}>
+            <Text style={{ paddingBottom: Metrics.tiny }}>Chọn hạn mức đóng</Text>
+            {odTier?.map((item, index) => renderItemLimit(item, index))}
+            <View style={styles.totalItem}>
+              <Text style={styles.totalLimit}>Dư nợ cần thanh toán</Text>
+              <AmountLabel
+                value={totalBl - totalLimit > 0 ? totalBl - totalLimit : 0}
+                currency="VND"
+                style={[styles.totalLimit, { color: Colors.primary2 }]}
+              />
+            </View>
+            <View style={styles.totalItem}>
+              <Text style={styles.totalLimit}>Hạn mức thấu chi còn lại</Text>
+              <AmountLabel
+                value={totalLimit}
+                currency="VND"
+                style={[styles.totalLimit, { color: Colors.primary2 }]}
+              />
+            </View>
+          </View>
+          <View style={[styles.headerContainer, styles.bottomContainer]}>
+            <Radio
+              size={Utils.getRatioDimension(18)}
+              style={[styles.checkBox]}
+              text="Không tất toán sổ tiết kiệm"
+              checked={checked}
+              onPress={() => {
+                setCheck(true)
+              }}
+            />
+            <Radio
+              style={[styles.checkBox]}
+              size={Utils.getRatioDimension(18)}
+              text="Đồng ý tất toán sổ tiết kiệm trực tuyến để thanh toán dư nợ thấu chi"
+              checked={!checked}
+              onPress={() => {
+                setCheck(false)
+              }}
+            />
+            <Note
+              text="Sổ tiết kiệm tất toán trước hạn sẽ hưởng lãi suất không kỳ hạn"
+              style={{ paddingHorizontal: Metrics.small }}
             />
           </View>
-          <View style={styles.totalItem}>
-            <Text style={styles.totalLimit}>Hạn mức thấu chi còn lại</Text>
-            <AmountLabel
-              value={totalLimit}
-              currency="VND"
-              style={[styles.totalLimit, { color: Colors.primary2 }]}
-            />
-          </View>
-        </View>
-        <View style={[styles.headerContainer, styles.bottomContainer]}>
-          <Radio
-            size={Utils.getRatioDimension(18)}
-            style={[styles.checkBox]}
-            text="Không tất toán sổ tiết kiệm"
-            checked={checked}
-            onPress={() => {
-              setCheck(true)
-            }}
-          />
-          <Radio
-            style={[styles.checkBox]}
-            size={Utils.getRatioDimension(18)}
-            text="Đồng ý tất toán sổ tiết kiệm trực tuyến để thanh toán dư nợ thấu chi"
-            checked={!checked}
-            onPress={() => {
-              setCheck(false)
-            }}
-          />
-          <Note
-            text="Sổ tiết kiệm tất toán trước hạn sẽ hưởng lãi suất không kỳ hạn"
-            style={{ paddingHorizontal: Metrics.small }}
-          />
-        </View>
-      </ScrollView>
-      <ConfirmButton loading={loading} onPress={onConfirm} />
+        </ScrollView>
+      )}
+      <ConfirmButton
+        loading={loading}
+        onPress={onConfirm}
+        disabled={isShowError}
+        color={!isShowError ? Colors.primary2 : Colors.gray5}
+      />
     </>
   )
 }

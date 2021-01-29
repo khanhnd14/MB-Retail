@@ -976,6 +976,7 @@ export default {
     uri: 'overdraft/getRegistedInfo',
     cache: true,
     cacheOptions: { interval: 1 },
+    hideError: true
   },
   overdraftPrepareClose: {
     id: 'overdraftPrepareClose',
