@@ -140,7 +140,10 @@ import {
   MessageScreen,
   MessageDetail,
   CommentScreen,
-  SendComment
+  SendComment,
+  CloseODSelect,
+  CloseODVerify,
+  CloseODSuccess
 } from '../screens'
 import { withAuthentication } from '../enhancers'
 
@@ -322,8 +325,10 @@ const routes = {
   CreateODVerify: { name: 'CreateODVerify', component: withAuthentication(CreateODVerify) },
   CreateODSuccessScreen: { name: 'CreateODSuccessScreen', component: withAuthentication(CreateODSuccessScreen) },
   CloseODScreen: { name: 'CloseODScreen', component: withAuthentication(CloseODScreen) },
-  
-  
+  CloseODSelect: { name: 'CloseODSelect', component: withAuthentication(CloseODSelect) },
+  CloseODVerify: { name: 'CloseODVerify', component: withAuthentication(CloseODVerify) },
+  CloseODSuccess: { name: 'CloseODSuccess', component: (CloseODSuccess) },
+
   // softtoken
   SoftTokenOTP: { name: 'SoftTokenOTP', component: SoftTokenOTP },
   SoftTokenScanQr: { name: 'SoftTokenScanQr', component: SoftTokenScanQr },

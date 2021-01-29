@@ -1,25 +1,34 @@
 import * as React from 'react'
 import { useState, Fragment, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { StyleSheet, View, ImageBackground, Image, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  ImageBackground,
+  Image,
+  SafeAreaView,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native'
 import I18n from 'i18n-js'
-import { ScrollView } from 'react-native-gesture-handler';
+import { ScrollView } from 'react-native-gesture-handler'
+import HTML from 'react-native-render-html'
+import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils'
 import { Helpers, Metrics, Colors, ApplicationStyles, Images } from '../../../theme'
 import { Text, ConfirmButton, Verify, Topbar, Loader } from '../../../components'
 import * as Navigation from '../../../navigation'
 import { productOperations } from '../../../state/product'
 import { Utils } from '../../../utilities'
-import HTML from 'react-native-render-html';
-import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils';
 import { odSavingOperations } from '../../../state/overdraftSaving'
-
 
 const CreateODVerify = () => {
   const reset = () => {
     // console.log('goi reset data o day');
   }
   const dispatch = useDispatch()
-  const { sendOTPOnly, completeRegister, completeRegisterError } = useSelector((state) => state.overdraft)
+  const { sendOTPOnly, completeRegister, completeRegisterError } = useSelector(
+    (state) => state.overdraft
+  )
   // const [checked, setCheck] = useState(false)
   const [loading, setLoading] = useState(false)
   const [isSetup, setIsSetup] = useState(false)
@@ -31,15 +40,15 @@ const CreateODVerify = () => {
         Navigation.popToPop()
         Navigation.push('CreateODSuccessScreen', {
           title: 'CreateODSuccessScreen',
-redoTransaction: 'ODServiceScreen',
-          onSwitchTransaction: reset
+          redoTransaction: 'ODServiceScreen',
+          onSwitchTransaction: reset,
         })
       } else {
         Navigation.popToPop()
         Navigation.push('Failed', {
           title: 'CreateODSuccessScreen',
-redoTransaction: 'ODServiceScreen',
-          onSwitchTransaction: reset
+          redoTransaction: 'ODServiceScreen',
+          onSwitchTransaction: reset,
         })
       }
     }
@@ -52,7 +61,7 @@ redoTransaction: 'ODServiceScreen',
       Navigation.push('Failed', {
         title: 'CreateODSuccessScreen',
         redoTransaction: 'ODServiceScreen',
-        onSwitchTransaction: reset
+        onSwitchTransaction: reset,
       })
     }
   }, [completeRegisterError])

@@ -572,12 +572,12 @@ const SettingScreen = () => {
             title={I18n.t('investigate.title')}
             onSelectItem={onMessage}
           />
-          <ItemSetting
+          {/* <ItemSetting
             style={styles.line}
             icon="icon-hoidap"
             title={I18n.t('investigate.title2')}
             onSelectItem={onComment}
-          />
+          /> */}
           <ItemSetting
             icon="setting_employee"
             title={I18n.t('action.action_reactive')}
@@ -596,12 +596,12 @@ const SettingScreen = () => {
             title={I18n.t('overdraft.title')}
             onSelectItem={() => overdraft()}
           />
-          <ItemSetting
+          {/* <ItemSetting
             style={styles.line}
             icon="napthe"
             title={I18n.t('opencard.title')}
             onSelectItem={() => openCard()}
-          />
+          /> */}
           <View style={[Helpers.fullWidth, Helpers.center, { padding: Metrics.normal }]}>
             <Text style={{ color: Colors.primary2 }}>
               {I18n.t('application.version')} {version}

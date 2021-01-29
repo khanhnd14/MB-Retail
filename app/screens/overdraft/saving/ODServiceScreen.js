@@ -34,18 +34,16 @@ const styles = StyleSheet.create({
 const ODServiceScreen = () => {
   // const dispatch = useDispatch()
 
-
   // React.useEffect(() => {
 
   // }, [])
 
-  let routeParam = {
+  const routeParam = {
     redoTransaction: 'CreditScreen',
     // onSwitchTransaction: reset
   }
   const reset = () => {
     console.log('goi reset data o day');
-    
   }
 
   // Navigation.push('Failed', {
@@ -63,10 +61,7 @@ const ODServiceScreen = () => {
             leftColor={Colors.yellow}
           />
           <MenuItem
-            onPress={() => Navigation.push('CreateODSuccessScreen', {
-              redoTransaction: 'ODServiceScreen',
-              onSwitchTransaction: reset
-            })}
+            onPress={() => Navigation.push('CloseODScreen')}
             text={I18n.t('overdraft.fromOnlineSaving.closeScreenTitle')}
             leftColor={Colors.yellow}
           />

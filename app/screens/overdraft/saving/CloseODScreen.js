@@ -1,320 +1,285 @@
-import React, { Fragment, useRef, useMemo, useEffect } from 'react'
+/* eslint-disable array-callback-return */
+import React, { useMemo, useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ScrollView, StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback } from 'react-native'
+import { ScrollView, StyleSheet, View, ActivityIndicator } from 'react-native'
 import I18n from 'i18n-js'
-import { Helpers, Metrics, Colors, ApplicationStyles } from '../../../theme'
-import { Topbar, Toast, Text, AmountLabel, Loader, SelectAccount, DatePicker, ModalSelect, ConfirmButton } from '../../../components'
+import _ from 'lodash'
+import { Helpers, Metrics, Colors } from '../../../theme'
+import { Topbar, Radio, Text, AmountLabel, ConfirmButton } from '../../../components'
 import * as Navigation from '../../../navigation'
-import { productOperations } from '../../../state/product'
-import { SelectFDCollatComponent, SelectPurpose } from '../../../components/Overdraft'
 import Note from '../../../components/SaveMoney/Note'
 import { odSavingOperations } from '../../../state/overdraftSaving'
-import moment from 'moment'
+import { Utils } from '../../../utilities'
 
 const styles = StyleSheet.create({
   scrollView: {
     paddingHorizontal: Metrics.medium,
+    marginBottom: Metrics.small,
   },
   container: {
     backgroundColor: Colors.white,
     height: '100%',
   },
-  title: { fontWeight: 'bold', fontSize: 13, color: Colors.primary2, paddingVertical: 5 },
-  lineItem: {
-    borderBottomColor: Colors.lineSep,
+  itemView: {
+    paddingVertical: Utils.getRatioDimension(9),
+    borderBottomColor: Colors.line,
     borderBottomWidth: 1,
-    marginHorizontal: Metrics.medium,
-    paddingVertical: Metrics.small,
-    height: 70,
-    justifyContent: 'center'
-  },
-  noteView: {
     flexDirection: 'row',
     alignItems: 'center',
-    flex: 1,
-    borderBottomWidth: 0
+    justifyContent: 'space-between',
   },
-  noteText: {
-    fontSize: 10,
-    paddingLeft: 10,
-    color: Colors.gray,
+  headerContainer: {
+    paddingHorizontal: Utils.getRatioDimension(17),
+    backgroundColor: Colors.white,
+    marginBottom: Metrics.small,
   },
-  readOnlyText: {
-    color: Colors.gray, paddingVertical: 5
+  bottomContainer: {
+    borderBottomRightRadius: 8,
+    borderBottomLeftRadius: 9,
+    paddingVertical: Metrics.tiny,
   },
-  datePicker: {
-    flex: 1
+  checkBox: {
+    paddingVertical: Metrics.tiny,
   },
-  textDetail: {
-    color: Colors.primary2
-  }
+  limit: {
+    fontWeight: '600',
+    fontSize: 16,
+    paddingVertical: Utils.getRatioDimension(13),
+  },
+  titleLimit: {
+    fontSize: 12,
+    color: Colors.primary2,
+    paddingBottom: Metrics.tiny,
+    fontWeight: '600',
+  },
+  totalLimit: {
+    fontWeight: '600',
+  },
+  totalItem: {
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    marginTop: Utils.getRatioDimension(8),
+  },
 })
 
 const CloseODScreen = () => {
   const dispatch = useDispatch()
-  const { creationInfo, getPaymentAccount, listTCType, purposeList, sendOTPRegister } = useSelector((state) => state.overdraft)
-  const [, setTotalTSDB] = React.useState(0)
-  const [odLimit, setOdLimit] = React.useState(0)
-  const [fDList, setFDList] = React.useState(0)
-  const [startDate, setStartDate] = React.useState(null)
-  const [endDate, setEndDate] = React.useState(null)
-  const [minDate, setMinDate] = React.useState(null)
-  const [maxDate, setMaxDate] = React.useState(null)
-  const [paymentAccount, setPaymentAccount] = React.useState(null)
-  const [selectedPurpose, setSelectedPurpose] = React.useState(null)
-  const [noteVisible, setNoteVisible] = React.useState(false)
-  const [collatData, setCollatData] = React.useState(false)
-  const [loading, setLoading] = React.useState(false)
-  const [isSetup, setIsSetup] = React.useState(false)
-  const momentFormat = 'DD/MM/YYYY'
-  const note = useMemo(() =>
-    'Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ', [])
-  const refToast = useRef(null)
+  const { registedInfo, prepareData, prepareError, registedInfoError } = useSelector(
+    (state) => state.overdraft
+  )
+  const { odAccount, odTier } = registedInfo || {}
+  const { accountInString, overdraftLimit, accruedInterestOverdraf, ledgerBalance } =
+    odAccount || {}
 
-  const endDateCal = () => {
-    // let currentDate = new Date()
-    let minDate = moment().add(1, 'M').toDate();
-    let maxDate = moment().add(12, 'M').toDate();
-    setMinDate(minDate)
-    setMaxDate(maxDate)
-    setEndDate(maxDate)
-  }
+  const [loading, setLoading] = useState(false)
+  const [checked, setCheck] = useState(true)
+  const [listSelect, setListSelect] = useState({})
+  const [isShowError, setError] = useState(true)
 
-  React.useEffect(() => {
-    dispatch(odSavingOperations.creationInfo())
-    dispatch(odSavingOperations.getPaymentAccount())
-    dispatch(odSavingOperations.listTCType())
-    dispatch(odSavingOperations.purposeList())
-    setStartDate(moment().toDate())
-    endDateCal()
-  }, [])
-
-  React.useEffect(() => {
-    setCollatData(creationInfo)
-    if (creationInfo?.FDList) {
-      setFDList(creationInfo?.FDList)
-    }
-  }, [creationInfo])
-
-  React.useEffect(() => {
-    // console.log('purposeList', purposeList);
-    if (purposeList) {
-      setSelectedPurpose(purposeList[0])
-    }
-  }, [purposeList])
-
-  React.useEffect(() => {
-    if (getPaymentAccount) {
-      if (getPaymentAccount.isExistOD) {
-        const expiredDate = new Date(getPaymentAccount.expiredDate)
-        setMaxDate(expiredDate)
-        setEndDate(expiredDate)
-        // console.log('getPaymentAccount.accounts',getPaymentAccount.accounts);
-        setPaymentAccount(getPaymentAccount.accounts)// .accountInString
-      } else {
-        setPaymentAccount(getPaymentAccount?.accounts[0])
-        // console.log('getPaymentAccount',getPaymentAccount);
-      }
-
-    }
-  }, [getPaymentAccount])
-
-  
-
-  const completeFDSelected = (data, total, odl) => {
-    // console.log(data, total, odl);
-    setFDList(data.FDList)
-    setTotalTSDB(total)
-    setOdLimit(odl)
-    setCollatData(data)
-  }
-
-  const changeFromAccount = (accId) => {
-    // console.log(accId);
-    getPaymentAccount.accounts.forEach(element => {
-      if (element.acctNo == accId) {
-        setPaymentAccount(element)
-      }
-    });
-  }
-  const toggleFrqDatePicker = (date) => {
-    // console.log(date);
-    setEndDate(date)
-  }
-  const onSelectPurpose = (pp) => {
-    setSelectedPurpose(pp)
-  }
-  const handleSubmit = () => {
-    if (!odLimit) {
-      refToast.current.show(I18n.t('overdraft.fromOnlineSaving.error_odlimit_null'), 3000)
-      return
-    }
-    console.log('paymentAccount',paymentAccount);
-    
-    if (!paymentAccount) {
-      refToast.current.show(I18n.t('overdraft.fromOnlineSaving.error_ca_account_null'), 3000)
-      return
-    }
-
-    let fdListParam = ""
-    fDList.forEach(fd => {
-      if (fd.isSelected == true) {
-        fdListParam += fd.receiptNo + ","
-      }
-    });
-    if (fdListParam.length > 0) {
-      fdListParam = fdListParam.slice(0, -1)
-    }
-
-    // rolloutAcctNo: 11001011414192
-    // effectiveDate: 19/01/2021
-    // expireDate: 19/01/2022
-    // purpose: 41
-
-    let body = {
-      fdList: fdListParam,
-      rolloutAcctNo: paymentAccount.acctNo,
-      effectiveDate: moment(startDate).format(momentFormat),
-      expireDate: moment(endDate).format(momentFormat),
-      purpose: selectedPurpose.code,
-      notSendOTP: true
-    }
+  useEffect(() => {
     setLoading(true)
-    
-    dispatch(odSavingOperations.sendOTPRegister(body))
-  }
-
-  React.useEffect(() => {
-    setLoading(false)
-    // console.log('sendOTPRegister', sendOTPRegister);
-    if (isSetup && sendOTPRegister) {
-      setIsSetup(false)
-      Navigation.push('CreateODConfirm', { title: 'CreateODConfirm' })
+    dispatch(odSavingOperations.getRegistedInfo())
+  }, [])
+  useEffect(() => {
+    if (loading && !_.isEmpty(registedInfo)) {
+      setLoading(false)
+      setError(false)
     }
-  }, [sendOTPRegister])
+  }, [registedInfo])
 
-  
+  useEffect(() => {
+    if (loading) {
+      setLoading(false)
+      setError(true)
+    }
+  }, [registedInfoError])
 
-  if (creationInfo && getPaymentAccount && listTCType && purposeList) {
-    // console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
-  } else {
-    return null
+  useEffect(() => {
+    if (loading && prepareData) {
+      setLoading(false)
+      Navigation.push('CloseODVerify')
+    }
+  }, [prepareData])
+
+  useEffect(() => {
+    if (loading && prepareError) {
+      setLoading(false)
+    }
+  }, [prepareError])
+
+  const totalLimit = useMemo(() => {
+    let total = 0
+    odTier?.map((item, index) => {
+      if (!listSelect[item.seqNo]) {
+        total += item.drawLimit
+      }
+    })
+    return total
+  }, [listSelect, odTier])
+
+  const totalBl = useMemo(() => {
+    let total = 0
+    odTier?.map((item, index) => {
+      if (listSelect[item.seqNo]) {
+        total += item.ledgerBalance
+      }
+    })
+    const data = Object.keys(listSelect).filter((key) => listSelect[key])
+    if (data?.length === odTier?.length) {
+      total += accruedInterestOverdraf
+    }
+    return total
+  }, [listSelect, odTier])
+
+  const onConfirm = () => {
+    if (_.isEmpty(listSelect)) {
+      Utils.showToast('Vui lòng chọn hạn mức đóng')
+      return
+    }
+    const data = Object.keys(listSelect).filter((key) => listSelect[key])
+    if (_.isEmpty(data)) {
+      Utils.showToast('Vui lòng chọn hạn mức đóng')
+      return
+    }
+    const body = {}
+    data.map((item, index) => {
+      body[item] = []
+    })
+    if (checked) {
+      setLoading(true)
+      dispatch(odSavingOperations.selectedDataClose({ data: listSelect }))
+      dispatch(odSavingOperations.prepareClose({ data: JSON.stringify(body) }))
+    } else {
+      Navigation.push('CloseODSelect', {
+        listSelect,
+        totalbl: totalBl - totalLimit > 0 ? totalBl - totalLimit : 0,
+      })
+    }
   }
+  const onSelectItem = (item) => {
+    const list = {}
+    list[item.seqNo] = !listSelect[item.seqNo]
+    setListSelect({ ...listSelect, ...list })
+  }
+
+  const renderItemView = (title, value, isAmount = true, isBorder = true) => (
+    <View style={[styles.itemView, { borderBottomWidth: isBorder ? 1 : 0 }]}>
+      <Text>{title}</Text>
+      <Text style={[{ color: Colors.primary2 }]}>
+        {isAmount ? `${Utils.displayAmount(value)} VND` : value}
+      </Text>
+    </View>
+  )
+
+  const renderItemLimit = (item, index) => (
+    <View style={[styles.itemView, Helpers.row]} key={`${index}`}>
+      <Radio
+        size={Utils.getRatioDimension(18)}
+        checked={!!listSelect[item.seqNo]}
+        circle={false}
+        onPress={() => onSelectItem(item)}
+      />
+      <View style={Helpers.fill}>
+        <AmountLabel value={item.drawLimit} currency="VND" style={styles.limit} />
+        <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
+          <Text style={styles.titleLimit}>Dư nợ thấu chi</Text>
+          <Text style={styles.titleLimit}>
+            {I18n.t('overdraft.fromOnlineSaving.odInterestRate')}
+          </Text>
+        </View>
+        <View style={{ justifyContent: 'space-between', flexDirection: 'row' }}>
+          <AmountLabel value={item.ledgerBalance} currency="VND" />
+          <Text>{item.odInterest}%</Text>
+        </View>
+      </View>
+    </View>
+  )
+
   return (
     <>
-      <Topbar subTitle={I18n.t('overdraft.fromOnlineSaving.openScreenTitle')} background={Colors.mainBg} title={I18n.t('overdraft.fromOnlineSaving.title')} />
-      <ScrollView style={[Helpers.fill, styles.scrollView]}>
+      <Topbar
+        subTitle={I18n.t('overdraft.fromOnlineSaving.closeScreenTitle')}
+        background={Colors.mainBg}
+        title={I18n.t('overdraft.fromOnlineSaving.title')}
+      />
+      {loading && (
+        <View style={[Helpers.fill, styles.container, Helpers.center]}>
+          <ActivityIndicator
+            style={Helpers.mainCenter}
+            animating={loading}
+            color={Colors.primary2}
+            size="large"
+          />
+        </View>
+      )}
+      {!loading && isShowError && (
         <View style={[Helpers.fill, styles.container]}>
-
-          {/* chọn stk */}
-          <SelectFDCollatComponent data={collatData} onSubmit={completeFDSelected} />
-
-          {/* han muc thau chi */}
-          <View style={styles.lineItem}>
-            <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.overdraftLimit')}</Text>
-            <AmountLabel style={styles.readOnlyText} value={odLimit} currency={'VND'} />
-          </View>
-
-          {/* note */}
-          {/* <View style={[styles.lineItem, styles.noteView]}>
-            <Icon size={Metrics.tiny * 2} name="icon-internet" color={Colors.gray3} />
-            <View style={{}}>
-              <Text style={styles.noteText}>{I18n.t('overdraft.fromOnlineSaving.noteFSRN')}</Text>
-            </View>
-          </View> */}
-
-          {/* tai khoan thau chi */}
-          {creationInfo.odAccount
-            ? (
-              <View style={[styles.lineItem]}>
-                <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.odAccount')}</Text>
-                <Text style={styles.readOnlyText}>{creationInfo.odAccount?.accountInString}</Text>
-              </View>
-            ) : (
-              null
-            )
-          }
-
-          {/* lai thau chi */}
-          <View style={styles.lineItem}>
-            <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.odInterestRate')}</Text>
-            <Text style={styles.readOnlyText}>{creationInfo.laiSuatTC}{' '}{I18n.t('overdraft.fromOnlineSaving.percentYear')}</Text>
-          </View>
-
-          {/* chon ngay */}
-          <View style={{ flex: 1, flexDirection: 'row' }}>
-            <TouchableOpacity style={[styles.lineItem, { flex: 1 }]}>
-              <Text style={styles.textDetail}>{I18n.t('overdraft.fromOnlineSaving.effectiveDate')}</Text>
-              <DatePicker
-                dateStyle={styles.text}
-                style={{ flex: 1 }}
-                date={startDate}
-                disable="true"
-              />
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.lineItem, { flex: 1 }]}>
-              <Text style={styles.textDetail}>{I18n.t('overdraft.fromOnlineSaving.expireDate')}</Text>
-              <DatePicker
-                onPress={toggleFrqDatePicker}
-                dateStyle={styles.text}
-                style={{ flex: 1 }}
-                date={endDate}
-                minDate={minDate}
-                maxDate={maxDate}
-              />
-            </TouchableOpacity>
-          </View>
-
-          {/* ca account */}
-          {getPaymentAccount.isExistOD
-            ? (
-              <View style={[styles.lineItem]}>
-                <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.odAccount')}</Text>
-                <Text style={styles.readOnlyText}>{paymentAccount.accountInString}</Text>
-              </View>
-            ) : (
-              <SelectAccount onSelectRolloutAccountNo={changeFromAccount} data={getPaymentAccount.accounts} />
-            )
-          }
-
-          {/* purpose */}
-          <SelectPurpose data={purposeList} onSubmit={onSelectPurpose} />
+          <Text style={[Helpers.textCenter, { marginTop: Metrics.medium }]}>
+            {registedInfoError?.message}
+          </Text>
         </View>
-        {/* xem ghi chu */}
-        <View style={{ borderBottomLeftRadius: 10, borderBottomRightRadius: 10, backgroundColor: 'white', paddingBottom: 10 }}>
-          <Note onPress={() => {
-            setNoteVisible(true)
-          }} />
-          <ModalSelect
-            title={I18n.t('application.note')}
-            visible={noteVisible}
-            maxHeight={100}
-            handleModal={() => setNoteVisible(false)}
-          >
-            <View style={{ flex: 1, marginHorizontal: 16, justifyContent: 'center' }}>
-              <Text style={styles.itemText}>{note}</Text>
+      )}
+      {!loading && !isShowError && (
+        <ScrollView style={[Helpers.fill, styles.scrollView]}>
+          <View style={[styles.headerContainer]}>
+            {renderItemView('Tài khoản thấu chi', accountInString, false)}
+            {renderItemView('Hạn mức thấu chi', overdraftLimit)}
+            {renderItemView('Lãi suất', `${odTier ? odTier[0].odInterest : '-' || ''}%/năm`, false)}
+            {renderItemView('Dư nợ thấu chi', -ledgerBalance)}
+            {renderItemView('Lãi thấu chi dự thu', accruedInterestOverdraf, true, false)}
+          </View>
+          <View style={[styles.headerContainer, { paddingVertical: Metrics.medium }]}>
+            <Text style={{ paddingBottom: Metrics.tiny }}>Chọn hạn mức đóng</Text>
+            {odTier?.map((item, index) => renderItemLimit(item, index))}
+            <View style={styles.totalItem}>
+              <Text style={styles.totalLimit}>Dư nợ cần thanh toán</Text>
+              <AmountLabel
+                value={totalBl - totalLimit > 0 ? totalBl - totalLimit : 0}
+                currency="VND"
+                style={[styles.totalLimit, { color: Colors.primary2 }]}
+              />
             </View>
-          </ModalSelect>
-        </View>
-
-        {/* nut tiep tuc */}
-        <ConfirmButton
-          onPress={() => handleSubmit()}
-          style={{
-            paddingHorizontal: Metrics.small,
-            paddingBottom: Metrics.small,
-            paddingTop: Metrics.small
-          }}
-          color={Colors.primary2}
-          styleButton={{ width: '100%' }}
-          text={I18n.t('action.action_continue').toUpperCase()}
-          styleText={{
-            fontSize: 14,
-          }}
-        />
-      </ScrollView>
-      <Toast ref={refToast} position="bottom" />
-      <Loader modalVisible={loading} />
+            <View style={styles.totalItem}>
+              <Text style={styles.totalLimit}>Hạn mức thấu chi còn lại</Text>
+              <AmountLabel
+                value={totalLimit}
+                currency="VND"
+                style={[styles.totalLimit, { color: Colors.primary2 }]}
+              />
+            </View>
+          </View>
+          <View style={[styles.headerContainer, styles.bottomContainer]}>
+            <Radio
+              size={Utils.getRatioDimension(18)}
+              style={[styles.checkBox]}
+              text="Không tất toán sổ tiết kiệm"
+              checked={checked}
+              onPress={() => {
+                setCheck(true)
+              }}
+            />
+            <Radio
+              style={[styles.checkBox]}
+              size={Utils.getRatioDimension(18)}
+              text="Đồng ý tất toán sổ tiết kiệm trực tuyến để thanh toán dư nợ thấu chi"
+              checked={!checked}
+              onPress={() => {
+                setCheck(false)
+              }}
+            />
+            <Note
+              text="Sổ tiết kiệm tất toán trước hạn sẽ hưởng lãi suất không kỳ hạn"
+              style={{ paddingHorizontal: Metrics.small }}
+            />
+          </View>
+        </ScrollView>
+      )}
+      <ConfirmButton
+        loading={loading}
+        onPress={onConfirm}
+        disabled={isShowError}
+        color={!isShowError ? Colors.primary2 : Colors.gray5}
+      />
     </>
   )
 }

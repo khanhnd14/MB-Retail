@@ -112,8 +112,8 @@ const CreateOD = () => {
 
   const endDateCal = () => {
     // let currentDate = new Date()
-    let minDate = moment().add(1, 'M').toDate();
-    let maxDate = moment().add(12, 'M').toDate();
+    const minDate = moment().add(1, 'M').toDate();
+    const maxDate = moment().add(12, 'M').toDate();
     setMinDate(minDate)
     setMaxDate(maxDate)
     setEndDate(minDate)
@@ -136,7 +136,6 @@ const CreateOD = () => {
     }
   }, [creationInfo])
 
-
   React.useEffect(() => {
     // console.log('creationInfoError',creationInfoError);
     // let msg = creationInfoError.message
@@ -152,7 +151,7 @@ const CreateOD = () => {
   React.useEffect(() => {
     if (getPaymentAccount) {
       if (getPaymentAccount.isExistOD) {
-        let expiredDate = new Date(getPaymentAccount.expiredDate)
+        const expiredDate = new Date(getPaymentAccount.expiredDate)
         setMaxDate(expiredDate)
         setEndDate(expiredDate)
         console.log('React.useEffect getPaymentAccount');
@@ -163,8 +162,6 @@ const CreateOD = () => {
       }
     }
   }, [getPaymentAccount])
-
-  
 
   const completeFDSelected = (data, total, odl) => {
     console.log(data, total, odl);
@@ -371,7 +368,8 @@ const CreateOD = () => {
           <View style={{ borderBottomLeftRadius: 10, borderBottomRightRadius: 10, backgroundColor: 'white', paddingBottom: 10 }}>
             <Note onPress={() => {
               setNoteVisible(true)
-            }} />
+            }}
+            />
             <ModalSelect
               title={I18n.t('application.note')}
               visible={noteVisible}

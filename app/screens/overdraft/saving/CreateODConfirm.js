@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux'
 import { StyleSheet, View, ImageBackground, Image, SafeAreaView, TouchableOpacity, Dimensions } from 'react-native'
 import I18n from 'i18n-js'
 import { ScrollView } from 'react-native-gesture-handler';
+import HTML from 'react-native-render-html';
+import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils';
 import { Helpers, Metrics, Colors, ApplicationStyles, Images } from '../../../theme'
 import { Text, ConfirmButton, Radio, Topbar, Loader } from '../../../components'
 import * as Navigation from '../../../navigation'
 import { productOperations } from '../../../state/product'
 import { Utils } from '../../../utilities'
-import HTML from 'react-native-render-html';
-import { IGNORED_TAGS } from 'react-native-render-html/src/HTMLUtils';
 import { odSavingOperations } from '../../../state/overdraftSaving'
 
 const styles = StyleSheet.create({

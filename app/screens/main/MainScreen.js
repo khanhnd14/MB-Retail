@@ -1,12 +1,14 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-use-before-define */
 import React, { useEffect, useState, useCallback } from 'react'
-import { View, Platform, BackHandler,Alert } from 'react-native'
+import { View, Platform, BackHandler, Alert } from 'react-native'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useDispatch, useSelector } from 'react-redux'
 import EventEmitter from 'react-native-eventemitter'
 import { useFocusEffect } from '@react-navigation/native'
 import DeviceInfo from 'react-native-device-info'
 import { useBackHandler } from '@react-native-community/hooks'
+import Clipboard from '@react-native-community/clipboard';
 import { Helpers } from '../../theme'
 import MainTab from './MainTab'
 import HomeScreen from '../home/HomeScreen'
@@ -26,7 +28,6 @@ import MenuTranslate from '../intro/MenuTranslate'
 import { withAuthentication } from '../../enhancers'
 import { storeService } from '../../services'
 import UpdateVesion from './UpdateVesion'
-import Clipboard from '@react-native-community/clipboard';
 
 var isFocusScreen = false
 const MainScreen = () => {
@@ -92,7 +93,6 @@ const MainScreen = () => {
   }, [user])
 
   const updateNotifyId = async () => {
-    
     const fbToken = await storeService.getFireBaseId()
     // Clipboard.setString(fbToken)
     // Alert.alert(fbToken)

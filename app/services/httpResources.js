@@ -971,4 +971,21 @@ export default {
     cacheOptions: { interval: 1 },
     isGetFullResponse: true,
   },
+  getRegistedOverDraffInfo: {
+    id: 'getRegistedOverDraffInfo',
+    uri: 'overdraft/getRegistedInfo',
+    cache: true,
+    cacheOptions: { interval: 1 },
+    hideError: true
+  },
+  overdraftPrepareClose: {
+    id: 'overdraftPrepareClose',
+    uri: 'overdraft/prepareClose',
+  },
+  overdraftCompleteClose: {
+    id: 'overdraftCompleteClose',
+    uri: 'overdraft/completeClose',
+    isGetFullResponse: true,
+
+  },
 }
