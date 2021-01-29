@@ -293,6 +293,11 @@ export const completeClose = (body) => ({
   },
 })
 
+export const selectedDataClose = (body) => ({
+  type: types.DATA_CLOSE_COMPLETED,
+  payload: body
+})
+
 export const dispatchSchedule = (form) => (dispatch) => {
   dispatch({
     type: types.DISPATCH_SCHEDULE,

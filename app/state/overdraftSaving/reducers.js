@@ -22,6 +22,7 @@ const initialState = {
   prepareError: null,
   completeData: null,
   completeError: null,
+  selectedData: null,
 }
 
 export default function(state = initialState, action) {
@@ -152,6 +153,11 @@ export default function(state = initialState, action) {
         ...state,
         completeError: action.payload,
       }
+      case types.DATA_CLOSE_COMPLETED:
+        return {
+          ...state,
+          selectedData: action.payload,
+        }
 
     case appTypes.REACTIVE:
       return initialState

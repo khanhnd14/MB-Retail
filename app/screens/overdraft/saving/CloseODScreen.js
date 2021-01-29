@@ -66,12 +66,8 @@ const CloseODScreen = () => {
   const dispatch = useDispatch()
   const { registedInfo, prepareData, prepareError } = useSelector((state) => state.overdraft)
   const { odAccount, odTier } = registedInfo || {}
-  const {
-    accountInString,
-    overdraftLimit,
-    accruedInterestOverdraf,
-    ledgerBalance
-  } = odAccount || {}
+  const { accountInString, overdraftLimit, accruedInterestOverdraf, ledgerBalance } =
+    odAccount || {}
 
   const [loading, setLoading] = useState(false)
   const [checked, setCheck] = useState(true)
@@ -124,7 +120,6 @@ const CloseODScreen = () => {
       return
     }
     const data = Object.keys(listSelect).filter((key) => listSelect[key])
-    console.log('data:', data)
     if (_.isEmpty(data)) {
       Utils.showToast('Vui lòng chọn hạn mức đóng')
       return
@@ -135,12 +130,12 @@ const CloseODScreen = () => {
     })
     if (checked) {
       setLoading(true)
-      console.log('data:', body)
+      dispatch(odSavingOperations.selectedDataClose({ data: listSelect }))
       dispatch(odSavingOperations.prepareClose({ data: JSON.stringify(body) }))
     } else {
       Navigation.push('CloseODSelect', {
         listSelect,
-        totalbl: totalBl - totalLimit > 0 ? totalBl - totalLimit : 0
+        totalbl: totalBl - totalLimit > 0 ? totalBl - totalLimit : 0,
       })
     }
   }
@@ -237,7 +232,10 @@ const CloseODScreen = () => {
               setCheck(false)
             }}
           />
-          <Note text="Sổ tiết kiệm tất toán trước hạn sẽ hưởng lãi suất không kỳ hạn" />
+          <Note
+            text="Sổ tiết kiệm tất toán trước hạn sẽ hưởng lãi suất không kỳ hạn"
+            style={{ paddingHorizontal: Metrics.small }}
+          />
         </View>
       </ScrollView>
       <ConfirmButton loading={loading} onPress={onConfirm} />

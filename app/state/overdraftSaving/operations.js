@@ -10,7 +10,8 @@ import {
   openODInfo,
   getRegistedInfo,
   prepareClose,
-  completeClose
+  completeClose,
+  selectedDataClose
 } from './actions'
 
 export {
@@ -25,5 +26,6 @@ export {
   openODInfo,
   getRegistedInfo,
   prepareClose,
-  completeClose
+  completeClose,
+  selectedDataClose
 }

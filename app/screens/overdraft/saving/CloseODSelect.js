@@ -83,10 +83,10 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   line: {
-    marginHorizontal: Metrics.normal,
-    marginTop: Metrics.normal,
-    height: 1,
-    backgroundColor: Colors.line,
+    marginHorizontal: Metrics.tiny,
+    marginTop: Metrics.small,
+    borderTopWidth: 1,
+    borderTopColor: Colors.line,
   },
 })
 
@@ -99,10 +99,6 @@ const CloseODSelect = ({ route }) => {
   const [loading, setLoading] = useState(false)
   const [checked, setCheck] = useState(false)
   const [selects, setListSelect] = useState({})
-
-  useEffect(() => {
-    dispatch(odSavingOperations.getRegistedInfo())
-  }, [])
 
   useEffect(() => {
     if (loading && prepareData) {
@@ -129,9 +125,10 @@ const CloseODSelect = ({ route }) => {
 
   const totalSaving = useMemo(() => {
     let total = 0
-    listSaving?.map((item, index) => {
-      if (selects[item.receiptNo]) {
-        const { receiptInfo } = item
+    Object.keys(selects)?.map((item, index) => {
+      const itemSelect = selects[item]
+      if (itemSelect) {
+        const { receiptInfo } = itemSelect
         total += parseInt(
           receiptInfo.principal + receiptInfo.interestAmount - receiptInfo.penaltyAmount
         )
@@ -142,26 +139,28 @@ const CloseODSelect = ({ route }) => {
 
   const onSelectItem = (item) => {
     const list = {}
-    list[item.receiptNo] = !selects[item.receiptNo]
+    list[item.receiptNo] = selects[item.receiptNo] ? null : item
     setListSelect({ ...selects, ...list })
   }
 
   const onConfirm = () => {
-    if (_.isEmpty(listSelect)) {
+    if (_.isEmpty(selects)) {
+      Utils.showToast('Vui lòng chọn sổ')
+      return
+    }
+    const selected = Object.keys(selects).filter((key) => selects[key])
+    if (_.isEmpty(selected)) {
       Utils.showToast('Vui lòng chọn sổ')
       return
     }
     const data = Object.keys(listSelect).filter((key) => listSelect[key])
-    if (_.isEmpty(data)) {
-      Utils.showToast('Vui lòng chọn sổ')
-      return
-    }
     const body = {}
     data.map((item, index) => {
-      body[item] = Object.keys(selects).filter((key) => selects[key])
+      body[item] = Object.keys(selects).filter((key) => (selects[key].seqNo === item))
     })
     setLoading(true)
     dispatch(odSavingOperations.prepareClose({ data: JSON.stringify(body) }))
+    dispatch(odSavingOperations.selectedDataClose({ data: listSelect, listSaving: selects }))
   }
 
   const renderItemLimit = (item, index) => {
@@ -230,18 +229,18 @@ const CloseODSelect = ({ route }) => {
             />
           </View>
           <Note text="Số tiền tất toán sẽ được chuyển vào tài khoản thấu chi đã được đăng ký" />
-
-          <View style={styles.line} />
-          <Radio
-            size={Utils.getRatioDimension(18)}
-            style={[styles.checkBox]}
-            textStyle={styles.textCheckBox}
-            text="Đồng ý tất toán trước hạn và hưởng lãi suất không kỳ hạn"
-            checked={checked}
-            onPress={() => {
-              setCheck(!checked)
-            }}
-          />
+          <View style={styles.line}>
+            <Radio
+              size={Utils.getRatioDimension(18)}
+              style={[styles.checkBox]}
+              textStyle={styles.textCheckBox}
+              text="Đồng ý tất toán trước hạn và hưởng lãi suất không kỳ hạn"
+              checked={checked}
+              onPress={() => {
+                setCheck(!checked)
+              }}
+            />
+          </View>
         </View>
       </View>
 

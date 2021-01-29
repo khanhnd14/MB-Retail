@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
 })
 
-const Note = ({ onPress, text }) => {
+const Note = ({ onPress, text, style }) => {
   const onClicked = () => {
     if (onPress) {
       onPress()
@@ -28,15 +28,14 @@ const Note = ({ onPress, text }) => {
   }
 
   return (
-    <TouchableOpacity onPress={onClicked} style={styles.container}>
+    <TouchableOpacity onPress={onClicked} style={[styles.container, style]}>
       <MsbIcon size={Metrics.tiny * 2} name="icon-internet" color={Colors.gray3} />
-      <Text style={styles.note}>{text}</Text>
+      <Text style={styles.note}>{text || I18n.t('action.action_note')}</Text>
     </TouchableOpacity>
   )
 }
 
 Note.defaultProps = {
-  text: I18n.t('action.action_note')
 }
 
 Note.propTypes = {

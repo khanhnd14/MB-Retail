@@ -38,6 +38,8 @@ export const CLOSE = 'overdraft/CLOSE'
 export const CLOSE_COMPLETED = 'overdraft/CLOSE_COMPLETED'
 export const CLOSE_FAILED = 'overdraft/CLOSE_FAILED'
 
+export const DATA_CLOSE_COMPLETED = 'overdraft/DATA_CLOSE_COMPLETED'
+
 export const COMPLETE_TRANSACTION = 'overdraft/COMPLETE_TRANSACTION'
 export const OPEN_OD_INFO = 'overdraft/OPEN_OD_INFO'
 

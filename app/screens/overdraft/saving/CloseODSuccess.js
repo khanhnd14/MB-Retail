@@ -1,7 +1,10 @@
+/* eslint-disable radix */
+/* eslint-disable array-callback-return */
 /* eslint-disable react/destructuring-assignment */
-import React from 'react'
+import React, { useMemo } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { useSelector } from 'react-redux'
+import _ from 'lodash'
 import { Colors, Metrics, Helpers } from '../../../theme'
 import { Text, Success, AmountLabel, ConfirmButton } from '../../../components'
 import I18n from '../../../translations'
@@ -31,7 +34,7 @@ const styles = StyleSheet.create({
   },
   itemView: {
     paddingVertical: Utils.getRatioDimension(9),
-    borderBottomColor: Colors.line,
+    borderBottomColor: Colors.white,
     borderBottomWidth: 1,
     flexDirection: 'row',
     alignItems: 'center',
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
 })
 
 const CloseODSuccess = (props) => {
-  const { completeData, registedInfo } = useSelector((state) => state.overdraft)
+  const { completeData, registedInfo, selectedData } = useSelector((state) => state.overdraft)
   const { params } = props.route
   const { message } = completeData || {}
   const { odAccount, odTier } = registedInfo || {}
@@ -62,6 +65,52 @@ const CloseODSuccess = (props) => {
     holdAmount,
     interestRate,
   } = odAccount || {}
+  const { data, listSaving } = selectedData || {}
+
+  const closeTotalLimit = useMemo(() => {
+    let total = 0
+    odTier?.map((item, index) => {
+      if (data[item.seqNo]) {
+        total += item.drawLimit
+      }
+    })
+    return total
+  }, [data])
+
+  const totalLimit = useMemo(() => {
+    let total = 0
+    odTier?.map((item, index) => {
+      if (!data[item.seqNo]) {
+        total += item.drawLimit
+      }
+    })
+    return total
+  }, [data])
+
+  const totalSaving = useMemo(() => {
+    let total = 0
+    Object.keys(listSaving)?.map((item, index) => {
+      const itemSelect = listSaving[item]
+      if (itemSelect) {
+        const { receiptInfo } = itemSelect
+        total += parseInt(
+          receiptInfo.principal + receiptInfo.interestAmount - receiptInfo.penaltyAmount
+        )
+      }
+    })
+    return total
+  }, [listSaving])
+
+  const listItemSaving = useMemo(() => {
+    const list = []
+    Object.keys(listSaving)?.map((item, index) => {
+      const itemSelect = listSaving[item]
+      if (itemSelect) {
+        list.push(itemSelect)
+      }
+    })
+    return list
+  }, [listSaving])
 
   const renderItemLimit = (title, value, isAmount = true, isBorder = true) => (
     <View style={[styles.itemView]}>
@@ -79,18 +128,20 @@ const CloseODSuccess = (props) => {
         textButton={I18n.t('overdraft.btn_end')}
         message={message}
       >
-        {/* <View style={[Helpers.fullWidth]}>
+        <View style={[Helpers.fullWidth]}>
           {renderItemLimit('Tài khoản thấu chi', accountInString, false)}
-          {renderItemLimit('Đóng hạn mức thấu chi', 100000000)}
-          {renderItemLimit('Hạn mức thấu chi còn lại', 0)}
-          <Text style={[styles.itemText, styles.itemTitle]}>
-            Sổ tiết kiệm đã tất toán
-          </Text>
-          {renderItemLimit('030-20-18-542381-3', 100000000)}
-          {renderItemLimit('030-20-18-542381-3', 100000000)}
-          {renderItemLimit('030-20-18-542381-3', 100000000)}
-          {renderItemLimit('Tổng số tiền tất toán', 100000000)}
-        </View> */}
+          {renderItemLimit('Đóng hạn mức thấu chi', closeTotalLimit)}
+          {renderItemLimit('Hạn mức thấu chi còn lại', totalLimit)}
+          {!_.isEmpty(listItemSaving) && (
+            <View style={[Helpers.fullWidth]}>
+              <Text style={[styles.itemText, styles.itemTitle]}>Sổ tiết kiệm đã tất toán</Text>
+              {listItemSaving.map((item, index) =>
+                renderItemLimit(item.receiptInfo.receiptNoInString, item.principal)
+              )}
+              {renderItemLimit('Tổng số tiền tất toán', totalSaving, false)}
+            </View>
+          )}
+        </View>
       </Success>
     </>
   )
