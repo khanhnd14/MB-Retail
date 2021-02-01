@@ -17,7 +17,7 @@ export const sendOTPVerify = (mobile, deviceId = Utils.getUserDeviceID(), client
     clientTime,
     requestId,
     version: DeviceInfo.getVersion(),
-    osName:Platform.OS
+    osName: Platform.OS
   };
 
   dispatch({
