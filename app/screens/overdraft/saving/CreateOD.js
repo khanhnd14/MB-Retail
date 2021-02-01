@@ -49,8 +49,8 @@ const styles = StyleSheet.create({
     color: Colors.primary2
   },
   containerAlert: {
-    minHeight: Metrics.small * 23.2,
-    width: Metrics.small * 29.6,
+    minHeight: Metrics.small * 25,
+    width: Metrics.small * 30,
     backgroundColor: Colors.white,
     alignSelf: 'center',
     borderRadius: 10,
