@@ -138,7 +138,10 @@ const CloseODSuccess = (props) => {
             <View style={[Helpers.fullWidth]}>
               <Text style={[styles.itemText, styles.itemTitle]}>Sổ tiết kiệm đã tất toán</Text>
               {listItemSaving.map((item, index) =>
-                renderItemLimit(item.receiptInfo.receiptNoInString, item.principal)
+                renderItemLimit(
+                  item.receiptInfo.receiptNoInString,
+                  parseInt(item.principal + item.interestAmount - item.penaltyAmount)
+                )
               )}
               {renderItemLimit('Tổng số tiền tất toán', totalSaving, true, false)}
             </View>

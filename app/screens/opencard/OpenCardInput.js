@@ -192,7 +192,7 @@ const OpenCardInput = ({ route }) => {
           size="small"
           onToggle={(val) => {
             if (val && _.isEmpty(rolloutAcc)) {
-              Utils.showToast(I18n.t('opencard.empty_account'))
+              Utils.toast(I18n.t('opencard.empty_account'))
               return
             }
             setAuto(val)
