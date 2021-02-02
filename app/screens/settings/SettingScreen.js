@@ -64,7 +64,7 @@ const SettingScreen = () => {
   const avatarRef = useRef(null)
   const user = useSelector((state) => state.user)
   const { fullName, securityTypeMB, loginSecurityType, isOpenSMS } = user || {}
-  const { otpVerifyComplete, otpVerifyError } = useSelector((state) => state.setting)
+  const { otpVerifyComplete, otpVerifyError, loadingOffSms } = useSelector((state) => state.setting)
   const { isTimeout } = useSelector((state) => state.application)
   const [loading, setLoading] = useState(false)
   const { language } = useSelector((state) => state.application)
@@ -79,6 +79,14 @@ const SettingScreen = () => {
       Navigation.push('SettingVerifyOTP')
     }
   }, [otpVerifyComplete])
+
+  useEffect(() => {
+    if (loadingOffSms) {
+      Utils.showLoading()
+    } else {
+      Utils.hideLoading()
+    }
+  }, [loadingOffSms])
 
   useEffect(() => {
     if (loading) {
@@ -262,9 +270,6 @@ const SettingScreen = () => {
       Utils.confirm(I18n.t('application.title_confirm'), I18n.t('setting.sms_on_notify'), () => {
         Utils.showLoading()
         dispatch(userOperations.changeNotifyStatus({ isOn: true }))
-        setTimeout(() => {
-          Utils.hideLoading()
-        }, 300)
       })
     }
   }
@@ -275,9 +280,6 @@ const SettingScreen = () => {
       Utils.confirm(I18n.t('application.title_confirm'), I18n.t('setting.sms_off_notify'), () => {
         Utils.showLoading()
         dispatch(userOperations.changeNotifyStatus({ isOn: false }))
-        setTimeout(() => {
-          Utils.hideLoading()
-        }, 300)
       })
     }
   }

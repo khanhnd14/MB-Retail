@@ -1,5 +1,6 @@
 import * as types from './types'
 import * as appTypes from '../application/types'
+import * as userTypes from '../user/types'
 
 const initialState = {
   securityList: [],
@@ -28,6 +29,8 @@ const initialState = {
   // change securitytype
   changeSecurity: null,
   changeSecurityError: null,
+
+  loadingOffSms: false,
 }
 
 export default function(state = initialState, action) {
@@ -163,6 +166,23 @@ export default function(state = initialState, action) {
         ...state,
         changeSecurityError: action.payload,
       }
+    case userTypes.CHANGE_NOTIFY_STATUS_COMPLETED:
+      return {
+        ...state,
+        isOpenSMS: action.meta.body.isOn === true ? 'Y' : 'N',
+        loadingOffSms: false,
+      }
+    case userTypes.CHANGE_NOTIFY_STATUS_FAILED:
+      return {
+        ...state,
+        loadingOffSms: false,
+      }
+    case userTypes.CHANGE_NOTIFY_STATUS:
+      return {
+        ...state,
+        loadingOffSms: true,
+      }
+
     case appTypes.REACTIVE:
       return initialState
     default:
