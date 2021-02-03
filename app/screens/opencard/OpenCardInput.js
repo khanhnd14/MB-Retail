@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     paddingVertical: Utils.getRatioDimension(8),
   },
   content: {
-    color: '#15181B',
+    color: '#81838A',
     paddingVertical: Utils.getRatioDimension(8),
   },
   contentBold: {
@@ -97,6 +97,9 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: '#171D33',
   },
+  disableText: {
+    color: '#81838A'
+  }
 })
 
 const OpenCardInput = ({ route }) => {
@@ -187,7 +190,13 @@ const OpenCardInput = ({ route }) => {
           onColor={Colors.primary}
           offColor={Colors.gray}
           size="small"
-          onToggle={(val) => setAuto(val)}
+          onToggle={(val) => {
+            if (val && _.isEmpty(rolloutAcc)) {
+              Utils.toast(I18n.t('opencard.empty_account'))
+              return
+            }
+            setAuto(val)
+          }}
         />
       </View>
       {auto && (
@@ -212,14 +221,16 @@ const OpenCardInput = ({ route }) => {
               setFullPayment(false)
             }}
           />
-          <SelectAccount
-            style={{
-              paddingHorizontal: 0,
-            }}
-            title={I18n.t('opencard.account_title')}
-            data={rolloutAcc || []}
-            onSelectRolloutAccountNo={onSelectRolloutAccountNo}
-          />
+          {!_.isEmpty(rolloutAcc) && (
+            <SelectAccount
+              style={{
+                paddingHorizontal: 0,
+              }}
+              title={I18n.t('opencard.account_title')}
+              data={rolloutAcc || []}
+              onSelectRolloutAccountNo={onSelectRolloutAccountNo}
+            />
+          )}
         </View>
       )}
     </View>
@@ -253,7 +264,7 @@ const OpenCardInput = ({ route }) => {
             <View style={styles.element}>
               <Text style={[styles.title]}>{I18n.t('opencard.request_limit')}</Text>
               <AmountInputText
-                style={[styles.content, { color: '#15181B' }]}
+                style={[styles.content, { color: typeCreditCardMax === '1' ? '#81838A' : '#15181B' }]}
                 value={amountInput}
                 defaultVal={Utils.formatAmountText(amountInput)}
                 rightText="VND"
@@ -278,7 +289,7 @@ const OpenCardInput = ({ route }) => {
                 {I18n.t('opencard.sec_question')}
               </Text>
               <TextInput
-                style={[styles.content]}
+                style={[styles.content, { color: _.isEmpty(securityName) ? '#15181B' : '#81838A' }]}
                 value={answer}
                 placeholder={I18n.t('opencard.sec_question_holder')}
                 placeholderTextColor="#81838A"

@@ -1095,7 +1095,8 @@
     "max_amount":"Hạn mức yêu cầu lớn hơn hạn mức tối đa. Quý khách vui lòng nhập lại",
     "min_amount":"Hạn mức tối thiểu là {0} đồng. Quý khách vui lòng nhập lại",
     "open_fee":"Phí mở thẻ",
-    "card_fee":"Phí thường niên"
+    "card_fee":"Phí thường niên",
+    "empty_account":"Quý khách không có tài khoản trích nợ. Vui lòng tắt tính năng trích nợ tự động."
   },
   "investigate":{
     "title":"Tra soát",
