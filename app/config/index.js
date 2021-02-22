@@ -1,7 +1,7 @@
 export const Config = {
-  // API_URL: 'https://ebank.msb.com.vn/IBSRetail/', // product
+  API_URL: 'https://ebank.msb.com.vn/IBSRetail/', // product
   // API_URL: 'https://ebank.msb.com.vn/IBSRetailMobile/',
-  API_URL: 'http://10.0.2.51:8080/IBS-Retail-Web/', // UAT
+  // API_URL: 'http://10.0.2.51:8080/IBS-Retail-Web/', // UAT
   // API_URL: 'http://10.2.216.230:8080/IBSRetail/', // Local
   // API_URL: "http://10.2.206.116:8082/IBSRetail/", // Local
   // API_URL: 'http://118.70.157.239:8080/IBS-Retail-Web/',
