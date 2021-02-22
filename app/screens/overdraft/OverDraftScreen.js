@@ -96,7 +96,7 @@ const OverDraftScreen = () => {
     flagOdLmAmountOnline,
   } = initData || {}
   const [loading, setLoading] = useState(false)
-  const [checked, setCheck] = useState(true)
+  const [checked, setCheck] = useState(false)
   const [listPurpose, setListPurPose] = useState([])
   const [listAccount, setListAccount] = useState([])
   const [purpose, setPurpose] = useState({})
