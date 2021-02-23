@@ -1099,7 +1099,9 @@
     "max_amount":"Limit exceeds maximum granting limit",
     "min_amount":"Limit is lower than minimum granting limit ({0})",
     "open_fee":"Card opening fee",
-    "card_fee":"Annual card fee"
+    "card_fee":"Annual card fee",
+    "empty_account":"Quý khách không có tài khoản trích nợ. Vui lòng tắt tính năng trích nợ tự động."
+
   },
   "investigate":{
     "title":"Investigate",

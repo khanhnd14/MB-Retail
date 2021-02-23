@@ -72,24 +72,25 @@ const CloseODScreen = () => {
     odAccount || {}
 
   const [loading, setLoading] = useState(false)
+  const [loadata, setLoadData] = useState(false)
   const [checked, setCheck] = useState(true)
   const [listSelect, setListSelect] = useState({})
   const [isShowError, setError] = useState(true)
 
   useEffect(() => {
-    setLoading(true)
+    setLoadData(true)
     dispatch(odSavingOperations.getRegistedInfo())
   }, [])
   useEffect(() => {
-    if (loading && !_.isEmpty(registedInfo)) {
-      setLoading(false)
+    if (loadata && !_.isEmpty(registedInfo)) {
+      setLoadData(false)
       setError(false)
     }
   }, [registedInfo])
 
   useEffect(() => {
-    if (loading) {
-      setLoading(false)
+    if (loadata) {
+      setLoadData(false)
       setError(true)
     }
   }, [registedInfoError])
@@ -202,30 +203,30 @@ const CloseODScreen = () => {
         background={Colors.mainBg}
         title={I18n.t('overdraft.fromOnlineSaving.title')}
       />
-      {loading && (
+      {loadata && (
         <View style={[Helpers.fill, styles.container, Helpers.center]}>
           <ActivityIndicator
             style={Helpers.mainCenter}
-            animating={loading}
+            animating={loadata}
             color={Colors.primary2}
             size="large"
           />
         </View>
       )}
-      {!loading && isShowError && (
+      {!loadata && isShowError && (
         <View style={[Helpers.fill, styles.container]}>
           <Text style={[Helpers.textCenter, { marginTop: Metrics.medium }]}>
             {registedInfoError?.message}
           </Text>
         </View>
       )}
-      {!loading && !isShowError && (
+      {!loadata && !isShowError && (
         <ScrollView style={[Helpers.fill, styles.scrollView]}>
           <View style={[styles.headerContainer]}>
             {renderItemView('Tài khoản thấu chi', accountInString, false)}
             {renderItemView('Hạn mức thấu chi', overdraftLimit)}
             {renderItemView('Lãi suất', `${odTier ? odTier[0].odInterest : '-' || ''}%/năm`, false)}
-            {renderItemView('Dư nợ thấu chi', -ledgerBalance)}
+            {renderItemView('Dư nợ thấu chi', ledgerBalance > 0 ? 0 : -ledgerBalance)}
             {renderItemView('Lãi thấu chi dự thu', accruedInterestOverdraf, true, false)}
           </View>
           <View style={[styles.headerContainer, { paddingVertical: Metrics.medium }]}>

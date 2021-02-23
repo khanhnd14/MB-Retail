@@ -115,7 +115,7 @@ const CloseODSuccess = (props) => {
   }, [listSaving])
 
   const renderItemLimit = (title, value, isAmount = true, isBorder = true) => (
-    <View style={[styles.itemView]}>
+    <View style={[styles.itemView, { borderBottomWidth: isBorder ? 1 : 0 }]}>
       <Text style={[styles.itemText, { fontWeight: '600' }]}>{title}</Text>
       <Text style={styles.itemText}>{isAmount ? `${Utils.displayAmount(value)} VND` : value}</Text>
     </View>
@@ -138,7 +138,14 @@ const CloseODSuccess = (props) => {
             <View style={[Helpers.fullWidth]}>
               <Text style={[styles.itemText, styles.itemTitle]}>Sổ tiết kiệm đã tất toán</Text>
               {listItemSaving.map((item, index) =>
-                renderItemLimit(item.receiptInfo.receiptNoInString, item.principal)
+                renderItemLimit(
+                  item.receiptInfo.receiptNoInString,
+                  parseInt(
+                    item.receiptInfo.principal +
+                      item.receiptInfo.interestAmount -
+                      item.receiptInfo.penaltyAmount
+                  )
+                )
               )}
               {renderItemLimit('Tổng số tiền tất toán', totalSaving, true, false)}
             </View>
