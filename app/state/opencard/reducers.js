@@ -14,10 +14,28 @@ const initialState = {
   listDistrict: [],
   listBranch: [],
   branch: null,
+  mPlusAppLink: null,
+  mPlusAppLinkError: null
 }
 
 export default function(state = initialState, action) {
   switch (action.type) {
+    case types.GET_MPLUS_APP_LINK:
+      return {
+        ...state,
+        mPlusAppLink: null,
+        mPlusAppLinkError: null
+      }
+    case types.GET_MPLUS_APP_LINK_COMPLETED:
+      return {
+        ...state,
+        mPlusAppLink: action.payload,
+      }
+    case types.GET_MPLUS_APP_LINK_FAILED:
+      return {
+        ...state,
+        mPlusAppLinkError: action.payload,
+      }
     case types.GET_LIST_INFO_COMPLETED:
       return {
         ...state,

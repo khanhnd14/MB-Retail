@@ -46,8 +46,9 @@ const SelectPurpose = ({ data, onSubmit }) => {
   const [isVisible, setVisible] = React.useState(false)
   const [selectedPurpose, setSelectedPurpose] = React.useState(null)
   React.useEffect(() => {
-    // console.log('data',data,onSubmit);
+    console.log('data', data);
     if (data && data.length) {
+      console.log('data[0]', data[0]);
       setSelectedPurpose(data[0])
     }
   }, [])
@@ -57,7 +58,6 @@ const SelectPurpose = ({ data, onSubmit }) => {
     onSubmit(pp)
     setVisible(false)
   }
-
   return (
     <>
       <TouchableOpacity style={styles.container} onPress={() => setVisible(true)}>

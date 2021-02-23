@@ -90,6 +90,11 @@ export default function(state = initialState, action) {
         ...state,
         purposeList: action.payload,
       }
+    case types.PURPOSE_LIST:
+        return {
+          ...state,
+          purposeList: null,
+        }
     case types.CREATION_INFO_FAILED:
       return {
         ...state,
