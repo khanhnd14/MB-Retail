@@ -5,7 +5,7 @@ import I18n from 'i18n-js'
 import Modal from 'react-native-modal'
 import moment from 'moment'
 import { Helpers, Metrics, Colors } from '../../../theme'
-import { Topbar, Toast, Text, AmountLabel, Loader, SelectAccount, DatePicker, ModalSelect, ConfirmButton } from '../../../components'
+import { Topbar, Toast, Text, AmountLabel, Loader, SelectAccount, DatePicker, ModalSelect, ConfirmButton, Icon} from '../../../components'
 import * as Navigation from '../../../navigation'
 import { SelectFDCollatComponent, SelectPurpose } from '../../../components/Overdraft'
 import Note from '../../../components/SaveMoney/Note'
@@ -86,6 +86,29 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     flex: 1,
   },
+  containerPurpose: {
+    borderBottomColor: Colors.lineSep,
+    borderBottomWidth: 1,
+    marginHorizontal: Metrics.medium,
+    paddingVertical: Metrics.small,
+  },
+  selectCollatView: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: Metrics.small
+  },
+  fdRowView: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.lineSep,
+    paddingVertical: 10
+  },
+  itemText: {
+    paddingHorizontal: 10,
+    fontWeight: 'bold'
+  },
 })
 
 const CreateOD = () => {
@@ -106,6 +129,7 @@ const CreateOD = () => {
   const [isSetup, setIsSetup] = React.useState(false)
   const [showAlert, setShowAlert] = React.useState(false)
   const [isInit, setIsInit] = React.useState(true)
+  const [purposeVisible, setPurposeVisible] = React.useState(false)
   const momentFormat = 'DD/MM/YYYY'
   const note = useMemo(() =>
     'Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ', [])
@@ -113,11 +137,11 @@ const CreateOD = () => {
 
   const endDateCal = () => {
     // let currentDate = new Date()
-    const minDate = moment().add(1, 'M').toDate();
-    const maxDate = moment().add(12, 'M').toDate();
-    setMinDate(minDate)
-    setMaxDate(maxDate)
-    setEndDate(maxDate)
+    const min = moment().add(1, 'M').toDate();
+    const max = moment().add(12, 'M').toDate();
+    setMinDate(min)
+    setMaxDate(max)
+    setEndDate(max)
     console.log('endDateCal');
   }
 
@@ -144,6 +168,7 @@ const CreateOD = () => {
   }, [creationInfoError])
 
   React.useEffect(() => {
+    console.log('purposeList', purposeList);
     if (purposeList) {
       setSelectedPurpose(purposeList[0])
     }
@@ -187,11 +212,13 @@ const CreateOD = () => {
     });
   }
   const toggleFrqDatePicker = (date) => {
+    console.log(minDate, maxDate, endDate);
     setEndDate(date)
   }
   const onSelectPurpose = (pp) => {
-    console.log(pp);
+    console.log(minDate, maxDate, endDate);
     setSelectedPurpose(pp)
+    setPurposeVisible(false)
   }
   const handleSubmit = () => {
     if (!odLimit) {
@@ -215,10 +242,7 @@ const CreateOD = () => {
       fdListParam = fdListParam.slice(0, -1)
     }
 
-    // rolloutAcctNo: 11001011414192
-    // effectiveDate: 19/01/2021
-    // expireDate: 19/01/2022
-    // purpose: 41
+    console.log('purpose', selectedPurpose);
 
     const body = {
       fdList: fdListParam,
@@ -280,6 +304,43 @@ const CreateOD = () => {
     }
     return null
   }
+
+  const renderPurpose = () => {
+    // <SelectPurpose data={purposeList} onSubmit={onSelectPurpose} />
+    return (
+      <View>
+        <TouchableOpacity style={styles.containerPurpose} onPress={() => setPurposeVisible(true)}>
+          <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.openingPurpose')}</Text>
+          <View style={styles.selectCollatView}>
+            {selectedPurpose ?
+              <Text style={[styles.selectedText, {}]}>{selectedPurpose.desc}</Text>
+            :
+              <Text style={styles.select}>{I18n.t('overdraft.fromOnlineSaving.openingPurposePlaceHolder')}</Text>
+            }
+            <Icon name="icon-detail" size={20} color={Colors.check} style={styles.icon} />
+          </View>
+        </TouchableOpacity>
+        <ModalSelect
+          title={I18n.t('overdraft.fromOnlineSaving.openingPurpose')}
+          visible={purposeVisible}
+          handleModal={() => setPurposeVisible(false)}
+        >
+          <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }} bounces={false}>
+            <View style={{ flex: 1, marginHorizontal: 16 }}>
+              {purposeList?.map((pp) => (
+                <TouchableOpacity key={pp.code} style={styles.fdRowView} onPress={() => onSelectPurpose(pp)}>
+                  <View>
+                    <Text style={styles.itemText}>{pp.desc}</Text>
+                  </View>
+                </TouchableOpacity>
+                ))}
+            </View>
+          </ScrollView>
+        </ModalSelect>
+      </View>
+    )
+  }
+
   // if (getPaymentAccount && listTCType && purposeList) {
   //   // console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
   // } else {
@@ -371,7 +432,7 @@ const CreateOD = () => {
                 <Text style={styles.textDetail}>{I18n.t('overdraft.fromOnlineSaving.expireDate')}
                 </Text>
                 <DatePicker
-                  onPress={toggleFrqDatePicker}
+                  onPressConfirm={toggleFrqDatePicker}
                   dateStyle={getPaymentAccount?.expiredDate ? { color: Colors.gray } : {}}
                   style={{ flex: 1 }}
                   date={endDate}
@@ -386,7 +447,7 @@ const CreateOD = () => {
             {renderAccountCA()}
 
             {/* purpose */}
-            <SelectPurpose data={purposeList} onSubmit={onSelectPurpose} />
+            {renderPurpose()}
           </View>
           {/* xem ghi chu */}
           <View style={{ borderBottomLeftRadius: 10, borderBottomRightRadius: 10, backgroundColor: 'white', paddingBottom: 10 }}>

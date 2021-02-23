@@ -53,3 +53,11 @@ export const selectBranch = (item) => ({
   type: types.SELECT_BRANCH,
   payload: item,
 })
+
+export const getMPlusAppLink = (body) => ({
+  type: types.GET_MPLUS_APP_LINK,
+  meta: {
+    ...resourceHttp.getMPlusAppLink,
+    body
+  },
+})

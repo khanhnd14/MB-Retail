@@ -986,6 +986,9 @@ export default {
     id: 'overdraftCompleteClose',
     uri: 'overdraft/completeClose',
     isGetFullResponse: true,
-
+  },
+  getMPlusAppLink: {
+    id: 'getMPlusAppLink',
+    uri: 'card/getMPlusAppLink',
   },
 }
