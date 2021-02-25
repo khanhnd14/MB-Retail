@@ -89,7 +89,6 @@ const MainAlert = () => {
     setVisible(true)
   }
   const showSettingSoftToken = (param) => {
-    console.log('jkashdjahsjdkhasjkhdas:', param);
     setMessage(param.message)
     setVisible(true)
     setVisibleBtn(true)
