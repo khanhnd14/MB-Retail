@@ -1097,7 +1097,9 @@
     "min_amount":"Hạn mức tối thiểu là {0} đồng. Quý khách vui lòng nhập lại",
     "open_fee":"Phí mở thẻ",
     "card_fee":"Phí thường niên",
-    "empty_account":"Quý khách không có tài khoản trích nợ. Vui lòng tắt tính năng trích nợ tự động."
+    "empty_account":"Quý khách không có tài khoản trích nợ. Vui lòng tắt tính năng trích nợ tự động.",
+    "empty_info":"Tính năng này chỉ dành cho CBNV MSB/TNG đủ điều kiện. Quý khách vui lòng liên hệ hotline 1800599999 hoặc Chi nhánh/PGD gần nhất để được hỗ trợ. Xin cảm ơn! (016)"
+    
   },
   "investigate":{
     "title":"Tra soát",
