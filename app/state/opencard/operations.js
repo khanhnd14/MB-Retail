@@ -5,7 +5,8 @@ import {
   getListInfo,
   getDistrict,
   getSubBranch,
-  selectBranch
+  selectBranch,
+  getMPlusAppLink
 } from './actions'
 
-export { init, prepareRegister, completeRegister, getListInfo, getDistrict, getSubBranch, selectBranch }
+export { init, prepareRegister, completeRegister, getListInfo, getDistrict, getSubBranch, selectBranch, getMPlusAppLink }

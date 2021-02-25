@@ -1,9 +1,15 @@
 import * as React from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
+import { useState, useEffect } from 'react'
+import { ScrollView, StyleSheet, Linking } from 'react-native'
+import { useDispatch, useSelector } from 'react-redux'
+import DeviceInfo from 'react-native-device-info';
+
 import { Helpers, Metrics, Colors, ApplicationStyles } from '../../theme'
-import { Topbar, MenuItem } from '../../components'
+import { Topbar, MenuItem, Loader } from '../../components'
 import I18n from '../../translations'
 import * as Navigation from '../../navigation'
+import { openCardOperations } from '../../state/opencard'
+import { Utils } from '../../utilities'
 
 const styles = StyleSheet.create({
   container: {
@@ -28,12 +34,44 @@ const styles = StyleSheet.create({
 })
 
 const Loyalty = () => {
+  const dispatch = useDispatch()
+  const { mPlusAppLink, mPlusAppLinkError } = useSelector((state) => state.opencard)
+  const [loading, setLoading] = useState(false)
+
   const registerCard = () => {
     Navigation.push('RegisterCreditCard')
   }
   const game = () => {
     Navigation.push('ListWordsScreen')
   }
+
+  useEffect(() => {
+    if (loading && mPlusAppLink) {
+      setLoading(false)
+      // open app
+      // Linking.openURL('app-settings:')
+      Linking.openURL(mPlusAppLink.appURL)
+    }
+  }, [mPlusAppLink])
+
+  useEffect(() => {
+    if (loading && mPlusAppLinkError) {
+      setLoading(false)
+    }
+  }, [mPlusAppLinkError])
+
+  const mplus = () => {
+    setLoading(true)
+    DeviceInfo.getDeviceName().then((dname) => {
+      const name = dname
+      const params = {
+        deviceName: name,
+        deviceId: Utils.getUserDeviceID(),
+      }
+      dispatch(openCardOperations.getMPlusAppLink(params))
+    })
+  }
+
   return (
     <>
       <Topbar
@@ -63,7 +101,14 @@ const Loyalty = () => {
           text={I18n.t('product.atm.title')}
           iconSize={42}
         />
+        {/* <MenuItem
+          icon="icon-atm"
+          onPress={mplus}
+          text={I18n.t('product.mPlus')}
+          iconSize={42}
+        /> */}
       </ScrollView>
+      <Loader modalVisible={loading} />
     </>
   )
 }

@@ -23,3 +23,7 @@ export const GET_LIST_INFO_COMPLETED = 'opencard/GET_LIST_INFO_COMPLETED'
 export const GET_LIST_INFO_FAILED = 'opencard/GET_LIST_INFO_FAILED'
 
 export const SELECT_BRANCH = 'opencard/SELECT_BRANCH'
+
+export const GET_MPLUS_APP_LINK = 'opencard/GET_MPLUS_APP_LINK'
+export const GET_MPLUS_APP_LINK_COMPLETED = 'opencard/GET_MPLUS_APP_LINK_COMPLETED'
+export const GET_MPLUS_APP_LINK_FAILED = 'opencard/GET_MPLUS_APP_LINK_FAILED'

@@ -122,11 +122,14 @@ const OpenCardScreen = () => {
   }, [])
 
   useEffect(() => {
-    if (loading && !_.isEmpty(listCreditCardInfo)) {
+    if (loading) {
       setLoading(false)
-      setError(false)
-
-      setSelectCard(listCreditCardInfo[0] || {})
+      if (!_.isEmpty(listCreditCardInfo) && _.isArray(listCreditCardInfo)) {
+        setSelectCard(listCreditCardInfo[0] || {})
+        setError(false)
+      } else {
+        setError(true)
+      }
     }
   }, [listCreditCardInfo])
 
@@ -203,7 +206,7 @@ const OpenCardScreen = () => {
       {!loading && isShowError && (
         <View style={[Helpers.fill, styles.container]}>
           <Text style={[Helpers.textCenter, { marginTop: Metrics.medium }]}>
-            {listError?.message}
+            {listError ? listError.message : I18n.t('opencard.empty_info')}
           </Text>
         </View>
       )}
@@ -235,40 +238,42 @@ const OpenCardScreen = () => {
               />
             )}
           </View>
-          <View style={[Helpers.fill, styles.container]}>
-            <KeyboardAwareScrollView
-              style={[Helpers.fullWidth]}
-              showsVerticalScrollIndicator
-              extraHeight={300}
-              keyboardShouldPersistTaps="handled"
-            >
-              <View style={[styles.titleContainer, Helpers.fullWidth]}>
-                <Text style={styles.title}>{selectCard?.cardName.toUpperCase()}</Text>
-                <Text style={styles.content}>{selectCard?.description}</Text>
-                <TouchableOpacity onPress={onLink}>
-                  <Text style={styles.link}>{I18n.t('opencard.detail')}</Text>
-                </TouchableOpacity>
-              </View>
-              <View style={[styles.contentContainer, Helpers.fullWidth]}>
-                {ItemDisplay(
-                  I18n.t('opencard.open_fee'),
-                  selectCard.openFee === 0 ? I18n.t('opencard.free') : selectCard.openFee,
-                  selectCard.openFee !== 0
-                )}
-                {ItemDisplay(
-                  I18n.t('opencard.card_fee'),
-                  selectCard.annualFee === 0 ? I18n.t('opencard.free') : selectCard.annualFee,
-                  selectCard.annualFee !== 0
-                )}
-                {ItemDisplay('Cashback', selectCard.cashBackDesc)}
-              </View>
-            </KeyboardAwareScrollView>
-            <ConfirmButton
-              onPress={onRegister}
-              text={I18n.t('opencard.btn_open')}
-              loading={isInit}
-            />
-          </View>
+          {!_.isEmpty(listCreditCardInfo) && (
+            <View style={[Helpers.fill, styles.container]}>
+              <KeyboardAwareScrollView
+                style={[Helpers.fullWidth]}
+                showsVerticalScrollIndicator
+                extraHeight={300}
+                keyboardShouldPersistTaps="handled"
+              >
+                <View style={[styles.titleContainer, Helpers.fullWidth]}>
+                  <Text style={styles.title}>{selectCard?.cardName?.toUpperCase()}</Text>
+                  <Text style={styles.content}>{selectCard?.description}</Text>
+                  <TouchableOpacity onPress={onLink}>
+                    <Text style={styles.link}>{I18n.t('opencard.detail')}</Text>
+                  </TouchableOpacity>
+                </View>
+                <View style={[styles.contentContainer, Helpers.fullWidth]}>
+                  {ItemDisplay(
+                    I18n.t('opencard.open_fee'),
+                    selectCard.openFee === 0 ? I18n.t('opencard.free') : selectCard.openFee,
+                    selectCard.openFee !== 0
+                  )}
+                  {ItemDisplay(
+                    I18n.t('opencard.card_fee'),
+                    selectCard.annualFee === 0 ? I18n.t('opencard.free') : selectCard.annualFee,
+                    selectCard.annualFee !== 0
+                  )}
+                  {ItemDisplay('Cashback', selectCard.cashBackDesc)}
+                </View>
+              </KeyboardAwareScrollView>
+              <ConfirmButton
+                onPress={onRegister}
+                text={I18n.t('opencard.btn_open')}
+                loading={isInit}
+              />
+            </View>
+          )}
         </View>
       )}
     </Fragment>
