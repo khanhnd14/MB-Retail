@@ -1100,7 +1100,8 @@
     "min_amount":"Limit is lower than minimum granting limit ({0})",
     "open_fee":"Card opening fee",
     "card_fee":"Annual card fee",
-    "empty_account":"Quý khách không có tài khoản trích nợ. Vui lòng tắt tính năng trích nợ tự động."
+    "empty_account":"Quý khách không có tài khoản trích nợ. Vui lòng tắt tính năng trích nợ tự động.",
+    "empty_info":"This function is only available for approved MSB/TNG staff. Please contact hotline 1800599999 or the nearest MSB branch/office for support. Thank you!(016)"
 
   },
   "investigate":{
