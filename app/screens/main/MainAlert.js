@@ -11,8 +11,9 @@ import Modal from 'react-native-modal'
 import EventEmitter from 'react-native-eventemitter'
 import I18n from '../../translations'
 import { Text } from '../../components'
-import { Colors, Metrics } from '../../theme'
+import { Colors, Metrics, Helpers } from '../../theme'
 import { Config } from '../../config'
+import * as Navigation from '../../navigation'
 
 const styles = StyleSheet.create({
   container: {
@@ -45,7 +46,9 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.gray4,
     paddingHorizontal: Metrics.medium,
     paddingVertical: Metrics.small * 0.7,
-    marginVertical: Metrics.normal,
+    marginHorizontal: Metrics.small,
+    marginTop: Metrics.tiny,
+    marginBottom: Metrics.small
   },
   input: {
     marginTop: Metrics.normal * 2,
@@ -57,6 +60,7 @@ const styles = StyleSheet.create({
 
 const MainAlert = () => {
   const [visible, setVisible] = useState(false)
+  const [visibleBtn, setVisibleBtn] = useState(false)
   const [title, setTitle] = useState(I18n.t('application.title_alert_notification'))
   const [message, setMessage] = useState('')
 
@@ -69,39 +73,66 @@ const MainAlert = () => {
 
   const eventBinding = () => {
     EventEmitter.on(Config.EVENT_NAMES.user_alert_mess, showMess)
+    EventEmitter.on(Config.EVENT_NAMES.user_alert_change_softtoken, showSettingSoftToken)
   }
 
   const unEventBinding = () => {
     EventEmitter.removeListener(Config.EVENT_NAMES.user_alert_mess, showMess)
+    EventEmitter.removeListener(
+      Config.EVENT_NAMES.user_alert_change_softtoken,
+      showSettingSoftToken
+    )
   }
 
   const showMess = (param) => {
     setMessage(param.message)
     setVisible(true)
   }
+  const showSettingSoftToken = (param) => {
+    console.log('jkashdjahsjdkhasjkhdas:', param);
+    setMessage(param.message)
+    setVisible(true)
+    setVisibleBtn(true)
+  }
 
   const onHide = () => {
     setVisible(false)
+    setVisibleBtn(false)
+  }
+
+  const onContinuous = () => {
+    setVisible(false)
+    setVisibleBtn(false)
+    Navigation.push('SoftTokenScreen')
   }
   return (
     <View>
       {visible && (
-      <Modal isVisible={visible} onBackdropPress={() => onHide()} onModalHide={() => onHide()}>
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-          <View style={styles.container}>
-            <View style={styles.header}>
-              <Text style={styles.title}>{title.toUpperCase()}</Text>
+        <Modal isVisible={visible} onBackdropPress={() => onHide()} onModalHide={() => onHide()}>
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <View style={styles.container}>
+              <View style={styles.header}>
+                <Text style={styles.title}>{title.toUpperCase()}</Text>
+              </View>
+              <Text style={styles.input}>{message}</Text>
+              <View style={[Helpers.row, { justifyContent: 'center' }]}>
+                {visibleBtn && (
+                  <TouchableOpacity
+                    onPress={() => onContinuous()}
+                    style={[styles.button, { backgroundColor: Colors.primary2 }]}
+                  >
+                    <Text style={styles.title}>{I18n.t('action.action_done').toUpperCase()}</Text>
+                  </TouchableOpacity>
+                )}
+                <TouchableOpacity onPress={() => onHide()} style={styles.button}>
+                  <Text style={styles.title}>{I18n.t('action.action_close').toUpperCase()}</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-            <Text style={styles.input}>{message}</Text>
-            <TouchableOpacity onPress={() => onHide()} style={styles.button}>
-              <Text style={styles.title}>{I18n.t('action.action_close').toUpperCase()}</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableWithoutFeedback>
-      </Modal>
-)}
+          </TouchableWithoutFeedback>
+        </Modal>
+      )}
     </View>
-
   )
 }
 

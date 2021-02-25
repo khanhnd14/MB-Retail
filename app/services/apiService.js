@@ -58,9 +58,9 @@ const apiService = ({ dispatch }) => (next) => (action) => {
 export default apiService
 
 function handleErrors(err, action, next) {
-  console.log('====================================');
-  console.log(err);
-  console.log('====================================');
+  console.log('====================================')
+  console.log(err)
+  console.log('====================================')
   const status = err.response ? err.response.status : err.status
   const data = err.response ? err.response.data : err
   const { isAxiosError, code } = err || {}
@@ -72,15 +72,17 @@ function handleErrors(err, action, next) {
   })
   setTimeout(() => {
     if (status >= 500) {
-      err.message &&
-        !action.meta.hideError &&
-        Utils.toast(data.message)
+      err.message && !action.meta.hideError && Utils.toast(data.message)
     } else if (status == 401 || err?.httpStatus == 401) {
       EventEmitter.emit(Config.EVENT_NAMES.user_signout, err)
     } else if (!code || code !== 'ECONNABORTED') {
-      data.message &&
-        !action.meta.hideError &&
-        Utils.toast(data.message)
+      if (data.message && !action.meta.hideError) {
+        if (status == '406' || status == '424') {
+          Utils.changeVerifySetting(data.message)
+        } else {
+          Utils.toast(data.message)
+        }
+      }
     }
   }, 500)
   return err

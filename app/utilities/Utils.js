@@ -331,6 +331,10 @@ export default {
     const param = { message: mess }
     EventEmitter.emit(Config.EVENT_NAMES.user_alert_mess, param)
   },
+  changeVerifySetting: (mess) => {
+    const param = { message: mess }
+    EventEmitter.emit(Config.EVENT_NAMES.user_alert_change_softtoken, param)
+  },
   showToast: (message) => {
     EventEmitter.emit(Config.EVENT_NAMES.user_toast, { message })
   },
