@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import { sha256 } from 'js-sha256';
+import { sha256 } from 'js-sha256'
 import axios from 'axios'
 import _ from 'lodash'
 import DeviceInfo from 'react-native-device-info'
@@ -9,22 +9,26 @@ import { Utils } from '../../utilities'
 import * as loginTypes from '../login/types'
 import { Config } from '../../config'
 
-export const sendOTPVerify = (mobile, deviceId = Utils.getUserDeviceID(), clientTime = new Date().getTime()) => (dispatch) => {
-  const requestId = sha256(`${mobile}${deviceId}${'MSB'}${clientTime}`);
+export const sendOTPVerify = (
+  mobile,
+  deviceId = Utils.getUserDeviceID(),
+  clientTime = new Date().getTime()
+) => (dispatch) => {
+  const requestId = sha256(`${mobile}${deviceId}${'MSB'}${clientTime}`)
   const body = {
     mobile,
     deviceId,
     clientTime,
     requestId,
     version: DeviceInfo.getVersion(),
-    osName: Platform.OS
-  };
+    osName: Platform.OS,
+  }
 
   dispatch({
     type: types.EKYC_SEND_OTP,
     meta: {
       ...resourceHttp.sendOTPVerify,
-      body
+      body,
     },
   })
 }
@@ -34,12 +38,18 @@ export const verifyOTP = (sessionId, otpInput, mobile) => (dispatch) => {
     sessionId,
     otpInput,
     mobile,
-  };
+    osVersion: DeviceInfo.getSystemVersion(),
+    deviceBrand: DeviceInfo.getBrand(),
+    deviceCarrier: DeviceInfo.getCarrier(),
+    deviceId: Utils.getUserDeviceID(),
+    version: DeviceInfo.getVersion(),
+    osName: Platform.OS,
+  }
   dispatch({
     type: types.EKYC_VERIFY_OTP,
     meta: {
       ...resourceHttp.verifyOTP,
-      body
+      body,
     },
   })
 }
@@ -49,29 +59,31 @@ export const checkID = (idNumber, token, idType = 'vn.cmnd_old') => (dispatch) =
     idNumber,
     idType,
     token,
-  };
+  }
   dispatch({
     type: types.EKYC_CHECK_ID,
     meta: {
       ...resourceHttp.checkID,
-      body
+      body,
     },
   })
 }
 
-export const saveLogError = (token, errorCode, errorDesc, phoneNumber, logContent) => (dispatch) => {
+export const saveLogError = (token, errorCode, errorDesc, phoneNumber, logContent) => (
+  dispatch
+) => {
   const body = {
     token,
     errorCode,
     errorDesc,
     logContent,
-    phoneNumber
-  };
+    phoneNumber,
+  }
   dispatch({
     type: types.SAVE_LOG,
     meta: {
       ...resourceHttp.saveLog,
-      body
+      body,
     },
   })
 }
@@ -79,19 +91,19 @@ export const saveLogError = (token, errorCode, errorDesc, phoneNumber, logConten
 export const getResultEkycSdk = (payload) => (dispatch) => {
   dispatch({
     type: types.EKYC_RESULT_SDK,
-    payload
+    payload,
   })
 }
 
 export const getTSToken = (token) => (dispatch) => {
   const body = {
-    token
-  };
+    token,
+  }
   dispatch({
     type: types.GET_TS_TOKEN,
     meta: {
       ...resourceHttp.getTSToken,
-      body
+      body,
     },
   })
 }
@@ -99,13 +111,13 @@ export const getTSToken = (token) => (dispatch) => {
 export const checkUsername = (username, token) => (dispatch) => {
   const body = {
     username,
-    token
-  };
+    token,
+  }
   dispatch({
     type: types.CHECK_USER_NAME,
     meta: {
       ...resourceHttp.checkUserName,
-      body
+      body,
     },
   })
 }
@@ -114,31 +126,31 @@ export const reset = () => (dispatch) => {
   dispatch([
     {
       type: types.EKYC_SEND_OTP_COMPLETED,
-      payload: null
+      payload: null,
     },
     {
       type: types.EKYC_VERIFY_OTP_COMPLETED,
-      payload: null
+      payload: null,
     },
     {
       type: types.EKYC_VERIFY_OTP_FAILED,
-      payload: null
-    }
+      payload: null,
+    },
   ])
 }
 
 export const verifyCustomerInfo = (params) => (dispatch) => {
-  console.log('====================================');
-  console.log(params);
-  console.log('====================================');
+  console.log('====================================')
+  console.log(params)
+  console.log('====================================')
 
-  const body = _.pickBy(params, _.identity);
-  console.log('====================================');
-  console.log('after', body);
-  console.log('====================================');
+  const body = _.pickBy(params, _.identity)
+  console.log('====================================')
+  console.log('after', body)
+  console.log('====================================')
 
-  const formData = new FormData();
-  const keys = _.keys(body);
+  const formData = new FormData()
+  const keys = _.keys(body)
   keys.forEach((e) => {
     formData.append(e, body[e])
   })
@@ -150,29 +162,32 @@ export const verifyCustomerInfo = (params) => (dispatch) => {
   dispatch({
     type: types.VERIFY_CUSTOMER_INFO,
   })
-  axios.post(`${Config.API_URL}ekyc/verifyCustomerInfo.do`, formData, config).then(response => {
-    console.log(response.data)
-    const { status } = response.data
-    if (status === '200') {
-      dispatch({
-        type: types.VERIFY_CUSTOMER_INFO_COMPLETED,
-        payload: response.data
-      })
-    } else {
+  axios
+    .post(`${Config.API_URL}ekyc/verifyCustomerInfo.do`, formData, config)
+    .then((response) => {
+      console.log(response.data)
+      const { status } = response.data
+      if (status === '200') {
+        dispatch({
+          type: types.VERIFY_CUSTOMER_INFO_COMPLETED,
+          payload: response.data,
+        })
+      } else {
+        dispatch({
+          type: types.VERIFY_CUSTOMER_INFO_FAILED,
+          payload: response.data,
+        })
+      }
+    })
+    .catch((err) => {
+      console.log('====================================')
+      console.log(err)
+      console.log('====================================')
       dispatch({
         type: types.VERIFY_CUSTOMER_INFO_FAILED,
-        payload: response.data
+        payload: err,
       })
-    }
-  }).catch((err) => {
-    console.log('====================================');
-    console.log(err);
-    console.log('====================================');
-    dispatch({
-      type: types.VERIFY_CUSTOMER_INFO_FAILED,
-      payload: err
     })
-  })
 }
 
 export const saveAdditionInfo = (token, email, currentAddress, incomeBracketCode) => (dispatch) => {
@@ -180,13 +195,13 @@ export const saveAdditionInfo = (token, email, currentAddress, incomeBracketCode
     token,
     email,
     currentAddress,
-    incomeBracketCode
-  };
+    incomeBracketCode,
+  }
   dispatch({
     type: types.SAVE_ADDITION_INFO,
     meta: {
       ...resourceHttp.saveAdditionInfo,
-      body
+      body,
     },
   })
 }
@@ -195,42 +210,47 @@ export const getDistrict = (token, cityCode) => (dispatch) => {
   const body = {
     token,
     cityCode,
-  };
+  }
   dispatch({
     type: types.GET_DISTRICT,
     meta: {
       ...resourceHttp.getDistrict,
-      body
+      body,
     },
   })
 }
 
 export const resetchoicedBranch = () => (dispatch) => {
-  dispatch([{
-    type: types.GET_DISTRICT_COMPLETED,
-    payload: null
-  }, {
-    type: types.GET_DISTRICT_FAILED,
-    payload: null
-  }, {
-    type: types.GET_SUB_BRANCH_FAILED,
-    payload: null
-  }, {
-    type: types.GET_SUB_BRANCH_COMPLETED,
-    payload: null
-  }])
+  dispatch([
+    {
+      type: types.GET_DISTRICT_COMPLETED,
+      payload: null,
+    },
+    {
+      type: types.GET_DISTRICT_FAILED,
+      payload: null,
+    },
+    {
+      type: types.GET_SUB_BRANCH_FAILED,
+      payload: null,
+    },
+    {
+      type: types.GET_SUB_BRANCH_COMPLETED,
+      payload: null,
+    },
+  ])
 }
 
 export const getSubBranch = (token, idDistrict) => (dispatch) => {
   const body = {
     token,
     idDistrict,
-  };
+  }
   dispatch({
     type: types.GET_SUB_BRANCH,
     meta: {
       ...resourceHttp.getSubbranch,
-      body
+      body,
     },
   })
 }
@@ -238,20 +258,20 @@ export const getSubBranch = (token, idDistrict) => (dispatch) => {
 export const choiceBranch = (branch) => (dispatch) => {
   dispatch({
     type: types.CHOICE_BRANCH,
-    payload: branch
+    payload: branch,
   })
 }
 
 export const choiceCombo = (combo) => (dispatch) => {
   dispatch({
     type: types.CHOICE_COMBO,
-    payload: combo
+    payload: combo,
   })
 }
 
 export const sendRegister = (params) => (dispatch) => {
-  const body = _.pickBy(params, _.identity);
-  console.log(body);
+  const body = _.pickBy(params, _.identity)
+  console.log(body)
   let values = ''
   Object.keys(body)
     .sort()
@@ -264,7 +284,7 @@ export const sendRegister = (params) => (dispatch) => {
     type: types.SEND_REGISTER,
     meta: {
       ...resourceHttp.sendRegister,
-      body
+      body,
     },
   })
 }
@@ -273,13 +293,13 @@ export const saveReferralCode = (token, refCode, idRetry) => (dispatch) => {
   const body = {
     token,
     refCode,
-    idRetry
-  };
+    idRetry,
+  }
   dispatch({
     type: types.SAVE_REFERRAL_CODE,
     meta: {
       ...resourceHttp.saveReferralCode,
-      body
+      body,
     },
   })
 }
@@ -289,27 +309,27 @@ export const activeEKYC = (token, userName, password, deviceId) => (dispatch) =>
     token,
     userName,
     password,
-    deviceId
-  };
+    deviceId,
+  }
   dispatch({
     type: types.ACTIVE_EKYC,
     meta: {
       ...resourceHttp.activeEKYC,
-      body
+      body,
     },
   })
 }
 export const saveActiveUser = (activeUser) => (dispatch) => {
   dispatch({
     type: loginTypes.ACTIVE_COMPLETED,
-    payload: activeUser
+    payload: activeUser,
   })
 }
 
 export const updateRequestId = (requestId) => (dispatch) => {
   dispatch({
     type: types.UPDATE_REQUEST_ID,
-    payload: requestId
+    payload: requestId,
   })
 }
 
