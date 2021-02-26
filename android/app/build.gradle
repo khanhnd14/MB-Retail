@@ -1,7 +1,7 @@
 apply plugin: 'com.onesignal.androidsdk.onesignal-gradle-plugin'
 apply plugin: "com.android.application"
 apply plugin: 'com.google.gms.google-services'
-
+apply plugin: 'com.google.firebase.crashlytics'
 import com.android.build.OutputFile
 
 /**
@@ -192,7 +192,6 @@ android {
 //            minifyEnabled enableProguardInReleaseBuilds
 //            useProguard enableProguardInReleaseBuilds
 //            setProguardFiles([getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'])
-
             debuggable false
             shrinkResources enableProguardInReleaseBuilds
             zipAlignEnabled enableProguardInReleaseBuilds
