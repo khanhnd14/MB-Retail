@@ -715,14 +715,15 @@ export default {
   },
 
   bioError(error) {
+    console.log('error:', error.name);
     if (!error) {
       return
     }
     if (Platform.OS === 'ios') {
-      if (error.code === 'USER_CANCELED') {
+      if (error.name === 'LAErrorUserCancel') {
         return
       }
-      if (error.code === 'NOT_SUPPORTED') {
+      if (error.name === 'RCTTouchIDNotSupported') {
         Alert.alert(I18n.t('bioCode.error'), I18n.t('bioCode.notPermit'), [
           { text: 'OK', onPress: () => console.log('OK Pressed') },
           {
