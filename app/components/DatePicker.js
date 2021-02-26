@@ -130,6 +130,7 @@ class DatePicker extends Component {
     if (nextProps.hasOwnProperty('date') && nextProps.date !== this.state.date) {
       this.setState({
         date: nextProps.date,
+        selectDate: nextProps.date,
       })
     }
   }

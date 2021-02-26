@@ -57,7 +57,7 @@ const Policy = () => {
     <div class="content">1. KH phải tự thực hiện giao dịch mở TKTT online và không được ủy quyền cho người khác sử dụng TKTT online trừ trường hợp KH đã hoàn thiện thủ tục nhận biết, xác minh thông tin tại các điểm giao dịch của MSB theo quy định của MSB từng thời kỳ.</div>
     <div class="content">2. Tại thời điểm mở TKTT online, KH phải đảm bảo đồng thời các điều kiện:<br>
 a. chưa từng có tài khoản thanh toán tại MSB;<br>
-b. là công dân có quốc tịch duy nhất là Việt Nam, từ 15 tuổi trở lên và có năng lực hành vi dân sự đầy đủ theo quy định pháp luật Việt Nam;<br>
+b. là công dân có quốc tịch duy nhất là Việt Nam, từ 18 tuổi trở lên và có năng lực hành vi dân sự đầy đủ theo quy định pháp luật Việt Nam;<br>
 c. không phải là công dân Hoa Kỳ hoặc là người được cấp thẻ thường trú nhân (Thẻ xanh) tại Hoa Kỳ hoặc là cá nhân cư trú tại Hoa Kỳ;<br>
 d. là chủ sở hữu hưởng lợi cuối cùng và duy nhất đối với TKTT online được mở; và<br>
 e. không tham gia bất kỳ thỏa thuận pháp lý nào.

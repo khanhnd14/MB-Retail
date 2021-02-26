@@ -1,11 +1,29 @@
 import React, { Fragment, useRef, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { ScrollView, StyleSheet, View, TouchableOpacity, TouchableWithoutFeedback, ActivityIndicator } from 'react-native'
+import {
+  ScrollView,
+  StyleSheet,
+  View,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  ActivityIndicator,
+} from 'react-native'
 import I18n from 'i18n-js'
 import Modal from 'react-native-modal'
 import moment from 'moment'
 import { Helpers, Metrics, Colors } from '../../../theme'
-import { Topbar, Toast, Text, AmountLabel, Loader, SelectAccount, DatePicker, ModalSelect, ConfirmButton, Icon} from '../../../components'
+import {
+  Topbar,
+  Toast,
+  Text,
+  AmountLabel,
+  Loader,
+  SelectAccount,
+  DatePicker,
+  ModalSelect,
+  ConfirmButton,
+  Icon,
+} from '../../../components'
 import * as Navigation from '../../../navigation'
 import { SelectFDCollatComponent, SelectPurpose } from '../../../components/Overdraft'
 import Note from '../../../components/SaveMoney/Note'
@@ -26,13 +44,13 @@ const styles = StyleSheet.create({
     marginHorizontal: Metrics.medium,
     paddingVertical: Metrics.small,
     height: 70,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   noteView: {
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
-    borderBottomWidth: 0
+    borderBottomWidth: 0,
   },
   noteText: {
     fontSize: 10,
@@ -40,13 +58,14 @@ const styles = StyleSheet.create({
     color: Colors.gray,
   },
   readOnlyText: {
-    color: Colors.gray, paddingVertical: 5
+    color: Colors.gray,
+    paddingVertical: 5,
   },
   datePicker: {
-    flex: 1
+    flex: 1,
   },
   textDetail: {
-    color: Colors.primary2
+    color: Colors.primary2,
   },
   containerAlert: {
     minHeight: Metrics.small * 25,
@@ -96,24 +115,36 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginTop: Metrics.small
+    marginTop: Metrics.small,
   },
   fdRowView: {
     flexDirection: 'row',
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: Colors.lineSep,
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   itemText: {
     paddingHorizontal: 10,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+  },
+  line: {
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.lineSep,
+    marginHorizontal: Metrics.medium,
   },
 })
 
 const CreateOD = () => {
   const dispatch = useDispatch()
-  const { creationInfo, getPaymentAccount, listTCType, purposeList, sendOTPRegister, creationInfoError } = useSelector((state) => state.overdraft)
+  const {
+    creationInfo,
+    getPaymentAccount,
+    listTCType,
+    purposeList,
+    sendOTPRegister,
+    creationInfoError,
+  } = useSelector((state) => state.overdraft)
   const [, setTotalTSDB] = React.useState(0)
   const [odLimit, setOdLimit] = React.useState(0)
   const [fDList, setFDList] = React.useState(0)
@@ -131,18 +162,24 @@ const CreateOD = () => {
   const [isInit, setIsInit] = React.useState(true)
   const [purposeVisible, setPurposeVisible] = React.useState(false)
   const momentFormat = 'DD/MM/YYYY'
-  const note = useMemo(() =>
-    'Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ', [])
+  const note = useMemo(
+    () =>
+      'Hạn mức thấu chi bằng 80% giá trị tài sản bảo đảm với tài sản bảo đảm là tiết kiệm trả sau, bằng 70% giá trị TSBĐ với TSBĐ là tiết kiệm trả trước nhưng không vượt quá 1 tỷ VNĐ',
+    []
+  )
   const refToast = useRef(null)
 
   const endDateCal = () => {
     // let currentDate = new Date()
-    const min = moment().add(1, 'M').toDate();
-    const max = moment().add(12, 'M').toDate();
+    const min = moment()
+      .add(1, 'M')
+      .toDate()
+    const max = moment()
+      .add(12, 'M')
+      .toDate()
     setMinDate(min)
     setMaxDate(max)
     setEndDate(max)
-    console.log('endDateCal');
   }
 
   React.useEffect(() => {
@@ -168,7 +205,7 @@ const CreateOD = () => {
   }, [creationInfoError])
 
   React.useEffect(() => {
-    console.log('purposeList', purposeList);
+    console.log('purposeList', purposeList)
     if (purposeList) {
       setSelectedPurpose(purposeList[0])
     }
@@ -186,8 +223,8 @@ const CreateOD = () => {
         const expiredDate = new Date(getPaymentAccount.expiredDate)
         setMaxDate(expiredDate)
         setEndDate(expiredDate)
-        console.log('React.useEffect getPaymentAccount');
-        setPaymentAccount(getPaymentAccount.accounts)// .accountInString
+        console.log('React.useEffect getPaymentAccount')
+        setPaymentAccount(getPaymentAccount.accounts) // .accountInString
       } else {
         setPaymentAccount(getPaymentAccount?.accounts[0])
         // console.log('getPaymentAccount',getPaymentAccount);
@@ -196,7 +233,7 @@ const CreateOD = () => {
   }, [getPaymentAccount])
 
   const completeFDSelected = (data, total, odl) => {
-    console.log(data, total, odl);
+    console.log(data, total, odl)
     setFDList(data.FDList)
     setTotalTSDB(total)
     setOdLimit(odl)
@@ -204,19 +241,18 @@ const CreateOD = () => {
   }
 
   const changeFromAccount = (accId) => {
-    console.log(accId);
-    getPaymentAccount.accounts.forEach(element => {
+    console.log(accId)
+    getPaymentAccount.accounts.forEach((element) => {
       if (element.acctNo === accId) {
         setPaymentAccount(element)
       }
-    });
+    })
   }
   const toggleFrqDatePicker = (date) => {
-    console.log(minDate, maxDate, endDate);
     setEndDate(date)
   }
   const onSelectPurpose = (pp) => {
-    console.log(minDate, maxDate, endDate);
+    console.log(minDate, maxDate, endDate)
     setSelectedPurpose(pp)
     setPurposeVisible(false)
   }
@@ -225,7 +261,7 @@ const CreateOD = () => {
       refToast.current.show(I18n.t('overdraft.fromOnlineSaving.error_odlimit_null'), 3000)
       return
     }
-    console.log('paymentAccount', paymentAccount);
+    console.log('paymentAccount', paymentAccount)
 
     if (!paymentAccount) {
       refToast.current.show(I18n.t('overdraft.fromOnlineSaving.error_ca_account_null'), 3000)
@@ -233,16 +269,16 @@ const CreateOD = () => {
     }
 
     let fdListParam = ''
-    fDList.forEach(fd => {
+    fDList.forEach((fd) => {
       if (fd.isSelected === true) {
         fdListParam += `${fd.receiptNo},`
       }
-    });
+    })
     if (fdListParam.length > 0) {
       fdListParam = fdListParam.slice(0, -1)
     }
 
-    console.log('purpose', selectedPurpose);
+    console.log('purpose', selectedPurpose)
 
     const body = {
       fdList: fdListParam,
@@ -250,7 +286,7 @@ const CreateOD = () => {
       effectiveDate: moment(startDate).format(momentFormat),
       expireDate: moment(endDate).format(momentFormat),
       purpose: selectedPurpose.code,
-      notSendOTP: true
+      notSendOTP: true,
     }
     setLoading(true)
     setIsSetup(true)
@@ -265,7 +301,7 @@ const CreateOD = () => {
       const openInfo = {
         odLimit,
         expireDate: endDate,
-        rate: creationInfo?.laiSuatTC
+        rate: creationInfo?.laiSuatTC,
       }
       dispatch(odSavingOperations.openODInfo(openInfo))
 
@@ -299,56 +335,68 @@ const CreateOD = () => {
         )
       }
       return (
-        <SelectAccount onSelectRolloutAccountNo={changeFromAccount} data={getPaymentAccount?.accounts} />
+        <SelectAccount
+          onSelectRolloutAccountNo={changeFromAccount}
+          data={getPaymentAccount?.accounts}
+        />
       )
     }
     return null
   }
 
-  const renderPurpose = () => {
+  const renderPurpose = () => (
     // <SelectPurpose data={purposeList} onSubmit={onSelectPurpose} />
-    return (
-      <View>
-        <TouchableOpacity style={styles.containerPurpose} onPress={() => setPurposeVisible(true)}>
-          <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.openingPurpose')}</Text>
-          <View style={styles.selectCollatView}>
-            {selectedPurpose ?
-              <Text style={[styles.selectedText, {}]}>{selectedPurpose.desc}</Text>
-            :
-              <Text style={styles.select}>{I18n.t('overdraft.fromOnlineSaving.openingPurposePlaceHolder')}</Text>
-            }
-            <Icon name="icon-detail" size={20} color={Colors.check} style={styles.icon} />
+    <View>
+      <TouchableOpacity style={styles.containerPurpose} onPress={() => setPurposeVisible(true)}>
+        <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.openingPurpose')}</Text>
+        <View style={styles.selectCollatView}>
+          {selectedPurpose ? (
+            <Text style={[styles.selectedText, {}]}>{selectedPurpose.desc}</Text>
+          ) : (
+            <Text style={styles.select}>
+              {I18n.t('overdraft.fromOnlineSaving.openingPurposePlaceHolder')}
+            </Text>
+          )}
+          <Icon name="icon-detail" size={20} color={Colors.check} style={styles.icon} />
+        </View>
+      </TouchableOpacity>
+      <ModalSelect
+        title={I18n.t('overdraft.fromOnlineSaving.openingPurpose')}
+        visible={purposeVisible}
+        handleModal={() => setPurposeVisible(false)}
+      >
+        <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }} bounces={false}>
+          <View style={{ flex: 1, marginHorizontal: 16 }}>
+            {purposeList?.map((pp) => (
+              <TouchableOpacity
+                key={pp.code}
+                style={styles.fdRowView}
+                onPress={() => onSelectPurpose(pp)}
+              >
+                <View>
+                  <Text style={styles.itemText}>{pp.desc}</Text>
+                </View>
+              </TouchableOpacity>
+            ))}
           </View>
-        </TouchableOpacity>
-        <ModalSelect
-          title={I18n.t('overdraft.fromOnlineSaving.openingPurpose')}
-          visible={purposeVisible}
-          handleModal={() => setPurposeVisible(false)}
-        >
-          <ScrollView style={{ flex: 1 }} contentContainerStyle={{ flexGrow: 1 }} bounces={false}>
-            <View style={{ flex: 1, marginHorizontal: 16 }}>
-              {purposeList?.map((pp) => (
-                <TouchableOpacity key={pp.code} style={styles.fdRowView} onPress={() => onSelectPurpose(pp)}>
-                  <View>
-                    <Text style={styles.itemText}>{pp.desc}</Text>
-                  </View>
-                </TouchableOpacity>
-                ))}
-            </View>
-          </ScrollView>
-        </ModalSelect>
-      </View>
-    )
-  }
+        </ScrollView>
+      </ModalSelect>
+    </View>
+  )
 
   // if (getPaymentAccount && listTCType && purposeList) {
   //   // console.log(creationInfo, getPaymentAccount, listTCType, purposeList);
   // } else {
   //   return null
   // }
+
   return (
     <>
-      <Topbar subTitle={I18n.t('overdraft.fromOnlineSaving.openScreenTitle')} background={Colors.mainBg} title={I18n.t('overdraft.fromOnlineSaving.title')} />
+      <Topbar
+        subTitle={I18n.t('overdraft.fromOnlineSaving.openScreenTitle')}
+        background={Colors.mainBg}
+        title={I18n.t('overdraft.fromOnlineSaving.title')}
+      />
       {!isInit && (
         <View style={[Helpers.fill, styles.container, Helpers.center]}>
           <ActivityIndicator
@@ -362,15 +410,23 @@ const CreateOD = () => {
       {getErrorMessage() != null && (
         <View style={[Helpers.fill, styles.scrollView]}>
           {showAlert && (
-            <Modal isVisible={showAlert} onBackdropPress={() => onHide()} onModalHide={() => onHide()}>
+            <Modal
+              isVisible={showAlert}
+              onBackdropPress={() => onHide()}
+              onModalHide={() => onHide()}
+            >
               <TouchableWithoutFeedback accessible={false}>
                 <View style={[styles.containerAlert, {}]}>
                   <View style={styles.header}>
-                    <Text style={styles.titleAlert}>{I18n.t('application.title_alert_notification').toUpperCase()}</Text>
+                    <Text style={styles.titleAlert}>
+                      {I18n.t('application.title_alert_notification').toUpperCase()}
+                    </Text>
                   </View>
                   <Text style={styles.input}>{getErrorMessage()}</Text>
                   <TouchableOpacity onPress={() => onHide()} style={styles.button}>
-                    <Text style={styles.titleAlert}>{I18n.t('action.action_close').toUpperCase()}</Text>
+                    <Text style={styles.titleAlert}>
+                      {I18n.t('action.action_close').toUpperCase()}
+                    </Text>
                   </TouchableOpacity>
                 </View>
               </TouchableWithoutFeedback>
@@ -381,13 +437,14 @@ const CreateOD = () => {
       {getErrorMessage() == null && (
         <ScrollView style={[Helpers.fill, styles.scrollView]}>
           <View style={[Helpers.fill, styles.container]}>
-
             {/* chọn stk */}
             <SelectFDCollatComponent data={collatData} onSubmit={completeFDSelected} />
 
             {/* han muc thau chi */}
             <View style={styles.lineItem}>
-              <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.overdraftLimit')}</Text>
+              <Text style={styles.title}>
+                {I18n.t('overdraft.fromOnlineSaving.overdraftLimit')}
+              </Text>
               <AmountLabel style={styles.readOnlyText} value={odLimit} currency="VND" />
             </View>
 
@@ -400,27 +457,29 @@ const CreateOD = () => {
           </View> */}
 
             {/* tai khoan thau chi */}
-            {creationInfo?.odAccount
-              ? (
-                <View style={[styles.lineItem]}>
-                  <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.odAccount')}</Text>
-                  <Text style={styles.readOnlyText}>{creationInfo?.odAccount?.accountInString}</Text>
-                </View>
-              ) : (
-                null
-              )
-            }
+            {creationInfo?.odAccount ? (
+              <View style={[styles.lineItem]}>
+                <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.odAccount')}</Text>
+                <Text style={styles.readOnlyText}>{creationInfo?.odAccount?.accountInString}</Text>
+              </View>
+            ) : null}
 
             {/* lai thau chi */}
             <View style={styles.lineItem}>
-              <Text style={styles.title}>{I18n.t('overdraft.fromOnlineSaving.odInterestRate')}</Text>
-              <Text style={styles.readOnlyText}>{creationInfo?.laiSuatTC}{' '}{I18n.t('overdraft.fromOnlineSaving.percentYear')}</Text>
+              <Text style={styles.title}>
+                {I18n.t('overdraft.fromOnlineSaving.odInterestRate')}
+              </Text>
+              <Text style={styles.readOnlyText}>
+                {creationInfo?.laiSuatTC} {I18n.t('overdraft.fromOnlineSaving.percentYear')}
+              </Text>
             </View>
 
             {/* chon ngay */}
             <View style={{ flex: 1, flexDirection: 'row' }}>
               <TouchableOpacity style={[styles.lineItem, { flex: 1 }]}>
-                <Text style={styles.textDetail}>{I18n.t('overdraft.fromOnlineSaving.effectiveDate')}</Text>
+                <Text style={styles.textDetail}>
+                  {I18n.t('overdraft.fromOnlineSaving.effectiveDate')}
+                </Text>
                 <DatePicker
                   dateStyle={{ color: Colors.gray }}
                   style={{ flex: 1 }}
@@ -429,7 +488,8 @@ const CreateOD = () => {
                 />
               </TouchableOpacity>
               <TouchableOpacity style={[styles.lineItem, { flex: 1 }]}>
-                <Text style={styles.textDetail}>{I18n.t('overdraft.fromOnlineSaving.expireDate')}
+                <Text style={styles.textDetail}>
+                  {I18n.t('overdraft.fromOnlineSaving.expireDate')}
                 </Text>
                 <DatePicker
                   onPressConfirm={toggleFrqDatePicker}
@@ -445,15 +505,23 @@ const CreateOD = () => {
 
             {/* ca account */}
             {renderAccountCA()}
-
+            <View style={styles.line} />
             {/* purpose */}
             {renderPurpose()}
           </View>
           {/* xem ghi chu */}
-          <View style={{ borderBottomLeftRadius: 10, borderBottomRightRadius: 10, backgroundColor: 'white', paddingBottom: 10 }}>
-            <Note onPress={() => {
-              setNoteVisible(true)
+          <View
+            style={{
+              borderBottomLeftRadius: 10,
+              borderBottomRightRadius: 10,
+              backgroundColor: 'white',
+              paddingBottom: 10,
             }}
+          >
+            <Note
+              onPress={() => {
+                setNoteVisible(true)
+              }}
             />
             <ModalSelect
               title={I18n.t('application.note')}
@@ -473,7 +541,7 @@ const CreateOD = () => {
             style={{
               paddingHorizontal: Metrics.small,
               paddingBottom: Metrics.small,
-              paddingTop: Metrics.small
+              paddingTop: Metrics.small,
             }}
             color={Colors.primary2}
             styleButton={{ width: '100%' }}
@@ -488,7 +556,6 @@ const CreateOD = () => {
       <Toast ref={refToast} position="bottom" />
       <Loader modalVisible={loading} />
       {/* alert */}
-
     </>
   )
 }
