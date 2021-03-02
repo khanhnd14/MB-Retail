@@ -112,7 +112,7 @@ const OpenCardScreen = () => {
   const { listCreditCardInfo, creditCardMax } = listData || {}
   const [loading, setLoading] = useState(false)
   const [isInit, setInit] = useState(false)
-  const [isShowError, setError] = useState(true)
+  const [isShowError, setError] = useState(false)
   const [selectCard, setSelectCard] = useState({})
   const [currIndex, setIndex] = useState(0)
 
@@ -122,9 +122,9 @@ const OpenCardScreen = () => {
   }, [])
 
   useEffect(() => {
-    if (loading) {
+    if (loading && !_.isEmpty(listCreditCardInfo)) {
       setLoading(false)
-      if (!_.isEmpty(listCreditCardInfo) && _.isArray(listCreditCardInfo)) {
+      if (_.isArray(listCreditCardInfo)) {
         setSelectCard(listCreditCardInfo[0] || {})
         setError(false)
       } else {

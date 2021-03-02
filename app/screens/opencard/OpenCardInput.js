@@ -107,8 +107,7 @@ const OpenCardInput = ({ route }) => {
   const { params } = route
   const { limitMin } = params.selectCard
   const { initData, listData, branch } = useSelector((state) => state.opencard)
-  const { rolloutAcc } = useSelector((state) => state.employee)
-  const { cardCode, liabilityContract } = initData || {}
+  const { cardCode, liabilityContract, accounts } = initData || {}
   const { creditCardMax, securityName, typeCreditCardMax } = listData || {}
 
   const [loading, setLoading] = useState(false)
@@ -191,7 +190,7 @@ const OpenCardInput = ({ route }) => {
           offColor={Colors.gray}
           size="small"
           onToggle={(val) => {
-            if (val && _.isEmpty(rolloutAcc)) {
+            if (val && _.isEmpty(accounts)) {
               Utils.toast(I18n.t('opencard.empty_account'))
               return
             }
@@ -221,13 +220,13 @@ const OpenCardInput = ({ route }) => {
               setFullPayment(false)
             }}
           />
-          {!_.isEmpty(rolloutAcc) && (
+          {!_.isEmpty(accounts) && (
             <SelectAccount
               style={{
                 paddingHorizontal: 0,
               }}
               title={I18n.t('opencard.account_title')}
-              data={rolloutAcc || []}
+              data={accounts || []}
               onSelectRolloutAccountNo={onSelectRolloutAccountNo}
             />
           )}

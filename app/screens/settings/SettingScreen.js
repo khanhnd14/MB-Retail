@@ -598,12 +598,12 @@ const SettingScreen = () => {
             title={I18n.t('overdraft.title')}
             onSelectItem={() => overdraft()}
           />
-          {/* <ItemSetting
+          <ItemSetting
             style={styles.line}
             icon="napthe"
             title={I18n.t('opencard.title')}
             onSelectItem={() => openCard()}
-          /> */}
+          />
           <View style={[Helpers.fullWidth, Helpers.center, { padding: Metrics.normal }]}>
             <Text style={{ color: Colors.primary2 }}>
               {I18n.t('application.version')} {version}
