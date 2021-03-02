@@ -150,8 +150,8 @@ android {
         applicationId "vn.com.msb.smartBanking"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 128
-        versionName "5.0.1"
+        versionCode 130
+        versionName "5.0.3"
         missingDimensionStrategy 'react-native-camera', 'general'
         multiDexEnabled true
         vectorDrawables.useSupportLibrary = true

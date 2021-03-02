@@ -84,7 +84,7 @@ const SoftTokenActive = () => {
   return (
     <View style={[Helpers.fillColCross, ApplicationStyles.mainContainer, styles.container]}>
       <View style={Helpers.fill}>{content}</View>
-      {info && info.peekData?.action !== 'none' && <ConfirmButton onPress={onActive} loading={loading} />}
+      <ConfirmButton onPress={onActive} loading={loading} />
     </View>
   )
 }
