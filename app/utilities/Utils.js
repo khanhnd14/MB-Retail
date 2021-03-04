@@ -1,3 +1,5 @@
+/* eslint-disable no-empty */
+/* eslint-disable radix */
 /* eslint-disable vars-on-top */
 /* eslint-disable no-bitwise */
 import {
@@ -17,6 +19,10 @@ import moment from 'moment'
 import DeviceInfo from 'react-native-device-info'
 import * as Keychain from 'react-native-keychain'
 import JailMonkey from 'jail-monkey'
+import ShortcutBadge from 'react-native-shortcut-badge';
+import AsyncStorage from '@react-native-community/async-storage';
+import PushNotificationIOS from '@react-native-community/push-notification-ios';
+import RNBadgerAndroid from 'react-native-badger-android';
 import I18n from '../translations'
 import { Config } from '../config'
 
@@ -1052,4 +1058,20 @@ export default {
     }
     return result;
   },
+  setBadge(count1) {
+    try {
+        const count = parseInt(count1);
+        if (!isNaN(count)) {
+            AsyncStorage.setItem('badgeCount', `${count}`);
+            // set Badge
+            if (Platform.OS === 'ios') {
+                PushNotificationIOS.setApplicationIconBadgeNumber(count);
+            } else {
+                ShortcutBadge.setCount(count);
+                // RNBadgerAndroid.setBadge(count)
+            }
+        }
+    } catch (error) {
+    }
+},
 }

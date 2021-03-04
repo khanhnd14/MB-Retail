@@ -95,19 +95,9 @@ export default {
   },
   getTokenNo() {
     return AsyncStorage.getItem(TOKEN_NO)
-    // try {
-    //   const tokenStorage = await AsyncStorage.getItem(TOKEN_NO)
-    //   const tokenKeychain = await Utils.getKeyChain(TOKEN_NO)
-    //   if (tokenKeychain) {
-    //     return tokenKeychain
-    //   }
-    //   if (tokenStorage) {
-    //     return tokenStorage
-    //   }
-    //   return null
-    // } catch (error) {
-    //   return null
-    // }
+  },
+  getBadge() {
+    return AsyncStorage.getItem('badgeCount')
   },
   async setAuthBioKey(key) {
     try {
