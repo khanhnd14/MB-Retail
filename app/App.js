@@ -1,3 +1,4 @@
+/* eslint-disable no-bitwise */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-use-before-define */
 import 'react-native-gesture-handler'
@@ -16,7 +17,7 @@ import JailMonkey from 'jail-monkey'
 import messaging from '@react-native-firebase/messaging'
 import PushNotification from 'react-native-push-notification'
 
-import Clipboard from '@react-native-community/clipboard';
+import Clipboard from '@react-native-community/clipboard'
 import AppStateListener from './AppStateListener'
 import configureStore from './store/configureStore'
 import { SplashScreen } from './screens'
@@ -61,13 +62,11 @@ const App = () => {
 
   useEffect(() => {
     PushNotification.configure({
-
       // (required) Called when a remote is received or opened, or local notification is opened
-      onNotification (notification) {
+      onNotification(notification) {
         push('NotificationScreen')
       },
-
-    });
+    })
 
     const unsubscribe = messaging().onMessage(async (remoteMessage) => {
       const { notification } = remoteMessage
@@ -216,6 +215,9 @@ const App = () => {
 
   function handleInactive() {
     storeService.setSessionTime()
+    storeService.getBadge().then((result) => {
+      Utils.setBadge(result)
+    })
     console.log('The application is now inactive!')
   }
 

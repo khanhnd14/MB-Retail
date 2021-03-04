@@ -13,6 +13,7 @@ import I18n from '../../translations'
 import { softTokenOperations } from '../../state/softtoken'
 import HomeNotification from './HomeNotification'
 import { getAcountList, getCardList, getCardListFull, getListSaveAcount } from '../../state/account/actions'
+import { Utils } from '../../utilities'
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
@@ -94,6 +95,10 @@ const HomeScreen = () => {
       setShowNoti(true)
     }
   }, [dataAdvance])
+
+  useEffect(() => {
+    Utils.setBadge(countNotification);
+  }, [countNotification])
 
   const showDetailNotification = () => {
     setShowNoti(false)
