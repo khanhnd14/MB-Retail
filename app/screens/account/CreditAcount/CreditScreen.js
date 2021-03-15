@@ -1,8 +1,9 @@
 import React, { useEffect, useMemo } from 'react'
-import { ScrollView, StyleSheet, RefreshControl } from 'react-native'
+import { ScrollView, StyleSheet, RefreshControl, Linking } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { View } from 'react-native-animatable'
 import _ from 'lodash'
+import DeviceInfo from 'react-native-device-info';
 import { Helpers, Metrics, Colors, ApplicationStyles } from '../../../theme'
 import I18n from '../../../translations'
 import { Topbar, MenuItem } from '../../../components'
@@ -10,6 +11,7 @@ import * as Navigation from '../../../navigation'
 import { getCardList, getCardListFull } from '../../../state/account/actions'
 import CollapsibleComponent from '../../../components/Account/collapsible.component'
 import { Utils } from '../../../utilities'
+import { openCardOperations } from '../../../state/opencard'
 
 const styles = StyleSheet.create({
   container: {
@@ -54,6 +56,7 @@ const styles = StyleSheet.create({
 
 const CreditScreen = () => {
   const { cardList, cardListFull, errorGetAccount } = useSelector((state) => state.account)
+  const { mPlusAppLink, mPlusAppLinkError } = useSelector((state) => state.opencard)
   const [loading, setLoading] = React.useState(false)
 
   const [dataCredit, setDataCredit] = React.useState([])
@@ -88,6 +91,33 @@ const CreditScreen = () => {
       setLoading(false)
     }
   }, [errorGetAccount])
+
+  useEffect(() => {
+    if (mPlusAppLink) {
+      Utils.hideLoading()
+      // open app
+      // Linking.openURL('app-settings:')
+      Linking.openURL(mPlusAppLink.appURL)
+    }
+  }, [mPlusAppLink])
+
+  useEffect(() => {
+    if (mPlusAppLinkError) {
+      Utils.hideLoading()
+    }
+  }, [mPlusAppLinkError])
+
+  const mplus = () => {
+    Utils.showLoading()
+    DeviceInfo.getDeviceName().then((dname) => {
+      const name = dname
+      const params = {
+        deviceName: name,
+        deviceId: Utils.getUserDeviceID(),
+      }
+      dispatch(openCardOperations.getMPlusAppLink(params))
+    })
+  }
 
   useEffect(() => {
     setRefreshing(false)
@@ -177,6 +207,11 @@ const CreditScreen = () => {
           <MenuItem
             onPress={() => Navigation.push('CardService', { creditItem: dataCredit[0] })}
             text={I18n.t('account.title_payment_card')}
+            leftColor={Colors.yellow}
+          />
+          <MenuItem
+            onPress={mplus}
+            text={I18n.t('account.title_advance_mplus')}// Quản lý thẻ nâng cao
             leftColor={Colors.yellow}
           />
         </View>

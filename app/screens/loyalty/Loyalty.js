@@ -82,6 +82,12 @@ const Loyalty = () => {
         background={Colors.mainBg}
       />
       <ScrollView style={[Helpers.fill, styles.container]}>
+        <MenuItem
+          icon="icon-atm"
+          onPress={mplus}
+          text={I18n.t('product.mPlus')}
+          iconSize={42}
+        />
         <MenuItem icon="napgame" onPress={game} text={I18n.t('msbplus.game')} iconSize={35} />
         <MenuItem
           icon="mathe"
@@ -96,17 +102,11 @@ const Loyalty = () => {
           iconSize={55}
         />
         <MenuItem
-          icon="icon-atm"
+          icon="icon-dv-the"
           onPress={() => Navigation.push('ATMScreen')}
           text={I18n.t('product.atm.title')}
           iconSize={42}
         />
-        {/* <MenuItem
-          icon="icon-atm"
-          onPress={mplus}
-          text={I18n.t('product.mPlus')}
-          iconSize={42}
-        /> */}
       </ScrollView>
       <Loader modalVisible={loading} />
     </>
