@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, RefreshControl, Linking } from 'react-native'
 import { useDispatch, useSelector } from 'react-redux'
 import { View } from 'react-native-animatable'
 import _ from 'lodash'
-import DeviceInfo from 'react-native-device-info';
+import DeviceInfo from 'react-native-device-info'
 import { Helpers, Metrics, Colors, ApplicationStyles } from '../../../theme'
 import I18n from '../../../translations'
 import { Topbar, MenuItem } from '../../../components'
@@ -65,6 +65,7 @@ const CreditScreen = () => {
   const dispatch = useDispatch()
 
   const [refreshing, setRefreshing] = React.useState(false)
+  const [isMplusLoading, setMplusLoading] = React.useState(false)
 
   const onRefresh = React.useCallback(() => {
     setRefreshing(true)
@@ -93,30 +94,34 @@ const CreditScreen = () => {
   }, [errorGetAccount])
 
   useEffect(() => {
-    if (mPlusAppLink) {
+    if (isMplusLoading) {
       Utils.hideLoading()
       // open app
-      // Linking.openURL('app-settings:')
-      Linking.openURL(mPlusAppLink.appURL)
+      setMplusLoading(false)
+      if (mPlusAppLink.appURL) {
+        Linking.openURL(mPlusAppLink.appURL)
+      }
     }
   }, [mPlusAppLink])
 
   useEffect(() => {
-    if (mPlusAppLinkError) {
+    if (isMplusLoading) {
+      setMplusLoading(false)
       Utils.hideLoading()
     }
   }, [mPlusAppLinkError])
 
   const mplus = () => {
-    Utils.showLoading()
-    DeviceInfo.getDeviceName().then((dname) => {
-      const name = dname
-      const params = {
-        deviceName: name,
-        deviceId: Utils.getUserDeviceID(),
-      }
-      dispatch(openCardOperations.getMPlusAppLink(params))
-    })
+      Utils.showLoading()
+      setMplusLoading(true)
+      DeviceInfo.getDeviceName().then((dname) => {
+        const name = dname
+        const params = {
+          deviceName: name,
+          deviceId: Utils.getUserDeviceID(),
+        }
+        dispatch(openCardOperations.getMPlusAppLink(params))
+      })
   }
 
   useEffect(() => {
@@ -128,7 +133,7 @@ const CreditScreen = () => {
         ?.productionStatus,
       status: cardListFull.find((el) => el.contractNumber === item.contractNumber)?.status,
       isActive: item.status,
-      bonusPoint: item.bonusPoint
+      bonusPoint: item.bonusPoint,
     }))
     const newListFull = _.map(cardListFull, (item) => ({
       contractNumber: item.contractNumber,
@@ -139,7 +144,7 @@ const CreditScreen = () => {
       cardCode: item.cardCode,
       cardName: item.productName,
       fi: item.fi,
-      isVisaDining: item.isVisaDining
+      isVisaDining: item.isVisaDining,
     }))
     let newCardList2 = []
     newCardList1.forEach((item) => {
@@ -177,7 +182,7 @@ const CreditScreen = () => {
       bonusPoint: item.bonusPoint,
       isActive: item.isActive,
       isVisaDining: item.isVisaDining,
-      toTime: item.toTime
+      toTime: item.toTime,
     }))
     setDataCredit(_.filter(data, (item) => item.cardType === 'C'))
     setDataDebit(_.filter(data, (item) => item.cardType === 'D'))
@@ -193,9 +198,9 @@ const CreditScreen = () => {
     [dataCredit]
   )
 
-  console.log('====================================');
-  console.log('dataCredit', dataCredit, dataDebit);
-  console.log('====================================');
+  console.log('====================================')
+  console.log('dataCredit', dataCredit, dataDebit)
+  console.log('====================================')
   return (
     <>
       <Topbar title={I18n.t('account.title_credit_screen')} background={Colors.mainBg} />
@@ -211,7 +216,7 @@ const CreditScreen = () => {
           />
           <MenuItem
             onPress={mplus}
-            text={I18n.t('account.title_advance_mplus')}// Quản lý thẻ nâng cao
+            text={I18n.t('account.title_advance_mplus')} // Quản lý thẻ nâng cao
             leftColor={Colors.yellow}
           />
         </View>

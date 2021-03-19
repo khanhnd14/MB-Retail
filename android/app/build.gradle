@@ -224,7 +224,7 @@ dependencies {
     implementation 'com.facebook.soloader:soloader:0.9.0+'
     implementation project(path: ":@react-native-firebase_messaging")
     implementation project(':react-native-push-notification')
-  implementation project(':react-native-badger-android')
+    implementation project(':react-native-badger-android')
 
     if (enableHermes) {
         def hermesPath = "../../node_modules/hermes-engine/android/";
